@@ -32,7 +32,7 @@ class ShowCaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
     override fun dispatchDraw(canvas: Canvas) {
         showcaseModel?.also {
             when (it.highlightType) {
-                HighlightType.CIRCLE -> CircleShape(statusBarHeight / 4, width, height, it.horizontalCenter(), it.top, it.radius)
+                HighlightType.CIRCLE -> CircleShape(statusBarHeight, width, height, it.horizontalCenter(), it.verticalCenter(), it.radius)
                 HighlightType.RECTANGLE -> RectangleShape(statusBarHeight, width, height, it.left, it.top, it.right, it.bottom)
             }.draw(it.windowBackgroundColor, it.windowBackgroundAlpha, canvas)
         }

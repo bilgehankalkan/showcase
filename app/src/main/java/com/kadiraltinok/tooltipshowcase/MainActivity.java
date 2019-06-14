@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                         .closeButtonColor(ContextCompat.getColor(getBaseContext(), R.color.white))
                         .showCloseButton(true)
                         .arrowPosition(ArrowPosition.AUTO)
+                        .highlightType(HighlightType.CIRCLE)
                         .windowBackgroundAlpha(255)
                         .titleTextSize(30F)
                         .build()
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         .showCloseButton(true)
                         .arrowPosition(ArrowPosition.DOWN)
                         .highlightType(HighlightType.CIRCLE)
-                        .arrowPercentage(0.1F)
+                        .arrowPercentage(100)
                         .cancelListener(new CancelListener() {
                             @Override
                             public void onCancel() {

@@ -24,13 +24,13 @@
             android:layout_height="wrap_content"
             android:visibility="@{tooltipViewState.getTopArrowVisibility()}"
             app:layout_constraintBottom_toTopOf="@id/card_content"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             app:srcCompat="@drawable/ic_arrow_up"
             app:tint="@{tooltipViewState.backgroundColor}"
-            bind:horizontalBias="@{tooltipViewState.arrowPercentage}" />
+            bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
+            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_content"
@@ -101,11 +101,11 @@
             android:layout_height="wrap_content"
             android:visibility="@{tooltipViewState.getBottomArrowVisibility()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_content"
             app:srcCompat="@drawable/ic_arrow_down"
             app:tint="@{tooltipViewState.backgroundColor}"
-            bind:horizontalBias="@{tooltipViewState.arrowPercentage}" />
+            bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
+            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,8 +2,8 @@ package com.kadiraltinok.library.ui.binding
 
 import android.util.TypedValue
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.kadiraltinok.library.ui.tooltip.ArrowPosition
@@ -50,5 +50,18 @@ object BindingSetter {
     @BindingAdapter("bind:textSizeInSP")
     fun TextView.setTextSizeInSp(size: Float) {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, size)
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["bind:arrowHorizontalPosition", "bind:arrowPercentage"], requireAll = true)
+    fun ImageView.layoutMarginStart(margin: Int, percentage: Int?) {
+        (layoutParams as ConstraintLayout.LayoutParams).apply {
+            percentage?.let {
+                endToEnd = 0
+                horizontalBias = (it / 100).toFloat()
+            } ?: run {
+                this.marginStart = margin
+            }
+        }
     }
 }

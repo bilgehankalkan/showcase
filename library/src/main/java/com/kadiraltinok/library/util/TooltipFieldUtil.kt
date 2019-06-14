@@ -44,7 +44,7 @@ object TooltipFieldUtil {
         }
     }
 
-    fun calculateMargin(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {
+    fun calculateMarginForCircle(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {
         ArrowPosition.UP -> bottom.toInt() + statusBarDiff
         ArrowPosition.DOWN -> resources.displayMetrics.heightPixels - top.toInt()// + statusBarDiff
         else -> 0//throw IllegalArgumentException("arrowPosition should be ArrowPosition.UP or ArrowPosition.DOWN")
@@ -54,6 +54,12 @@ object TooltipFieldUtil {
         ArrowPosition.UP -> bottom.toInt() + statusBarDiff
         ArrowPosition.DOWN -> resources.displayMetrics.heightPixels - top.toInt()// + statusBarDiff
         else -> 0//throw IllegalArgumentException("arrowPosition should be ArrowPosition.UP or ArrowPosition.DOWN")
+    }
+
+    fun calculateArrowMargin(resources: Resources, horizontalCenter: Float): Int {
+        val arrowHalfWidth = (15 * resources.displayMetrics.density)
+
+        return (horizontalCenter - arrowHalfWidth).toInt()
     }
 }
 

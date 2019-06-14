@@ -12,9 +12,10 @@ data class TooltipViewState(
     @ColorInt val closeButtonColor: Int,
     val showCloseButton: Boolean = true,
     val arrowPosition: ArrowPosition,
-    val arrowPercentage: Float,
+    val arrowPercentage: Int?,
     val titleTextSize: Float,
-    val descriptionTextSize: Float
+    val descriptionTextSize: Float,
+    val arrowMargin: Int
 ) {
 
     fun getTopArrowVisibility() =

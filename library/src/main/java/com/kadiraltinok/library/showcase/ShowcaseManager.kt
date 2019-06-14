@@ -39,7 +39,7 @@ class ShowcaseManager private constructor(private val showcaseModel: ShowcaseMod
         private var arrowPosition: ArrowPosition = ArrowPosition.AUTO
         private var highlightType: HighlightType = HighlightType.RECTANGLE
         private var cancelListener: CancelListener? = null
-        private var arrowPercentage: Float? = null
+        private var arrowPercentage: Int? = null
         @ColorInt
         private var windowBackgroundColor: Int = Constants.DEFAULT_COLOR_BACKGROUND
         private var windowBackgroundAlpha: Int = Constants.DEFAULT_BACKGROUND_ALPHA
@@ -57,14 +57,21 @@ class ShowcaseManager private constructor(private val showcaseModel: ShowcaseMod
         fun arrowPosition(position: ArrowPosition) = apply { arrowPosition = position }
         fun highlightType(type: HighlightType) = apply { highlightType = type }
         fun cancelListener(listener: CancelListener) = apply { cancelListener = listener }
-        fun arrowPercentage(@FloatRange(from = 0.1, to = 0.9) percentage: Float) = apply { arrowPercentage = percentage }
+
+        /**
+         *
+         * Custom positioning for arrow.
+         */
+        fun arrowPercentage(@IntRange(from = 0, to = 100) percentage: Int) = apply { arrowPercentage = percentage }
         fun windowBackgroundColor(@ColorInt color: Int) = apply { windowBackgroundColor = color }
         fun windowBackgroundAlpha(@IntRange(from = 0, to = 255) alpha: Int) = apply { windowBackgroundAlpha = alpha }
+
         /**
          *
          * titleTextSize in SP.
          */
         fun titleTextSize(size: Float) = apply { titleTextSize = size }
+
         /**
          *
          * descriptionTextSize in SP.

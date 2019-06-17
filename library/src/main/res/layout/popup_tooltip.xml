@@ -8,7 +8,7 @@
 
         <variable
             name="tooltipViewState"
-            type="com.kadiraltinok.library.ui.tooltip.TooltipViewState" />
+            type="com.trenyol.showcase.ui.tooltip.TooltipViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

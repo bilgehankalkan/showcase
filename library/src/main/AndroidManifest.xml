@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kadiraltinok.library">
+    package="com.trenyol.showcase">
 
     <!-- to display showcaseview, this activity and its' style must be added -->
-    <application android:name=".ShowCaseApplication">
+    <application android:name="com.trenyol.showcase.ShowCaseApplication">
         <activity
-            android:name="com.kadiraltinok.library.ui.showcase.ShowCaseActivity"
+            android:name="com.trenyol.showcase.ui.showcase.ShowCaseActivity"
             android:theme="@style/ShowcaseTransparentTheme" />
     </application>
 

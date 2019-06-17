@@ -6,18 +6,18 @@
 
         <variable
             name="showcaseViewState"
-            type="com.kadiraltinok.library.ui.showcase.ShowCaseViewState" />
+            type="com.trenyol.showcase.ui.showcase.ShowCaseViewState" />
 
         <variable
             name="tooltipViewState"
-            type="com.kadiraltinok.library.ui.tooltip.TooltipViewState" />
+            type="com.trenyol.showcase.ui.tooltip.TooltipViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.kadiraltinok.library.ui.tooltip.TooltipView
+        <com.trenyol.showcase.ui.tooltip.TooltipView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

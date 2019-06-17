@@ -13,16 +13,6 @@ import com.kadiraltinok.library.ui.tooltip.TooltipViewState
 object BindingSetter {
 
     @JvmStatic
-    @BindingAdapter("bind:horizontalBias")
-    fun View.horizontalPercentage(bias: Float) {
-        if (layoutParams is ConstraintLayout.LayoutParams) {
-            layoutParams = (layoutParams as ConstraintLayout.LayoutParams).apply {
-                horizontalBias = bias
-            }
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("tooltipViewState")
     fun TooltipView.setTooltipViewState(tooltipViewState: TooltipViewState) {
         bind(tooltipViewState)
@@ -32,13 +22,13 @@ object BindingSetter {
     @BindingAdapter(value = ["bind:applyMargin", "bind:arrowPosition"], requireAll = true)
     fun TooltipView.placeTooltip(margin: Int, arrowPosition: ArrowPosition) {
         if (arrowPosition == ArrowPosition.UP) {
-            (layoutParams as ConstraintLayout.LayoutParams).apply {
+            (layoutParams as? ConstraintLayout.LayoutParams)?.apply {
                 topToTop = 0 // parent
                 bottomToBottom = -1
                 topMargin = margin
             }
         } else if (arrowPosition == ArrowPosition.DOWN) {
-            (layoutParams as ConstraintLayout.LayoutParams).apply {
+            (layoutParams as? ConstraintLayout.LayoutParams)?.apply {
                 topToTop = -1
                 bottomToBottom = 0 // parent
                 bottomMargin = margin
@@ -55,7 +45,7 @@ object BindingSetter {
     @JvmStatic
     @BindingAdapter(value = ["bind:arrowHorizontalPosition", "bind:arrowPercentage"], requireAll = true)
     fun ImageView.layoutMarginStart(margin: Int, percentage: Int?) {
-        (layoutParams as ConstraintLayout.LayoutParams).apply {
+        (layoutParams as? ConstraintLayout.LayoutParams)?.apply {
             percentage?.let {
                 endToEnd = 0
                 horizontalBias = (it / 100).toFloat()

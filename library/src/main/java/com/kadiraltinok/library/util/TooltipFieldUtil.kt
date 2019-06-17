@@ -20,28 +20,10 @@ object TooltipFieldUtil {
     }
 
     fun calculateRadius(view: View): Float {
-        val x = (view.width / 2).toFloat()
-        val y = (view.height / 2).toFloat()
+        val x = (view.width / 2).toDouble()
+        val y = (view.height / 2).toDouble()
 
-        return Math.sqrt(Math.pow(x.toDouble(), 2.0) + Math.pow(y.toDouble(), 2.0)).toFloat()
-    }
-
-    fun calculateArrowPercentage(resources: Resources, horizontalCenter: Float): Float {
-        val arrowCenterWidth = (15 * resources.displayMetrics.density).toInt()
-        val screenCenter = resources.displayMetrics.widthPixels / 2
-        val arrowWidthFactor = when {
-            screenCenter == horizontalCenter.toInt() -> 0
-            screenCenter > horizontalCenter -> -arrowCenterWidth
-            else -> arrowCenterWidth
-        }
-
-        val percentage = (horizontalCenter + arrowWidthFactor) / (screenCenter * 2)
-
-        return when {
-            percentage < 0.1 -> 0.1F
-            percentage > 0.9 -> 0.9F
-            else -> percentage
-        }
+        return Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)).toFloat()
     }
 
     fun calculateMarginForCircle(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {
@@ -62,4 +44,3 @@ object TooltipFieldUtil {
         return (horizontalCenter - arrowHalfWidth).toInt()
     }
 }
-

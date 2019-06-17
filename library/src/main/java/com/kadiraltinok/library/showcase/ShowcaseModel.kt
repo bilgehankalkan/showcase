@@ -26,8 +26,8 @@ data class ShowcaseModel(val left: Float,
                          val descriptionTextSize: Float
 ) : Serializable {
 
-    fun horizontalCenter() = (left + ((right - left) / 2))
-    fun verticalCenter() = (top + ((bottom - top) / 2))
+    fun horizontalCenter() = left + ((right - left) / 2)
+    fun verticalCenter() = top + ((bottom - top) / 2)
 
     fun bottomOfCircle() = verticalCenter() + radius
     fun topOfCircle() = verticalCenter() - radius

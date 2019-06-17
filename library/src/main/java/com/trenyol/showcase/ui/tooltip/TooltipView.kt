@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.trenyol.showcase.R
-import com.trenyol.showcase.databinding.PopupTooltipBinding
+import com.trenyol.showcase.databinding.LayoutTooltipBinding
 import com.trenyol.showcase.util.getActivity
 
 class TooltipView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding: PopupTooltipBinding = DataBindingUtil.inflate(LayoutInflater.from(context),
-        R.layout.popup_tooltip, rootView as ViewGroup, true)
+    private val binding: LayoutTooltipBinding = DataBindingUtil.inflate(LayoutInflater.from(context),
+        R.layout.layout_tooltip, rootView as ViewGroup, true)
 
     fun bind(tooltipViewState: TooltipViewState) {
         binding.imageViewTooltipClose.setOnClickListener {

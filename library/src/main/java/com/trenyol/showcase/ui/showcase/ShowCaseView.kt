@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
 import com.trenyol.showcase.R
-import com.trenyol.showcase.databinding.LayoutIntroBinding
+import com.trenyol.showcase.databinding.LayoutShowcaseBinding
 import com.trenyol.showcase.showcase.ShowcaseModel
 import com.trenyol.showcase.ui.tooltip.ArrowPosition
 import com.trenyol.showcase.ui.tooltip.TooltipViewState
@@ -16,11 +16,11 @@ import com.trenyol.showcase.util.statusBarHeight
 import com.trenyol.showcase.util.shape.CircleShape
 import com.trenyol.showcase.util.shape.RectangleShape
 
-class ShowCaseView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : FrameLayout(context, attrs, defStyleAttr) {
 
-    private val binding: LayoutIntroBinding = DataBindingUtil.inflate(LayoutInflater.from(context),
-        R.layout.layout_intro, this, true)
+    private val binding: LayoutShowcaseBinding = DataBindingUtil.inflate(LayoutInflater.from(context),
+        R.layout.layout_showcase, this, true)
     var showcaseModel: ShowcaseModel? = null
         set(value) {
             field = value

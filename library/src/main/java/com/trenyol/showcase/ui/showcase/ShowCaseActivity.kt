@@ -11,7 +11,7 @@ class ShowCaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         (intent?.extras?.getSerializable(BUNDLE_KEY) as? ShowcaseModel)?.let { model ->
-            val layout = ShowCaseView(this).apply {
+            val layout = ShowcaseView(this).apply {
                 showcaseModel = model
             }
             setContentView(layout)

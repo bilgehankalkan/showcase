@@ -1,8 +1,6 @@
 package com.kadiraltinok.library.ui.tooltip
 
-import android.app.Activity
 import android.content.Context
-import android.content.ContextWrapper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.kadiraltinok.library.R
 import com.kadiraltinok.library.databinding.PopupTooltipBinding
+import com.kadiraltinok.library.util.getActivity
 
 class TooltipView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : ConstraintLayout(context, attrs, defStyleAttr) {
@@ -23,16 +22,5 @@ class TooltipView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
         binding.tooltipViewState = tooltipViewState
         binding.executePendingBindings()
-    }
-
-    private fun getActivity(): Activity? {
-        var mContext = context
-        while (mContext is ContextWrapper) {
-            if (mContext is Activity) {
-                return mContext
-            }
-            mContext = (context as ContextWrapper).baseContext
-        }
-        return null
     }
 }

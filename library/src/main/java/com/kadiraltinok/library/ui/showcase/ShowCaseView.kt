@@ -12,6 +12,7 @@ import com.kadiraltinok.library.showcase.ShowcaseModel
 import com.kadiraltinok.library.ui.tooltip.ArrowPosition
 import com.kadiraltinok.library.ui.tooltip.TooltipViewState
 import com.kadiraltinok.library.util.TooltipFieldUtil
+import com.kadiraltinok.library.util.statusBarHeight
 import com.kadiraltinok.library.util.shape.CircleShape
 import com.kadiraltinok.library.util.shape.RectangleShape
 
@@ -25,15 +26,12 @@ class ShowCaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
             field = value
             bind(value)
         }
-    private val statusBarHeight by lazy {
-        -resources.getDimensionPixelSize(resources.getIdentifier("status_bar_height", "dimen", "android"))
-    }
 
     override fun dispatchDraw(canvas: Canvas) {
         showcaseModel?.also {
             when (it.highlightType) {
-                HighlightType.CIRCLE -> CircleShape(statusBarHeight, width, height, it.horizontalCenter(), it.verticalCenter(), it.radius)
-                HighlightType.RECTANGLE -> RectangleShape(statusBarHeight, width, height, it.left, it.top, it.right, it.bottom)
+                HighlightType.CIRCLE -> CircleShape(statusBarHeight(), width, height, it.horizontalCenter(), it.verticalCenter(), it.radius)
+                HighlightType.RECTANGLE -> RectangleShape(statusBarHeight(), width, height, it.left, it.top, it.right, it.bottom)
             }.draw(it.windowBackgroundColor, it.windowBackgroundAlpha, canvas)
         }
         super.dispatchDraw(canvas)
@@ -45,8 +43,8 @@ class ShowCaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
                 TooltipFieldUtil.calculateArrowPosition(resources, it.verticalCenter()) else it.arrowPosition
 
             binding.showcaseViewState = ShowCaseViewState(when (it.highlightType) {
-                HighlightType.CIRCLE -> TooltipFieldUtil.calculateMarginForCircle(resources, it.topOfCircle(), it.bottomOfCircle(), arrowPosition, statusBarHeight)
-                HighlightType.RECTANGLE -> TooltipFieldUtil.calculateMarginForRectangle(resources, it.top, it.bottom, arrowPosition, statusBarHeight)
+                HighlightType.CIRCLE -> TooltipFieldUtil.calculateMarginForCircle(resources, it.topOfCircle(), it.bottomOfCircle(), arrowPosition, statusBarHeight())
+                HighlightType.RECTANGLE -> TooltipFieldUtil.calculateMarginForRectangle(resources, it.top, it.bottom, arrowPosition, statusBarHeight())
             })
 
             binding.tooltipViewState = TooltipViewState(

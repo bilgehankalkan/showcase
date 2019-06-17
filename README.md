@@ -1,7 +1,5 @@
 # showcase
-<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/1.png" width="170"/>
-<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/2.png" width="170"/>
-<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/3.png" width="170"/>
+<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/3.png" width="170"/>
 
 With **showcase**, you can easily show tooltips. **showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. Also you can have callback when user quits from **showcase**.
 

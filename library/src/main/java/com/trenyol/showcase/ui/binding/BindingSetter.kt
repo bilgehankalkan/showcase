@@ -47,7 +47,7 @@ object BindingSetter {
         (layoutParams as? ConstraintLayout.LayoutParams)?.apply {
             percentage?.let {
                 endToEnd = 0
-                horizontalBias = (it / 100).toFloat()
+                horizontalBias = (it.toFloat() / 100)
             } ?: run {
                 this.marginStart = margin
             }

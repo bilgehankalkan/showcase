@@ -1,14 +1,12 @@
-package com.trenyol.test;
+package com.trenyol.sample;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.trenyol.showcase.CancelListener;
 import com.trenyol.showcase.showcase.ShowcaseManager;
 import com.trenyol.showcase.ui.showcase.HighlightType;
 import com.trenyol.showcase.ui.tooltip.ArrowPosition;
@@ -29,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 new ShowcaseManager.Builder()
                         .view(button1)
-                        .titleText("Koleksiyon Oluşturdun Top!")
-                        .descriptionText("Bir koleksiyon oluşturdun! Koleksiyon sekmesinin altından oluşturduğun koleksiyonlara ulaşabilir, yeni koleksiyon oluşturabilir ve koleksiyonlarını paylaşabilirsin. :)")
+                        .titleText("Title about myView")
+                        .descriptionText("Little bit info for my lovely myView")
                         .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent))
                         .descriptionTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimary))
                         .backgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark))
@@ -49,14 +47,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new ShowcaseManager.Builder()
-                        .view(button2)
-                        .titleText("Koleksiyon Oluşturdun Buttom!")
-                        .descriptionText("Bir koleksiyon oluşturdun! Koleksiyon sekmesinin altından oluşturduğun koleksiyonlara ulaşabilir, yeni koleksiyon oluşturabilir ve koleksiyonlarını paylaşabilirsin. :)")
-                        .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent))
+                        .titleText("Title about myView")
+                        .descriptionText("Little bit info for my lovely myView")
+                        .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimary))
+                        .descriptionTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimary))
                         .showCloseButton(true)
-                        .arrowPosition(ArrowPosition.AUTO)
-                        .highlightType(HighlightType.CIRCLE)
-                        .descriptionTextSize(21)
+                        .arrowPosition(ArrowPosition.UP)
+                        .highlightType(HighlightType.RECTANGLE)
+                        .windowBackgroundAlpha(127)
+                        .backgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark))
                         .build()
                         .show(MainActivity.this);
             }
@@ -66,21 +65,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new ShowcaseManager.Builder()
-                        .view(button3)
-                        .titleText("Koleksiyon Oluşturdun Center!")
-                        .descriptionText("Bir koleksiyon oluşturdun! Koleksiyon sekmesinin altından oluşturduğun koleksiyonlara ulaşabilir, yeni koleksiyon oluşturabilir ve koleksiyonlarını paylaşabilirsin. :)")
-                        .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.white))
-                        .backgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark))
+                        .view(v)
+                        .titleText("Title about myView")
+                        .descriptionText("Custom aligned arrow for myView")
                         .showCloseButton(true)
-                        .arrowPosition(ArrowPosition.DOWN)
+                        .arrowPosition(ArrowPosition.UP)
                         .highlightType(HighlightType.CIRCLE)
-                        .arrowPercentage(100)
-                        .cancelListener(new CancelListener() {
-                            @Override
-                            public void onCancel() {
-                                Toast.makeText(MainActivity.this, "onCancel", Toast.LENGTH_SHORT).show();
-                            }
-                        })
+                        .windowBackgroundAlpha(127)
+                        .arrowPercentage(25)
+                        .showCloseButton(false)
                         .build()
                         .show(MainActivity.this);
             }

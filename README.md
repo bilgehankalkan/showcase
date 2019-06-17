@@ -1,10 +1,10 @@
-# showcase
+# Showcase
 <img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/3.png" width="170"/>
 
-With **showcase**, you can easily show tooltips. **showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. Also you can have callback when user quits from **showcase**.
+With **Showcase**, you can easily show tooltips. **Showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. Also you can have callback when user quits from **Showcase**.
 
-# installation
- - To implement **showcase** to your Android project via Gradle, you need to add Jitpack repository to your root build.gradle.
+# Installation
+ - To implement **Showcase** to your Android project via Gradle, you need to add Jitpack repository to your root build.gradle.
 ```
 allprojects {
     repositories {
@@ -13,15 +13,15 @@ allprojects {
     }
 }
 ```
- - After adding Jitpack repository, you can add **showcase** dependency to your app level build.gradle.
+ - After adding Jitpack repository, you can add **Showcase** dependency to your app level build.gradle.
 ```
 dependencies {
     implementation "com.trendyol.showcase:showcase:$showcase_version"
 }
 ```
 
-# usage
-You can easily use ShowcaseManager.Builder to create **showcase**.
+# Usage
+You can easily use ShowcaseManager.Builder to create **Showcase**.
 ```
 val showcaseManager = ShowcaseManager.Builder()  
     .view(myView)  

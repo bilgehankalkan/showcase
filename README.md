@@ -42,7 +42,7 @@ val showcaseManager = ShowcaseManager.Builder()
 showcaseManager.show(context)
 ```
 
-# builder configuration
+# Builder Configuration
 | Usage         | Description | Optional | Default Value |
 | ------------- |-------------| ------------- |------------- |
 | `builder.view(View)` | view to be focused on | no | |

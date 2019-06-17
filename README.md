@@ -1,5 +1,10 @@
 # showcase
-With **showcase**, you can easily show tooltips. **showcase** will highlight the view and show tooltip on it.
+<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/1.png" width="170"/>
+<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/2.png" width="170"/>
+<img src="https://raw.githubusercontent.com/bilgehankalkan/showcase/master/screenshots/3.png" width="170"/>
+
+With **showcase**, you can easily show tooltips. **showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. Also you can have callback when user quits from **showcase**.
+
 # installation
  - To implement **showcase** to your Android project via Gradle, you need to add Jitpack repository to your root build.gradle.
 ```
@@ -16,6 +21,7 @@ dependencies {
     implementation "com.trendyol.showcase:showcase:$showcase_version"
 }
 ```
+
 # usage
 You can easily use ShowcaseManager.Builder to create **showcase**.
 ```
@@ -37,6 +43,7 @@ val showcaseManager = ShowcaseManager.Builder()
   
 showcaseManager.show(context)
 ```
+
 # builder configuration
 | Usage         | Description | Optional | Default Value |
 | ------------- |-------------| ------------- |------------- |

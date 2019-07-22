@@ -1,14 +1,14 @@
-package com.trenyol.showcase.showcase
+package com.trendyol.showcase.showcase
 
+import android.graphics.RectF
+import android.os.Parcelable
 import androidx.annotation.ColorInt
-import com.trenyol.showcase.ui.showcase.HighlightType
-import com.trenyol.showcase.ui.tooltip.ArrowPosition
-import java.io.Serializable
+import com.trendyol.showcase.ui.showcase.HighlightType
+import com.trendyol.showcase.ui.tooltip.ArrowPosition
+import kotlinx.android.parcel.Parcelize
 
-data class ShowcaseModel(val left: Float,
-                         val top: Float,
-                         val right: Float,
-                         val bottom: Float,
+@Parcelize
+data class ShowcaseModel(val rectF: RectF,
                          val radius: Float,
                          val titleText: String,
                          val descriptionText: String,
@@ -23,11 +23,13 @@ data class ShowcaseModel(val left: Float,
                          val windowBackgroundColor: Int,
                          val windowBackgroundAlpha: Int,
                          val titleTextSize: Float,
-                         val descriptionTextSize: Float
-) : Serializable {
+                         val descriptionTextSize: Float,
+                         val highlightPadding: Float,
+                         val cancellableFromOutsideTouch: Boolean
+) : Parcelable {
 
-    fun horizontalCenter() = left + ((right - left) / 2)
-    fun verticalCenter() = top + ((bottom - top) / 2)
+    fun horizontalCenter() = rectF.left + ((rectF.right - rectF.left) / 2)
+    fun verticalCenter() = rectF.top + ((rectF.bottom - rectF.top) / 2)
 
     fun bottomOfCircle() = verticalCenter() + radius
     fun topOfCircle() = verticalCenter() - radius

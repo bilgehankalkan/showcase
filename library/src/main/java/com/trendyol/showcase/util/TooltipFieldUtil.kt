@@ -1,8 +1,10 @@
-package com.trenyol.showcase.util
+package com.trendyol.showcase.util
 
 import android.content.res.Resources
 import android.view.View
-import com.trenyol.showcase.ui.tooltip.ArrowPosition
+import com.trendyol.showcase.ui.tooltip.ArrowPosition
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 object TooltipFieldUtil {
 
@@ -12,18 +14,11 @@ object TooltipFieldUtil {
         return if (screenHeight / 2 > verticalCenter) ArrowPosition.UP else ArrowPosition.DOWN
     }
 
-    fun getRect(view: View): IntArray {
-        val array = IntArray(2)
-        view.getLocationOnScreen(array)
-
-        return intArrayOf(array[0], array[1], array[0] + view.width, array[1] + view.height)
-    }
-
     fun calculateRadius(view: View): Float {
-        val x = (view.width / 2).toDouble()
-        val y = (view.height / 2).toDouble()
+        val x = view.width.toDouble() / 2
+        val y = view.height.toDouble() / 2
 
-        return Math.sqrt(Math.pow(x, 2.0) + Math.pow(y, 2.0)).toFloat()
+        return sqrt(x.pow(2) + y.pow(2)).toFloat()
     }
 
     fun calculateMarginForCircle(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {

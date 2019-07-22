@@ -1,4 +1,4 @@
-package com.trenyol.showcase.ui.showcase
+package com.trendyol.showcase.ui.showcase
 
 enum class HighlightType {
     CIRCLE, RECTANGLE

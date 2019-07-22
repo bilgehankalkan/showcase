@@ -1,4 +1,4 @@
-package com.trenyol.showcase.util.shape
+package com.trendyol.showcase.util.shape
 
 import android.graphics.Canvas
 import android.graphics.RectF

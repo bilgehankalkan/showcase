@@ -1,4 +1,4 @@
-package com.trenyol.test;
+package com.trendyol.sample;
 
 import android.os.Bundle;
 import android.view.View;

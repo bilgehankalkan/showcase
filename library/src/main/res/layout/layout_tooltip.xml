@@ -8,15 +8,15 @@
 
         <variable
             name="tooltipViewState"
-            type="com.trenyol.showcase.ui.tooltip.TooltipViewState" />
+            type="com.trendyol.showcase.ui.tooltip.TooltipViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp">
+        android:paddingTop="@dimen/showcase_padding_8dp"
+        android:paddingBottom="@dimen/showcase_padding_8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewTopArrow"
@@ -36,9 +36,9 @@
             android:id="@+id/card_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="8dp"
+            android:layout_marginStart="@dimen/showcase_margin_20dp"
+            android:layout_marginEnd="@dimen/showcase_margin_20dp"
+            app:cardCornerRadius="@dimen/showcase_card_radius"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toTopOf="@id/imageViewBottomArrow"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:background="@{tooltipViewState.backgroundColor}"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/showcase_padding_16dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewTooltipTitle"

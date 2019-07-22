@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="HighlightView">
-        <attr name="hightlightType" format="enum">
-            <enum name="circle" value="0"/>
-            <enum name="rectangle" value="1"/>
-        </attr>
-        <attr name="radius" format="float"/>
-        <attr name="left" format="float"/>
-        <attr name="right" format="float"/>
-        <attr name="top" format="float"/>
-        <attr name="bottom" format="float"/>
+
+    <declare-styleable name="Showcase.Theme">
+        <attr name="titleTextColor" format="color"/>
+        <attr name="descriptionTextColor" format="color"/>
+        <attr name="closeButtonColor" format="color"/>
+        <attr name="popupBackgroundColor" format="color"/>
+        <attr name="windowBackgroundColor" format="color"/>
+        <attr name="cancellableFromOutsideTouch" format="boolean"/>
+        <attr name="showCloseButton" format="boolean"/>
     </declare-styleable>
 </resources>

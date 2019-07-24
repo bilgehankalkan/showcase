@@ -13,13 +13,13 @@ object BindingSetter {
 
     @JvmStatic
     @BindingAdapter("tooltipViewState")
-    fun TooltipView.setTooltipViewState(tooltipViewState: TooltipViewState) {
+    internal fun TooltipView.setTooltipViewState(tooltipViewState: TooltipViewState) {
         bind(tooltipViewState)
     }
 
     @JvmStatic
     @BindingAdapter(value = ["applyMargin", "arrowPosition"], requireAll = true)
-    fun TooltipView.placeTooltip(margin: Int, arrowPosition: ArrowPosition) {
+    internal fun TooltipView.placeTooltip(margin: Int, arrowPosition: ArrowPosition) {
         if (arrowPosition == ArrowPosition.UP) {
             (layoutParams as? ConstraintLayout.LayoutParams)?.apply {
                 topToTop = 0 // parent
@@ -37,13 +37,13 @@ object BindingSetter {
 
     @JvmStatic
     @BindingAdapter("textSizeInSP")
-    fun TextView.setTextSizeInSp(size: Float) {
+    internal fun TextView.setTextSizeInSp(size: Float) {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, size)
     }
 
     @JvmStatic
     @BindingAdapter(value = ["arrowHorizontalPosition", "arrowPercentage"], requireAll = true)
-    fun ImageView.layoutMarginStart(margin: Int, percentage: Int?) {
+    internal fun ImageView.layoutMarginStart(margin: Int, percentage: Int?) {
         (layoutParams as? ConstraintLayout.LayoutParams)?.apply {
             percentage?.let {
                 endToEnd = 0

@@ -61,4 +61,4 @@ showcaseManager.show(context)
 | `builder.titleTextSize(Int)` | titleText's text size in SP | yes | 18 | no |
 | `builder.cancellableFromOutsideTouch(Boolean)` | outside touch from tooltip will act as close click | yes | no | yes |
 | `builder.build()` | will return ShowcaseManager instance | no |  |
-| `showcaseManager.show(Context)` | show the tooltip with set attributes on  | no |
+| `showcaseManager.show(Context)` | show the tooltip with set attributes on  | no | |

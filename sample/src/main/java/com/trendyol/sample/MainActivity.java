@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                         .closeButtonColor(ContextCompat.getColor(getBaseContext(), R.color.white))
                         .showCloseButton(true)
                         .arrowPosition(ArrowPosition.AUTO)
-                        .highlightType(HighlightType.CIRCLE)
+                        .highlightType(HighlightType.RECTANGLE)
                         .windowBackgroundAlpha(255)
                         .titleTextSize(30F)
                         .build()
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         .arrowPosition(ArrowPosition.AUTO)
                         .highlightType(HighlightType.CIRCLE)
                         .descriptionTextSize(21)
+                        .highlightPadding(8F)
                         .build()
                         .show(MainActivity.this, 0);
             }

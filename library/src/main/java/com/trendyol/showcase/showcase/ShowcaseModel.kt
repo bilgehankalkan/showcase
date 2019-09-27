@@ -25,7 +25,8 @@ data class ShowcaseModel(val rectF: RectF,
                          val titleTextSize: Float,
                          val descriptionTextSize: Float,
                          val highlightPadding: Float,
-                         val cancellableFromOutsideTouch: Boolean
+                         val cancellableFromOutsideTouch: Boolean,
+                         val isDebugMode: Boolean
 ) : Parcelable {
 
     fun horizontalCenter() = rectF.left + ((rectF.right - rectF.left) / 2)

@@ -24,6 +24,8 @@ data class ShowcaseManager private constructor(
 ) {
 
     fun show(activity: Activity, requestCode: Int? = null) {
+        if(showcaseModel.isDebugMode) return
+
         val intent = Intent(activity, ShowcaseActivity::class.java)
         val model = if (resId != null) readFromStyle(activity, resId) else showcaseModel
         intent.putExtra(ShowcaseActivity.BUNDLE_KEY, model)
@@ -36,6 +38,8 @@ data class ShowcaseManager private constructor(
     }
 
     fun show(fragment: Fragment, requestCode: Int? = null) {
+        if(showcaseModel.isDebugMode) return
+
         fragment.activity?.let { activity ->
             val intent = Intent(activity, ShowcaseActivity::class.java)
             val model = if (resId != null) readFromStyle(activity, resId) else showcaseModel
@@ -91,6 +95,7 @@ data class ShowcaseManager private constructor(
         @StyleRes
         private var resId: Int? = null
         private var cancellableFromOutsideTouch: Boolean = Constants.DEFAULT_CANCELLABLE_FROM_OUTSIDE_TOUCH
+        private var isDebugMode: Boolean = false
 
         fun view(view: View) = apply { focusView = view }
         fun titleText(title: String) = apply { titleText = title }
@@ -136,6 +141,11 @@ data class ShowcaseManager private constructor(
         fun resId(@StyleRes res: Int) = apply { resId = res }
         fun cancellableFromOutsideTouch(cancellable: Boolean) = apply { cancellableFromOutsideTouch = cancellable }
 
+        /**
+         * Running in debug mode or not
+         */
+        fun isDebugMode(isDebug: Boolean) = apply { isDebugMode = isDebug }
+
         fun build(): ShowcaseManager {
             if (focusView == null) {
                 throw Exception("view should not be null!")
@@ -163,7 +173,8 @@ data class ShowcaseManager private constructor(
                 titleTextSize,
                 descriptionTextSize,
                 highlightPadding,
-                cancellableFromOutsideTouch)
+                cancellableFromOutsideTouch,
+                isDebugMode)
 
             return ShowcaseManager(showcaseModel, resId)
         }

@@ -23,13 +23,13 @@ object TooltipFieldUtil {
 
     fun calculateMarginForCircle(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {
         ArrowPosition.UP -> bottom.toInt() + statusBarDiff
-        ArrowPosition.DOWN -> resources.displayMetrics.heightPixels - top.toInt()// + statusBarDiff
+        ArrowPosition.DOWN -> (resources.displayMetrics.heightPixels - top.toInt()) + ((bottom.toInt() - top.toInt()) / 3) // + statusBarDiff
         else -> 0//throw IllegalArgumentException("arrowPosition should be ArrowPosition.UP or ArrowPosition.DOWN")
     }
 
     fun calculateMarginForRectangle(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {
         ArrowPosition.UP -> bottom.toInt() + statusBarDiff
-        ArrowPosition.DOWN -> resources.displayMetrics.heightPixels - top.toInt()// + statusBarDiff
+        ArrowPosition.DOWN -> (resources.displayMetrics.heightPixels - top.toInt()) + (bottom.toInt() - top.toInt())
         else -> 0//throw IllegalArgumentException("arrowPosition should be ArrowPosition.UP or ArrowPosition.DOWN")
     }
 

@@ -59,6 +59,7 @@ showcaseManager.show(context)
 | `builder.windowBackgroundColor(Int)` | background of the window's color can be decided | yes | Color.BLACK |  yes |
 | `builder.windowBackgroundTint(Int)` | alpha value of window's background color | yes | 204 | no |
 | `builder.titleTextSize(Int)` | titleText's text size in SP | yes | 18 | no |
-| `builder.cancellableFromOutsideTouch(Boolean)` | outside touch from tooltip will act as close click | yes | no | yes |
+| `builder.cancellableFromOutsideTouch(Boolean)` | outside touch from tooltip will act as close click | yes | false | yes |
+| `builder.isDebugMode(Boolean)` | tooltip won't be presented | yes | false | no |
 | `builder.build()` | will return ShowcaseManager instance | no |  |
 | `showcaseManager.show(Context)` | show the tooltip with set attributes on  | no | |

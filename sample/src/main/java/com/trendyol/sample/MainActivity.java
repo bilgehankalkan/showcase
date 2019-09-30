@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent))
                         .showCloseButton(true)
                         .arrowPosition(ArrowPosition.AUTO)
-                        .highlightType(HighlightType.CIRCLE)
+                        .highlightType(HighlightType.RECTANGLE)
                         .descriptionTextSize(21)
                         .highlightPadding(8F)
                         .build()

@@ -29,7 +29,7 @@ object TooltipFieldUtil {
 
     fun calculateMarginForRectangle(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {
         ArrowPosition.UP -> bottom.toInt() + statusBarDiff
-        ArrowPosition.DOWN -> (resources.displayMetrics.heightPixels - top.toInt()) + (bottom.toInt() - top.toInt())
+        ArrowPosition.DOWN -> bottom.toInt() - top.toInt()
         else -> 0//throw IllegalArgumentException("arrowPosition should be ArrowPosition.UP or ArrowPosition.DOWN")
     }
 

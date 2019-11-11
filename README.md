@@ -20,6 +20,7 @@ dependencies {
     implementation "com.trendyol.showcase:showcase:$showcase_version"
 }
 ```
+:warning: To use **Showcase**, you need to enable dataBinding from your main project's `build.gradle`.
 
 # Usage
 You can easily use ShowcaseManager.Builder to create **Showcase**.

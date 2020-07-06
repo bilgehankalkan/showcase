@@ -52,19 +52,31 @@
                 android:orientation="vertical"
                 android:padding="@dimen/showcase_padding_16dp">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:imageUrl="@{tooltipViewState.imageUrl}"
+                    android:visibility="@{tooltipViewState.imageViewVisibility}"
+                    android:layout_marginBottom="@dimen/showcase_padding_8dp"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewTooltipTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:text="@{tooltipViewState.titleText}"
-                    android:textAlignment="textStart"
+                    android:textAlignment="@{tooltipViewState.textPosition}"
                     android:textColor="@{tooltipViewState.titleTextColor}"
-                    bind:textSizeInSP="@{tooltipViewState.titleTextSize}"
                     app:layout_constraintEnd_toStartOf="@id/imageViewTooltipClose"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    bind:textSizeInSP="@{tooltipViewState.titleTextSize}"
                     tools:text="lorem ipsum" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -73,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@{tooltipViewState.descriptionText}"
-                    android:textAlignment="textStart"
+                    android:textAlignment="@{tooltipViewState.textPosition}"
                     android:textColor="@{tooltipViewState.descriptionTextColor}"
                     bind:textSizeInSP="@{tooltipViewState.descriptionTextSize}"
                     app:layout_constraintEnd_toEndOf="parent"

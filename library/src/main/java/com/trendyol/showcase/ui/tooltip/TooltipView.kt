@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.trendyol.showcase.R
 import com.trendyol.showcase.databinding.LayoutTooltipBinding
+import com.trendyol.showcase.ui.binding.loadImage
 import com.trendyol.showcase.util.getShowcaseActivity
 
 class TooltipView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
@@ -20,6 +22,7 @@ class TooltipView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         binding.imageViewTooltipClose.setOnClickListener {
             getShowcaseActivity()?.onBackPress()
         }
+        Glide.with(context).load("https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png").into(binding.imageView)
         binding.tooltipViewState = tooltipViewState
         binding.executePendingBindings()
     }

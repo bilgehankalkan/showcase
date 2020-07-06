@@ -30,7 +30,7 @@
             app:srcCompat="@drawable/ic_arrow_up"
             app:tint="@{tooltipViewState.backgroundColor}"
             bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
-            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"/>
+            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_content"
@@ -49,31 +49,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@{tooltipViewState.backgroundColor}"
-                android:orientation="vertical"
-                android:padding="@dimen/showcase_padding_16dp">
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imageView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:imageUrl="@{tooltipViewState.imageUrl}"
                     android:visibility="@{tooltipViewState.imageViewVisibility}"
-                    android:layout_marginBottom="@dimen/showcase_padding_8dp"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintTop_toBottomOf="parent"
+                    app:imageUrl="@{tooltipViewState.imageUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageViewTooltipClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/showcase_margin_12dp"
+                    android:layout_marginEnd="@dimen/showcase_margin_12dp"
+                    android:padding="4dp"
+                    android:visibility="@{tooltipViewState.getCloseButtonVisibility()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_close"
+                    app:tint="@{tooltipViewState.closeButtonColor}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewTooltipTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/showcase_margin_16dp"
+                    android:layout_marginTop="@dimen/showcase_margin_16dp"
+                    android:layout_marginEnd="@dimen/showcase_margin_16dp"
                     android:text="@{tooltipViewState.titleText}"
                     android:textAlignment="@{tooltipViewState.textPosition}"
                     android:textColor="@{tooltipViewState.titleTextColor}"
-                    app:layout_constraintEnd_toStartOf="@id/imageViewTooltipClose"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
                     bind:textSizeInSP="@{tooltipViewState.titleTextSize}"
@@ -83,27 +97,19 @@
                     android:id="@+id/textViewTooltipDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/showcase_margin_16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/showcase_margin_16dp"
+                    android:layout_marginBottom="@dimen/showcase_margin_16dp"
                     android:text="@{tooltipViewState.descriptionText}"
                     android:textAlignment="@{tooltipViewState.textPosition}"
                     android:textColor="@{tooltipViewState.descriptionTextColor}"
-                    bind:textSizeInSP="@{tooltipViewState.descriptionTextSize}"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textViewTooltipTitle"
+                    bind:textSizeInSP="@{tooltipViewState.descriptionTextSize}"
                     tools:text="lorem ipsum lorem ipsum lorem ipsum" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imageViewTooltipClose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:visibility="@{tooltipViewState.getCloseButtonVisibility()}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/textViewTooltipTitle"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_close"
-                    app:tint="@{tooltipViewState.closeButtonColor}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -118,6 +124,6 @@
             app:srcCompat="@drawable/ic_arrow_down"
             app:tint="@{tooltipViewState.backgroundColor}"
             bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
-            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"/>
+            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

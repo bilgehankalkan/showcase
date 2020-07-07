@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.annotation.ColorInt
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
+import com.trendyol.showcase.ui.tooltip.TextPosition
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -26,7 +27,9 @@ data class ShowcaseModel(val rectF: RectF,
                          val descriptionTextSize: Float,
                          val highlightPadding: Float,
                          val cancellableFromOutsideTouch: Boolean,
-                         val isDebugMode: Boolean
+                         val isDebugMode: Boolean,
+                         val textPosition: TextPosition,
+                         val imageUrl: String
 ) : Parcelable {
 
     fun horizontalCenter() = rectF.left + ((rectF.right - rectF.left) / 2)

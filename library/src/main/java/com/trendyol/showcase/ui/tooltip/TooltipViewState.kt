@@ -15,8 +15,20 @@ data class TooltipViewState(
     val arrowPercentage: Int?,
     val titleTextSize: Float,
     val descriptionTextSize: Float,
-    val arrowMargin: Int
+    val arrowMargin: Int,
+    val textPosition: TextPosition,
+    val imageUrl: String
 ) {
+
+    fun getImageViewVisibility(): Int = if (imageUrl.isEmpty()) View.GONE else View.VISIBLE
+
+    fun getTextPosition(): Int {
+        return when (textPosition) {
+            TextPosition.CENTER -> 4
+            TextPosition.END -> 3
+            else -> 2
+        }
+    }
 
     fun getTopArrowVisibility() =
         if (arrowPosition == ArrowPosition.UP) View.VISIBLE else View.GONE

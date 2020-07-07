@@ -3,6 +3,7 @@ package com.trendyol.showcase.util
 import android.graphics.Color
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
+import com.trendyol.showcase.ui.tooltip.TextPosition
 
 object Constants {
 
@@ -17,5 +18,6 @@ object Constants {
     const val DEFAULT_TEXT = ""
     val DEFAULT_ARROW_POSITION = ArrowPosition.AUTO
     val DEFAULT_HIGHLIGHT_TYPE = HighlightType.RECTANGLE
+    val DEFAULT_TEXT_POSITION = TextPosition.START
     const val DEFAULT_CANCELLABLE_FROM_OUTSIDE_TOUCH = false
 }

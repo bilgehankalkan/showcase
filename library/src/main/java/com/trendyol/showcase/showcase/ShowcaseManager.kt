@@ -14,6 +14,7 @@ import com.trendyol.showcase.R
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.showcase.ShowcaseActivity
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
+import com.trendyol.showcase.ui.tooltip.TextPosition
 import com.trendyol.showcase.util.Constants
 import com.trendyol.showcase.util.TooltipFieldUtil
 import com.trendyol.showcase.util.toRectF
@@ -96,6 +97,8 @@ data class ShowcaseManager private constructor(
         private var resId: Int? = null
         private var cancellableFromOutsideTouch: Boolean = Constants.DEFAULT_CANCELLABLE_FROM_OUTSIDE_TOUCH
         private var isDebugMode: Boolean = false
+        private var textPosition: TextPosition = Constants.DEFAULT_TEXT_POSITION
+        private var imageUrl: String = Constants.DEFAULT_TEXT
 
         fun view(view: View) = apply { focusView = view }
         fun titleText(title: String) = apply { titleText = title }
@@ -145,6 +148,13 @@ data class ShowcaseManager private constructor(
          * Running in debug mode or not
          */
         fun isDebugMode(isDebug: Boolean) = apply { isDebugMode = isDebug }
+        /**
+         *
+         * Custom positioning for text.
+         */
+        fun textPosition(position: TextPosition) = apply { textPosition = position }
+
+        fun imageUrl(url: String) = apply { imageUrl = url }
 
         fun build(): ShowcaseManager {
             if (focusView == null) {
@@ -174,7 +184,9 @@ data class ShowcaseManager private constructor(
                 descriptionTextSize,
                 highlightPadding,
                 cancellableFromOutsideTouch,
-                isDebugMode)
+                isDebugMode,
+                textPosition,
+                imageUrl)
 
             return ShowcaseManager(showcaseModel, resId)
         }

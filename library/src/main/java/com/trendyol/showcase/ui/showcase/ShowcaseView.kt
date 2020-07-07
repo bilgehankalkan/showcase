@@ -103,18 +103,20 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
             })
 
             binding.tooltipViewState = TooltipViewState(
-                it.titleText,
-                it.descriptionText,
-                it.titleTextColor,
-                it.descriptionTextColor,
-                it.popupBackgroundColor,
-                it.closeButtonColor,
-                it.showCloseButton,
-                arrowPosition,
-                it.arrowPercentage,
-                it.titleTextSize,
-                it.descriptionTextSize,
-                TooltipFieldUtil.calculateArrowMargin(resources, it.horizontalCenter()))
+                titleText = it.titleText,
+                descriptionText = it.descriptionText,
+                titleTextColor = it.titleTextColor,
+                descriptionTextColor = it.descriptionTextColor,
+                backgroundColor = it.popupBackgroundColor,
+                closeButtonColor = it.closeButtonColor,
+                showCloseButton = it.showCloseButton,
+                arrowPosition = arrowPosition,
+                arrowPercentage = it.arrowPercentage,
+                titleTextSize = it.titleTextSize,
+                descriptionTextSize = it.descriptionTextSize,
+                arrowMargin = TooltipFieldUtil.calculateArrowMargin(resources, it.horizontalCenter()),
+                textPosition = it.textPosition,
+                imageUrl = it.imageUrl)
             binding.executePendingBindings()
         }
     }

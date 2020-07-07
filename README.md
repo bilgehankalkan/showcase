@@ -1,6 +1,6 @@
 
 # Showcase
-<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/3.png" width="170"/>
+<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/3.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/4.png" width="170"/>
 
 With **Showcase**, you can easily show tooltips. **Showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. Also you can have callback when user quits from **Showcase**.
 
@@ -32,6 +32,7 @@ val showcaseManager = ShowcaseManager.Builder()
     .titleTextColor(ContextCompat.getColor(this, R.color.blue)) 
     .windowBackgroundAlpha(127)  
     .arrowPosition(ArrowPosition.DOWN)
+    .textPosition(TextPosition.START)
     .resId(R.style.Showcase_Theme)
     .build()  
   
@@ -61,6 +62,8 @@ showcaseManager.show(context)
 | `builder.titleTextSize(Int)` | titleText's text size in SP | yes | 18 | no |
 | `builder.cancellableFromOutsideTouch(Boolean)` | outside touch from tooltip will act as close click | yes | false | yes |
 | `builder.isDebugMode(Boolean)` | tooltip won't be presented | yes | false | no |
+| `builder.textPosition(TextPosition)` | text can be positioning center, end and start  | yes | TextPosition.START | no |
+| `builder.imageUrl(String)` | show image on tooltip | yes | null | no |
 | `builder.build()` | will return ShowcaseManager instance | no |  |
 | `showcaseManager.show(Context)` | show the tooltip with set attributes on  | no | |
 

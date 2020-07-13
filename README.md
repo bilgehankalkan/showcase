@@ -53,10 +53,11 @@ showcaseManager.show(context)
 | `builder.backgroundColor(Int)` | background color of tooltip | yes | Color.WHITE | yes |
 | `builder.closeButtonColor(Int)` | closeButton's color | yes | Color.BLACK | yes |
 | `builder.showCloseButton(Boolean)` | show close button on tooltip | yes | true | yes |
-| `builder.ArrowPosition(ArrowPosition)` | arrow can be placed under or over the tooltip | yes | ArrowPosition.AUTO | no |
+| `builder.arrowResource(Int)` | custom icon resource for arrow. | yes | ic_arrow_down or ic_arrow_up | no |
+| `builder.arrowPosition(ArrowPosition)` | arrow can be placed under or over the tooltip | yes | ArrowPosition.AUTO | no |
+| `builder.arrowPercentage(Int)` | arrow position percentage can be decided | yes | null | no |
 | `builder.highlightType(HighlightType)` | view can be highlighted with a circle shape or rectangle | yes | HighlightType.RECTANGLE | no |
 | `builder.cancelListener(CancelListener)` | will be called after user quit from tooltip | yes | null | no |
-| `builder.arrowPercentage(Int)` | arrow position percentage can be decided | yes | null | no |
 | `builder.windowBackgroundColor(Int)` | background of the window's color can be decided | yes | Color.BLACK |  yes |
 | `builder.windowBackgroundTint(Int)` | alpha value of window's background color | yes | 204 | no |
 | `builder.titleTextSize(Int)` | titleText's text size in SP | yes | 18 | no |

@@ -27,10 +27,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:srcCompat="@drawable/ic_arrow_up"
             app:tint="@{tooltipViewState.backgroundColor}"
             bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
-            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}" />
+            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"
+            bind:drawableRes="@{tooltipViewState.topArrowResource}"
+            tools:srcCompat="@drawable/ic_arrow_up" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_content"
@@ -56,12 +57,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="@{tooltipViewState.imageViewVisibility}"
-                    app:sc_imageUrl="@{tooltipViewState.imageUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sc_imageUrl="@{tooltipViewState.imageUrl}" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imageViewTooltipClose"
@@ -87,15 +88,18 @@
                     android:text="@{tooltipViewState.titleText}"
                     android:textAlignment="@{tooltipViewState.textPosition}"
                     android:textColor="@{tooltipViewState.titleTextColor}"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/textViewTooltipDescription"
+                    app:layout_constraintEnd_toStartOf="@id/imageViewTooltipClose"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:layout_goneMarginBottom="@dimen/showcase_margin_16dp"
+                    bind:isVisible="@{tooltipViewState.titleVisibility}"
                     bind:textSizeInSP="@{tooltipViewState.titleTextSize}"
                     tools:text="lorem ipsum" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewTooltipDescription"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/showcase_margin_16dp"
                     android:layout_marginTop="8dp"
@@ -108,9 +112,13 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textViewTooltipTitle"
+                    app:layout_goneMarginTop="@dimen/showcase_margin_16dp"
+                    bind:isVisible="@{tooltipViewState.descriptionVisibility}"
                     bind:textSizeInSP="@{tooltipViewState.descriptionTextSize}"
                     tools:text="lorem ipsum lorem ipsum lorem ipsum" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -121,9 +129,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_content"
-            app:srcCompat="@drawable/ic_arrow_down"
             app:tint="@{tooltipViewState.backgroundColor}"
             bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
-            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}" />
+            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"
+            bind:drawableRes="@{tooltipViewState.bottomArrowResource}"
+            tools:srcCompat="@drawable/ic_arrow_down" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

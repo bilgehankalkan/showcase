@@ -7,21 +7,21 @@ import com.trendyol.showcase.R
 import com.trendyol.showcase.util.Constants
 
 data class TooltipViewState(
-        val titleText: String,
-        val descriptionText: String,
-        @ColorInt val titleTextColor: Int,
-        @ColorInt val descriptionTextColor: Int,
-        @ColorInt val backgroundColor: Int,
-        @ColorInt val closeButtonColor: Int,
-        val showCloseButton: Boolean = true,
-        @DrawableRes val arrowResource: Int,
-        val arrowPosition: ArrowPosition,
-        val arrowPercentage: Int?,
-        val arrowMargin: Int,
-        val titleTextSize: Float,
-        val descriptionTextSize: Float,
-        val textPosition: TextPosition,
-        val imageUrl: String
+    val titleText: String,
+    val descriptionText: String,
+    @ColorInt val titleTextColor: Int,
+    @ColorInt val descriptionTextColor: Int,
+    @ColorInt val backgroundColor: Int,
+    @ColorInt val closeButtonColor: Int,
+    val showCloseButton: Boolean = true,
+    @DrawableRes val arrowResource: Int,
+    val arrowPosition: ArrowPosition,
+    val arrowPercentage: Int?,
+    val arrowMargin: Int,
+    val titleTextSize: Float,
+    val descriptionTextSize: Float,
+    val textPosition: TextPosition,
+    val imageUrl: String
 ) {
 
     fun getImageViewVisibility(): Int = if (imageUrl.isEmpty()) View.GONE else View.VISIBLE

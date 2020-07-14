@@ -22,10 +22,10 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
     : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val binding: LayoutShowcaseBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(context),
-            R.layout.layout_showcase,
-            this,
-            true)
+        LayoutInflater.from(context),
+        R.layout.layout_showcase,
+        this,
+        true)
 
     var showcaseModel: ShowcaseModel? = null
         set(value) {
@@ -37,20 +37,20 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
         showcaseModel?.also {
             when (it.highlightType) {
                 HighlightType.CIRCLE -> CircleShape(
-                        statusBarHeight(),
-                        width,
-                        height,
-                        it.horizontalCenter(),
-                        it.verticalCenter(),
-                        it.radius + it.highlightPadding)
+                    statusBarHeight(),
+                    width,
+                    height,
+                    it.horizontalCenter(),
+                    it.verticalCenter(),
+                    it.radius + it.highlightPadding)
                 HighlightType.RECTANGLE -> RectangleShape(
-                        statusBarHeight(),
-                        width,
-                        height,
-                        it.rectF.left - (it.highlightPadding / 2),
-                        it.rectF.top - (it.highlightPadding / 2),
-                        it.rectF.right + (it.highlightPadding / 2),
-                        it.rectF.bottom + (it.highlightPadding / 2))
+                    statusBarHeight(),
+                    width,
+                    height,
+                    it.rectF.left - (it.highlightPadding / 2),
+                    it.rectF.top - (it.highlightPadding / 2),
+                    it.rectF.right + (it.highlightPadding / 2),
+                    it.rectF.bottom + (it.highlightPadding / 2))
             }.draw(it.windowBackgroundColor, it.windowBackgroundAlpha, canvas)
         }
         super.dispatchDraw(canvas)
@@ -106,21 +106,21 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
             })
 
             binding.tooltipViewState = TooltipViewState(
-                    titleText = it.titleText,
-                    descriptionText = it.descriptionText,
-                    titleTextColor = it.titleTextColor,
-                    descriptionTextColor = it.descriptionTextColor,
-                    backgroundColor = it.popupBackgroundColor,
-                    closeButtonColor = it.closeButtonColor,
-                    showCloseButton = it.showCloseButton,
-                    arrowResource = it.arrowResource,
-                    arrowPosition = arrowPosition,
-                    arrowPercentage = it.arrowPercentage,
-                    arrowMargin = TooltipFieldUtil.calculateArrowMargin(resources, it.horizontalCenter()),
-                    titleTextSize = it.titleTextSize,
-                    descriptionTextSize = it.descriptionTextSize,
-                    textPosition = it.textPosition,
-                    imageUrl = it.imageUrl)
+                titleText = it.titleText,
+                descriptionText = it.descriptionText,
+                titleTextColor = it.titleTextColor,
+                descriptionTextColor = it.descriptionTextColor,
+                backgroundColor = it.popupBackgroundColor,
+                closeButtonColor = it.closeButtonColor,
+                showCloseButton = it.showCloseButton,
+                arrowResource = it.arrowResource,
+                arrowPosition = arrowPosition,
+                arrowPercentage = it.arrowPercentage,
+                arrowMargin = TooltipFieldUtil.calculateArrowMargin(resources, it.horizontalCenter()),
+                titleTextSize = it.titleTextSize,
+                descriptionTextSize = it.descriptionTextSize,
+                textPosition = it.textPosition,
+                imageUrl = it.imageUrl)
             binding.executePendingBindings()
         }
     }

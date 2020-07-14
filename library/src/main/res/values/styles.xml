@@ -9,5 +9,5 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="ShowcaseTransparentTheme" parent="ShowcaseBaseTheme"/>
+    <style name="ShowcaseTransparentTheme" parent="ShowcaseBaseTheme" />
 </resources>

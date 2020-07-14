@@ -20,8 +20,8 @@ import com.trendyol.showcase.util.TooltipFieldUtil
 import com.trendyol.showcase.util.toRectF
 
 data class ShowcaseManager private constructor(
-        private val showcaseModel: ShowcaseModel,
-        @StyleRes val resId: Int?
+    private val showcaseModel: ShowcaseModel,
+    @StyleRes val resId: Int?
 ) {
 
     fun show(activity: Activity, requestCode: Int? = null) {
@@ -58,13 +58,13 @@ data class ShowcaseManager private constructor(
         val typedArray = context.obtainStyledAttributes(resId, R.styleable.Showcase_Theme)
 
         return showcaseModel.copy(
-                titleTextColor = typedArray.getColor(R.styleable.Showcase_Theme_titleTextColor, showcaseModel.titleTextColor),
-                descriptionTextColor = typedArray.getColor(R.styleable.Showcase_Theme_descriptionTextColor, showcaseModel.descriptionTextColor),
-                closeButtonColor = typedArray.getColor(R.styleable.Showcase_Theme_closeButtonColor, showcaseModel.closeButtonColor),
-                popupBackgroundColor = typedArray.getColor(R.styleable.Showcase_Theme_popupBackgroundColor, showcaseModel.popupBackgroundColor),
-                windowBackgroundColor = typedArray.getColor(R.styleable.Showcase_Theme_windowBackgroundColor, showcaseModel.windowBackgroundColor),
-                showCloseButton = typedArray.getBoolean(R.styleable.Showcase_Theme_showCloseButton, showcaseModel.showCloseButton),
-                cancellableFromOutsideTouch = typedArray.getBoolean(R.styleable.Showcase_Theme_cancellableFromOutsideTouch, showcaseModel.cancellableFromOutsideTouch)
+            titleTextColor = typedArray.getColor(R.styleable.Showcase_Theme_titleTextColor, showcaseModel.titleTextColor),
+            descriptionTextColor = typedArray.getColor(R.styleable.Showcase_Theme_descriptionTextColor, showcaseModel.descriptionTextColor),
+            closeButtonColor = typedArray.getColor(R.styleable.Showcase_Theme_closeButtonColor, showcaseModel.closeButtonColor),
+            popupBackgroundColor = typedArray.getColor(R.styleable.Showcase_Theme_popupBackgroundColor, showcaseModel.popupBackgroundColor),
+            windowBackgroundColor = typedArray.getColor(R.styleable.Showcase_Theme_windowBackgroundColor, showcaseModel.windowBackgroundColor),
+            showCloseButton = typedArray.getBoolean(R.styleable.Showcase_Theme_showCloseButton, showcaseModel.showCloseButton),
+            cancellableFromOutsideTouch = typedArray.getBoolean(R.styleable.Showcase_Theme_cancellableFromOutsideTouch, showcaseModel.cancellableFromOutsideTouch)
         ).also {
             typedArray.recycle()
         }
@@ -190,28 +190,28 @@ data class ShowcaseManager private constructor(
             focusView?.getGlobalVisibleRect(rect)
 
             val showcaseModel = ShowcaseModel(
-                    rect.toRectF(),
-                    TooltipFieldUtil.calculateRadius(focusView!!),
-                    titleText,
-                    descriptionText,
-                    titleTextColor,
-                    descriptionTextColor,
-                    popupBackgroundColor,
-                    closeButtonColor,
-                    showCloseButton,
-                    highlightType,
-                    arrowResource,
-                    arrowPosition,
-                    arrowPercentage,
-                    windowBackgroundColor,
-                    windowBackgroundAlpha,
-                    titleTextSize,
-                    descriptionTextSize,
-                    highlightPadding,
-                    cancellableFromOutsideTouch,
-                    isDebugMode,
-                    textPosition,
-                    imageUrl)
+                rect.toRectF(),
+                TooltipFieldUtil.calculateRadius(focusView!!),
+                titleText,
+                descriptionText,
+                titleTextColor,
+                descriptionTextColor,
+                popupBackgroundColor,
+                closeButtonColor,
+                showCloseButton,
+                highlightType,
+                arrowResource,
+                arrowPosition,
+                arrowPercentage,
+                windowBackgroundColor,
+                windowBackgroundAlpha,
+                titleTextSize,
+                descriptionTextSize,
+                highlightPadding,
+                cancellableFromOutsideTouch,
+                isDebugMode,
+                textPosition,
+                imageUrl)
 
             return ShowcaseManager(showcaseModel, resId)
         }

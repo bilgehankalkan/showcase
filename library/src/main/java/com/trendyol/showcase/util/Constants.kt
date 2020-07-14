@@ -16,6 +16,7 @@ object Constants {
     const val DEFAULT_HIGHLIGHT_PADDING_EXTRA = 0F
     const val DEFAULT_CLOSE_BUTTON_VISIBILITY = true
     const val DEFAULT_TEXT = ""
+    const val DEFAULT_ARROW_RESOURCE = -1
     val DEFAULT_ARROW_POSITION = ArrowPosition.AUTO
     val DEFAULT_HIGHLIGHT_TYPE = HighlightType.RECTANGLE
     val DEFAULT_TEXT_POSITION = TextPosition.START

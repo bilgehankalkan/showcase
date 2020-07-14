@@ -27,21 +27,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new ShowcaseManager.Builder()
-                    .view(buttonTop)
-                    .titleText("Title For Top!")
-                    .descriptionText("Simple, short description for top tooltip.")
-                    .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent))
-                    .descriptionTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimary))
-                    .backgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark))
-                    .imageUrl("https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png")
-                    .showCloseButton(true)
-                    .arrowPosition(ArrowPosition.AUTO)
-                    .highlightType(HighlightType.RECTANGLE)
-                    .textPosition(TextPosition.START)
-                    .windowBackgroundAlpha(255)
-                    .titleTextSize(30F)
-                    .build()
-                    .show(MainActivity.this, 0);
+                        .view(buttonTop)
+                        .titleText("Title For Top!")
+                        .descriptionText("Simple, short description for top tooltip.")
+                        .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent))
+                        .descriptionTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimary))
+                        .backgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark))
+                        .imageUrl("https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png")
+                        .showCloseButton(true)
+                        .arrowPosition(ArrowPosition.AUTO)
+                        .highlightType(HighlightType.RECTANGLE)
+                        .textPosition(TextPosition.START)
+                        .windowBackgroundAlpha(255)
+                        .titleTextSize(30F)
+                        .build()
+                        .show(MainActivity.this, 0);
             }
         });
 
@@ -49,19 +49,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new ShowcaseManager.Builder()
-                    .view(buttonCenter)
-                    .titleText("Title For Center!")
-                    .descriptionText("Center is here.")
-                    .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.white))
-                    .backgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark))
-                    .closeButtonColor(ContextCompat.getColor(getBaseContext(), R.color.white))
-                    .showCloseButton(true)
-                    .arrowPosition(ArrowPosition.DOWN)
-                    .highlightType(HighlightType.CIRCLE)
-                    .arrowPercentage(100)
-                    .textPosition(TextPosition.CENTER)
-                    .build()
-                    .show(MainActivity.this, 0);
+                        .view(buttonCenter)
+                        .titleText("Title For Center!")
+                        .descriptionText("Center is here.")
+                        .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.white))
+                        .backgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark))
+                        .closeButtonColor(ContextCompat.getColor(getBaseContext(), R.color.white))
+                        .showCloseButton(true)
+                        .arrowPosition(ArrowPosition.DOWN)
+                        .highlightType(HighlightType.CIRCLE)
+                        .arrowPercentage(100)
+                        .textPosition(TextPosition.CENTER)
+                        .build()
+                        .show(MainActivity.this, 0);
             }
         });
 
@@ -69,17 +69,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new ShowcaseManager.Builder()
-                    .view(buttonBottom)
-                    .descriptionText("Some kind of description.")
-                    .titleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent))
-                    .showCloseButton(true)
-                    .arrowPosition(ArrowPosition.AUTO)
-                    .highlightType(HighlightType.RECTANGLE)
-                    .descriptionTextSize(21)
-                    .highlightPadding(8F)
-                    .textPosition(TextPosition.END)
-                    .build()
-                    .show(MainActivity.this, 0);
+                        .view(buttonBottom)
+                        .titleText("Title without a description")
+                        .titleTextSize(16)
+                        .showCloseButton(true)
+                        .arrowResource(R.drawable.ic_custom_arrow_down)
+                        .arrowPosition(ArrowPosition.AUTO)
+                        .highlightType(HighlightType.RECTANGLE)
+                        .highlightPadding(8F)
+                        .textPosition(TextPosition.START)
+                        .build()
+                        .show(MainActivity.this, 0);
             }
         });
     }

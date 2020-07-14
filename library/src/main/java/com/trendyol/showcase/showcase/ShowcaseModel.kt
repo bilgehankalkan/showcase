@@ -3,6 +3,7 @@ package com.trendyol.showcase.showcase
 import android.graphics.RectF
 import android.os.Parcelable
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
 import com.trendyol.showcase.ui.tooltip.TextPosition
@@ -18,8 +19,9 @@ data class ShowcaseModel(val rectF: RectF,
                          @ColorInt val popupBackgroundColor: Int,
                          @ColorInt val closeButtonColor: Int,
                          val showCloseButton: Boolean,
-                         val arrowPosition: ArrowPosition,
                          val highlightType: HighlightType,
+                         @DrawableRes val arrowResource: Int,
+                         val arrowPosition: ArrowPosition,
                          val arrowPercentage: Int?,
                          val windowBackgroundColor: Int,
                          val windowBackgroundAlpha: Int,

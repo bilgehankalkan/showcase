@@ -21,8 +21,12 @@ import com.trendyol.showcase.util.statusBarHeight
 class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding: LayoutShowcaseBinding = DataBindingUtil.inflate(LayoutInflater.from(context),
-        R.layout.layout_showcase, this, true)
+    private val binding: LayoutShowcaseBinding = DataBindingUtil.inflate(
+        LayoutInflater.from(context),
+        R.layout.layout_showcase,
+        this,
+        true)
+
     var showcaseModel: ShowcaseModel? = null
         set(value) {
             field = value
@@ -66,26 +70,25 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
         setOnTouchListener(onTouchClickListener)
     }
 
-    private fun isHighlightClick(x: Float, y: Float) =
-        showcaseModel?.let {
-            val newRectF = it.rectF
+    private fun isHighlightClick(x: Float, y: Float) = showcaseModel?.let {
+        val newRectF = it.rectF
 
-            when (it.highlightType) {
-                HighlightType.CIRCLE -> {
-                    newRectF.left -= (it.radius + it.highlightPadding)
-                    newRectF.right += (it.radius + it.highlightPadding)
-                    newRectF.top -= (it.radius + it.highlightPadding - statusBarHeight())
-                    newRectF.bottom += (it.radius + it.highlightPadding - statusBarHeight())
-                }
-                HighlightType.RECTANGLE -> {
-                    newRectF.left -= (it.highlightPadding / 2)
-                    newRectF.right += (it.highlightPadding / 2)
-                    newRectF.top -= (it.highlightPadding / 2)
-                    newRectF.bottom += (it.highlightPadding / 2)
-                }
+        when (it.highlightType) {
+            HighlightType.CIRCLE -> {
+                newRectF.left -= (it.radius + it.highlightPadding)
+                newRectF.right += (it.radius + it.highlightPadding)
+                newRectF.top -= (it.radius + it.highlightPadding - statusBarHeight())
+                newRectF.bottom += (it.radius + it.highlightPadding - statusBarHeight())
             }
-            newRectF.contains(x, y)
-        } ?: false
+            HighlightType.RECTANGLE -> {
+                newRectF.left -= (it.highlightPadding / 2)
+                newRectF.right += (it.highlightPadding / 2)
+                newRectF.top -= (it.highlightPadding / 2)
+                newRectF.bottom += (it.highlightPadding / 2)
+            }
+        }
+        newRectF.contains(x, y)
+    } ?: false
 
     private fun bind(showcaseModel: ShowcaseModel?) {
         showcaseModel?.let {
@@ -110,11 +113,12 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
                 backgroundColor = it.popupBackgroundColor,
                 closeButtonColor = it.closeButtonColor,
                 showCloseButton = it.showCloseButton,
+                arrowResource = it.arrowResource,
                 arrowPosition = arrowPosition,
                 arrowPercentage = it.arrowPercentage,
+                arrowMargin = TooltipFieldUtil.calculateArrowMargin(resources, it.horizontalCenter()),
                 titleTextSize = it.titleTextSize,
                 descriptionTextSize = it.descriptionTextSize,
-                arrowMargin = TooltipFieldUtil.calculateArrowMargin(resources, it.horizontalCenter()),
                 textPosition = it.textPosition,
                 imageUrl = it.imageUrl)
             binding.executePendingBindings()

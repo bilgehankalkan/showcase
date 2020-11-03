@@ -72,7 +72,7 @@ data class ShowcaseManager private constructor(
 
     class Builder {
 
-        private var focusView: View? = null
+        private var focusViews: Array<out View>? = null
         private var titleText: String = Constants.DEFAULT_TEXT
         private var descriptionText: String = Constants.DEFAULT_TEXT
 
@@ -109,7 +109,9 @@ data class ShowcaseManager private constructor(
         private var textPosition: TextPosition = Constants.DEFAULT_TEXT_POSITION
         private var imageUrl: String = Constants.DEFAULT_TEXT
 
-        fun view(view: View) = apply { focusView = view }
+        fun focus(view: View) = apply { focusViews = arrayOf(view) }
+
+        fun focus(vararg view: View) = apply { focusViews = view }
 
         fun titleText(title: String) = apply { titleText = title }
 
@@ -181,44 +183,48 @@ data class ShowcaseManager private constructor(
         fun imageUrl(url: String) = apply { imageUrl = url }
 
         fun build(): ShowcaseManager {
-            if (focusView == null) {
+            if (focusViews.isNullOrEmpty()) {
                 throw Exception("view should not be null!")
             }
 
             val rect = Rect()
 
-            focusView?.getGlobalVisibleRect(rect)
+            focusViews!!.forEach {
+                val viewRect = Rect()
+                it.getGlobalVisibleRect(viewRect)
+                rect.union(viewRect)
+            }
 
             val showcaseModel = ShowcaseModel(
-                rect.toRectF(),
-                TooltipFieldUtil.calculateRadius(focusView!!),
-                titleText,
-                descriptionText,
-                titleTextColor,
-                descriptionTextColor,
-                popupBackgroundColor,
-                closeButtonColor,
-                showCloseButton,
-                highlightType,
-                arrowResource,
-                arrowPosition,
-                arrowPercentage,
-                windowBackgroundColor,
-                windowBackgroundAlpha,
-                titleTextSize,
-                descriptionTextSize,
-                highlightPadding,
-                cancellableFromOutsideTouch,
-                isDebugMode,
-                textPosition,
-                imageUrl)
+                rectF = rect.toRectF(),
+                radius = TooltipFieldUtil.calculateRadius(rect),
+                titleText = titleText,
+                descriptionText = descriptionText,
+                titleTextColor = titleTextColor,
+                descriptionTextColor = descriptionTextColor,
+                popupBackgroundColor = popupBackgroundColor,
+                closeButtonColor = closeButtonColor,
+                showCloseButton = showCloseButton,
+                highlightType = highlightType,
+                arrowResource = arrowResource,
+                arrowPosition = arrowPosition,
+                arrowPercentage = arrowPercentage,
+                windowBackgroundColor = windowBackgroundColor,
+                windowBackgroundAlpha = windowBackgroundAlpha,
+                titleTextSize = titleTextSize,
+                descriptionTextSize = descriptionTextSize,
+                highlightPadding = highlightPadding,
+                cancellableFromOutsideTouch = cancellableFromOutsideTouch,
+                isDebugMode = isDebugMode,
+                textPosition = textPosition,
+                imageUrl = imageUrl
+            )
 
-            return ShowcaseManager(showcaseModel, resId)
+            return ShowcaseManager(showcaseModel = showcaseModel, resId = resId)
         }
     }
 
     companion object {
-
         const val HIGHLIGHT_CLICKED = "highlight_clicked"
     }
 }

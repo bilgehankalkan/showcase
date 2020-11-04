@@ -10,27 +10,64 @@
         android:id="@+id/button_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button Top"
+        android:text="Showcase - Rectangle 1"
+        app:layout_constraintBottom_toTopOf="@id/button_center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <Button
         android:id="@+id/button_center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Showcase - Circle"
+        app:layout_constraintBottom_toTopOf="@id/button_focus_multiple_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Button Center" />
+        app:layout_constraintTop_toBottomOf="@id/button_top" />
+
+    <Button
+        android:id="@+id/button_focus_multiple_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Showcase - MultipleView"
+        app:layout_constraintBottom_toTopOf="@id/button_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_center" />
 
     <Button
         android:id="@+id/button_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button Bottom"
+        android:text="Showcase - Rectangle 2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_focus_multiple_view" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@android:drawable/ic_media_play"
+        app:layout_constraintEnd_toStartOf="@id/textView"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_focus_multiple_view"
+        app:tint="@color/colorPrimaryDark" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/imageView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

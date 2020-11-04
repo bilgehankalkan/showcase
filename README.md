@@ -1,6 +1,6 @@
 
 # Showcase
-<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/3.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/4.png" width="170"/>
+<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/3.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/4.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/5.png" width="170"/>
 
 With **Showcase**, you can easily show tooltips. **Showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. Also you can have callback when user quits from **Showcase**.
 
@@ -25,7 +25,7 @@ dependencies {
 You can easily use ShowcaseManager.Builder to create **Showcase**.
 ```
 val showcaseManager = ShowcaseManager.Builder()  
-    .view(myView)  
+    .focus(myView)  
     .titleText("Title about myView")  
     .descriptionText("Little bit info for my lovely myView")  
     .titleTextSize(22F)  
@@ -42,7 +42,8 @@ showcaseManager.show(context)
 # Builder Configuration
 | Usage         | Description | Optional | Default Value | StyleRes |
 | ------------- |-------------| ------------- |------------- |------------- | 
-| `builder.view(View)` | view to be focused on | no | null | no |
+| `builder.focus(View)` | view to be focused on | no | null | no |
+| `builder.focus(Array<View>)` | view array to be focused on | no | null | no |
 | `builder.resId(Int)` | Showcase.Theme style | yes | null | yes |
 | `builder.titleText(String)` | text to be showed on top of the tooltip | yes | "" | no |
 | `builder.descriptionText(String)` | description text will be displayed on tooltip | yes | "" | no |

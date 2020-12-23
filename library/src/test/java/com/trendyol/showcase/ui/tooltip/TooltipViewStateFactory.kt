@@ -12,7 +12,7 @@ object TooltipViewStateFactory {
         backgroundColor = R.color.white,
         closeButtonColor = R.color.black,
         showCloseButton = true,
-        arrowResource = R.drawable.ic_custom_arrow_down,
+        arrowResource = R.drawable.ic_showcase_arrow_down,
         arrowPosition = ArrowPosition.DOWN,
         arrowPercentage = 50,
         arrowMargin = 0,

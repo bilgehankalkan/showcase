@@ -122,7 +122,7 @@ class TooltipViewStateTest {
         val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = DEFAULT_ARROW_RESOURCE)
 
         //then
-        val expectedResult = R.drawable.ic_arrow_up
+        val expectedResult = R.drawable.ic_showcase_arrow_up
         val actualResult = tooltipViewState.getTopArrowResource()
 
         actualResult `should be` expectedResult
@@ -131,13 +131,13 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowResource is not DEFAULT_ARROW_RESOURCE then getTopArrowResource() returns arrowResource`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = R.drawable.ic_custom_arrow_down)
+        val givenArrowResource = android.R.drawable.arrow_down_float
+        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = givenArrowResource)
 
         //then
-        val expectedResult = R.drawable.ic_custom_arrow_down
         val actualResult = tooltipViewState.getTopArrowResource()
 
-        actualResult `should be` expectedResult
+        actualResult `should be` givenArrowResource
     }
 
     @Test
@@ -170,7 +170,7 @@ class TooltipViewStateTest {
         val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = DEFAULT_ARROW_RESOURCE)
 
         //then
-        val expectedResult = R.drawable.ic_arrow_down
+        val expectedResult = R.drawable.ic_showcase_arrow_down
         val actualResult = tooltipViewState.getBottomArrowResource()
 
         actualResult `should be` expectedResult
@@ -179,13 +179,13 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowResource is not DEFAULT_ARROW_RESOURCE then getBottomArrowResource() returns arrowResource`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = R.drawable.ic_custom_arrow_down)
+        val givenArrowResource = android.R.drawable.arrow_down_float
+        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = givenArrowResource)
 
         //then
-        val expectedResult = R.drawable.ic_custom_arrow_down
         val actualResult = tooltipViewState.getBottomArrowResource()
 
-        actualResult `should be` expectedResult
+        actualResult `should be` givenArrowResource
     }
 
     @Test

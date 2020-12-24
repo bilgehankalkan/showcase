@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     .titleText("Title without a description")
                     .titleTextSize(16)
                     .showCloseButton(true)
-                    .arrowResource(R.drawable.ic_custom_arrow_down)
+                    .arrowResource(android.R.drawable.arrow_down_float)
                     .arrowPosition(ArrowPosition.AUTO)
                     .highlightType(HighlightType.RECTANGLE)
                     .highlightPadding(8F)

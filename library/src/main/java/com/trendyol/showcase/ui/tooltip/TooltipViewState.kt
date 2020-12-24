@@ -38,11 +38,11 @@ data class TooltipViewState(
 
     fun getDescriptionVisibility() = descriptionText.isNotEmpty()
 
-    fun getTopArrowResource() = if (arrowResource == Constants.DEFAULT_ARROW_RESOURCE) R.drawable.ic_arrow_up else arrowResource
+    fun getTopArrowResource() = if (arrowResource == Constants.DEFAULT_ARROW_RESOURCE) R.drawable.ic_showcase_arrow_up else arrowResource
 
     fun getTopArrowVisibility() = if (arrowPosition == ArrowPosition.UP) View.VISIBLE else View.GONE
 
-    fun getBottomArrowResource() = if (arrowResource == Constants.DEFAULT_ARROW_RESOURCE) R.drawable.ic_arrow_down else arrowResource
+    fun getBottomArrowResource() = if (arrowResource == Constants.DEFAULT_ARROW_RESOURCE) R.drawable.ic_showcase_arrow_down else arrowResource
 
     fun getBottomArrowVisibility() = if (arrowPosition == ArrowPosition.DOWN) View.VISIBLE else View.GONE
 

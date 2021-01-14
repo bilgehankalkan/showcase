@@ -21,7 +21,8 @@ data class TooltipViewState(
     val titleTextSize: Float,
     val descriptionTextSize: Float,
     val textPosition: TextPosition,
-    val imageUrl: String
+    val imageUrl: String,
+    val showCustomContent: Boolean
 ) {
 
     fun getImageViewVisibility(): Int = if (imageUrl.isEmpty()) View.GONE else View.VISIBLE
@@ -47,4 +48,6 @@ data class TooltipViewState(
     fun getBottomArrowVisibility() = if (arrowPosition == ArrowPosition.DOWN) View.VISIBLE else View.GONE
 
     fun getCloseButtonVisibility() = if (showCloseButton) View.VISIBLE else View.GONE
+
+    fun isContentVisible(): Int = if (showCustomContent) View.GONE else View.VISIBLE
 }

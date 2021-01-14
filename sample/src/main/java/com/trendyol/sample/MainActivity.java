@@ -3,10 +3,8 @@ package com.trendyol.sample;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import com.trendyol.showcase.showcase.ShowcaseManager;
 import com.trendyol.showcase.ui.showcase.HighlightType;
 import com.trendyol.showcase.ui.tooltip.ArrowPosition;
@@ -25,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         final Button buttonMultipleView = findViewById(R.id.button_focus_multiple_view);
         final View textView = findViewById(R.id.textView);
         final View imageView = findViewById(R.id.imageView);
+        final View imageTop = findViewById(R.id.image_top);
 
         buttonTop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +97,18 @@ public class MainActivity extends AppCompatActivity {
                     .highlightType(HighlightType.RECTANGLE)
                     .highlightPadding(8F)
                     .textPosition(TextPosition.START)
+                    .build()
+                    .show(MainActivity.this, 0);
+            }
+        });
+
+        imageTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ShowcaseManager.Builder()
+                    .focus(imageTop)
+                    .customContent(R.layout.view_custom_content)
+                    .cancellableFromOutsideTouch(true)
                     .build()
                     .show(MainActivity.this, 0);
             }

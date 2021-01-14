@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
+import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.trendyol.showcase.R
@@ -25,7 +27,8 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
         LayoutInflater.from(context),
         R.layout.layout_showcase,
         this,
-        true)
+        true
+    )
 
     var showcaseModel: ShowcaseModel? = null
         set(value) {
@@ -120,8 +123,18 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
                 titleTextSize = it.titleTextSize,
                 descriptionTextSize = it.descriptionTextSize,
                 textPosition = it.textPosition,
-                imageUrl = it.imageUrl)
+                imageUrl = it.imageUrl,
+                showCustomContent = it.customContent != null
+            )
             binding.executePendingBindings()
+
+            if (showcaseModel.customContent != null) {
+                setCustomContent(showcaseModel.customContent)
+            }
         }
+    }
+
+    private fun setCustomContent(@LayoutRes customContent: Int) {
+        binding.tooltipView.setCustomContent(customContent)
     }
 }

@@ -20,6 +20,7 @@ object TooltipViewStateFactory {
         titleTextSize = 16F,
         descriptionTextSize = 14F,
         textPosition = TextPosition.CENTER,
-        imageUrl = ""
+        imageUrl = "",
+        showCustomContent = false
     )
 }

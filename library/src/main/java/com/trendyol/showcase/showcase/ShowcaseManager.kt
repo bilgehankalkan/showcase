@@ -8,6 +8,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
+import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
 import com.trendyol.showcase.R
@@ -108,6 +109,8 @@ data class ShowcaseManager private constructor(
         private var isDebugMode: Boolean = false
         private var textPosition: TextPosition = Constants.DEFAULT_TEXT_POSITION
         private var imageUrl: String = Constants.DEFAULT_TEXT
+        @LayoutRes
+        private var customContent: Int? = null
 
         fun focus(view: View) = apply { focusViews = arrayOf(view) }
 
@@ -182,6 +185,8 @@ data class ShowcaseManager private constructor(
 
         fun imageUrl(url: String) = apply { imageUrl = url }
 
+        fun customContent(@LayoutRes content: Int) = apply { customContent = content }
+
         fun build(): ShowcaseManager {
             if (focusViews.isNullOrEmpty()) {
                 throw Exception("view should not be null!")
@@ -217,7 +222,8 @@ data class ShowcaseManager private constructor(
                 cancellableFromOutsideTouch = cancellableFromOutsideTouch,
                 isDebugMode = isDebugMode,
                 textPosition = textPosition,
-                imageUrl = imageUrl
+                imageUrl = imageUrl,
+                customContent = customContent
             )
 
             return ShowcaseManager(showcaseModel = showcaseModel, resId = resId)

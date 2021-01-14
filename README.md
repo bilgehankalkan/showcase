@@ -35,45 +35,58 @@ val showcaseManager = ShowcaseManager.Builder()
     .textPosition(TextPosition.START)
     .resId(R.style.Showcase_Theme)
     .build()  
-  
+
+showcaseManager.show(context)
+```
+
+You can also provide layout resource id for more complex **Showcase** needs with `customContent`.
+
+```
+val showcaseManager = ShowcaseManager.Builder()
+    .focus(myView)
+    .customContent(R.layout.view_custom_content)
+    .arrowPosition(ArrowPosition.UP)
+    .build()
+
 showcaseManager.show(context)
 ```
 
 # Builder Configuration
-| Usage         | Description | Optional | Default Value | StyleRes |
-| ------------- |-------------| ------------- |------------- |------------- | 
-| `builder.focus(View)` | view to be focused on | no | null | no |
-| `builder.focus(Array<View>)` | view array to be focused on | no | null | no |
-| `builder.resId(Int)` | Showcase.Theme style | yes | null | yes |
-| `builder.titleText(String)` | text to be showed on top of the tooltip | yes | "" | no |
-| `builder.descriptionText(String)` | description text will be displayed on tooltip | yes | "" | no |
-| `builder.titleTextColor(Int)` | titleText's color | yes | Color.BLACK | yes |
-| `builder.descriptionTextColor(Int)` | descriptionText's color | yes | Color.BLACK | yes |
-| `builder.titleTextSize(Int)` | titleText's text size in SP | yes | 18 SP | no |
-| `builder.descriptionTextSize(Int)` | descriptionText's text size in SP | yes | 14 SP | no |
-| `builder.backgroundColor(Int)` | background color of tooltip | yes | Color.WHITE | yes |
-| `builder.closeButtonColor(Int)` | closeButton's color | yes | Color.BLACK | yes |
-| `builder.showCloseButton(Boolean)` | show close button on tooltip | yes | true | yes |
-| `builder.arrowResource(Int)` | custom icon resource for arrow. | yes | ic_arrow_down or ic_arrow_up | no |
-| `builder.arrowPosition(ArrowPosition)` | arrow can be placed under or over the tooltip | yes | ArrowPosition.AUTO | no |
-| `builder.arrowPercentage(Int)` | arrow position percentage can be decided | yes | null | no |
-| `builder.highlightType(HighlightType)` | view can be highlighted with a circle shape or rectangle | yes | HighlightType.RECTANGLE | no |
-| `builder.cancelListener(CancelListener)` | will be called after user quit from tooltip | yes | null | no |
-| `builder.windowBackgroundColor(Int)` | background of the window's color can be decided | yes | Color.BLACK |  yes |
-| `builder.windowBackgroundTint(Int)` | alpha value of window's background color | yes | 204 | no |
-| `builder.titleTextSize(Int)` | titleText's text size in SP | yes | 18 | no |
-| `builder.cancellableFromOutsideTouch(Boolean)` | outside touch from tooltip will act as close click | yes | false | yes |
-| `builder.isDebugMode(Boolean)` | tooltip won't be presented | yes | false | no |
-| `builder.textPosition(TextPosition)` | text can be positioning center, end and start  | yes | TextPosition.START | no |
-| `builder.imageUrl(String)` | show image on tooltip | yes | null | no |
-| `builder.build()` | will return ShowcaseManager instance | no |  |
-| `showcaseManager.show(Context)` | show the tooltip with set attributes on  | no | |
+| Usage                                          | Description                                              | Optional | Default Value                | StyleRes |
+|:-----------------------------------------------|:---------------------------------------------------------|:---------|:-----------------------------|:---------|
+| `builder.focus(View)`                          | view to be focused on                                    | no       | null                         | no       |
+| `builder.focus(Array<View>)`                   | view array to be focused on                              | no       | null                         | no       |
+| `builder.resId(Int)`                           | Showcase.Theme style                                     | yes      | null                         | yes      |
+| `builder.titleText(String)`                    | text to be showed on top of the tooltip                  | yes      | ""                           | no       |
+| `builder.descriptionText(String)`              | description text will be displayed on tooltip            | yes      | ""                           | no       |
+| `builder.titleTextColor(Int)`                  | titleText's color                                        | yes      | Color.BLACK                  | yes      |
+| `builder.descriptionTextColor(Int)`            | descriptionText's color                                  | yes      | Color.BLACK                  | yes      |
+| `builder.titleTextSize(Int)`                   | titleText's text size in SP                              | yes      | 18 SP                        | no       |
+| `builder.descriptionTextSize(Int)`             | descriptionText's text size in SP                        | yes      | 14 SP                        | no       |
+| `builder.backgroundColor(Int)`                 | background color of tooltip                              | yes      | Color.WHITE                  | yes      |
+| `builder.closeButtonColor(Int)`                | closeButton's color                                      | yes      | Color.BLACK                  | yes      |
+| `builder.showCloseButton(Boolean)`             | show close button on tooltip                             | yes      | true                         | yes      |
+| `builder.arrowResource(Int)`                   | custom icon resource for arrow.                          | yes      | ic_arrow_down or ic_arrow_up | no       |
+| `builder.arrowPosition(ArrowPosition)`         | arrow can be placed under or over the tooltip            | yes      | ArrowPosition.AUTO           | no       |
+| `builder.arrowPercentage(Int)`                 | arrow position percentage can be decided                 | yes      | null                         | no       |
+| `builder.highlightType(HighlightType)`         | view can be highlighted with a circle shape or rectangle | yes      | HighlightType.RECTANGLE      | no       |
+| `builder.cancelListener(CancelListener)`       | will be called after user quit from tooltip              | yes      | null                         | no       |
+| `builder.windowBackgroundColor(Int)`           | background of the window's color can be decided          | yes      | Color.BLACK                  | yes      |
+| `builder.windowBackgroundTint(Int)`            | alpha value of window's background color                 | yes      | 204                          | no       |
+| `builder.titleTextSize(Int)`                   | titleText's text size in SP                              | yes      | 18                           | no       |
+| `builder.cancellableFromOutsideTouch(Boolean)` | outside touch from tooltip will act as close click       | yes      | false                        | yes      |
+| `builder.isDebugMode(Boolean)`                 | tooltip won't be presented                               | yes      | false                        | no       |
+| `builder.textPosition(TextPosition)`           | text can be positioning center, end and start            | yes      | TextPosition.START           | no       |
+| `builder.imageUrl(String)`                     | show image on tooltip                                    | yes      | null                         | no       |
+| `builder.customContent(Int)`                   | show given layout                                        | yes      | null                         | no       |
+| `builder.build()`                              | will return ShowcaseManager instance                     | no       |                              |          |
+| `showcaseManager.show(Context)`                | show the tooltip with set attributes on                  | no       |                              |          |
 
 License
 --------
 
 
-    Copyright 2019 Trendyol.com
+    Copyright 2021 Trendyol.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

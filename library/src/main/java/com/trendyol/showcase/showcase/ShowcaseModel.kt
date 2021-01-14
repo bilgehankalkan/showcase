@@ -7,7 +7,7 @@ import androidx.annotation.DrawableRes
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
 import com.trendyol.showcase.ui.tooltip.TextPosition
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ShowcaseModel(val rectF: RectF,

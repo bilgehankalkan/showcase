@@ -17,7 +17,7 @@ allprojects {
  - After adding Jitpack repository, you can add **Showcase** dependency to your app level build.gradle.
 ```
 dependencies {
-    implementation "com.trendyol.showcase:showcase:$showcase_version"
+    implementation "com.trendyol.showcase:showcase:0.9"
 }
 ```
 

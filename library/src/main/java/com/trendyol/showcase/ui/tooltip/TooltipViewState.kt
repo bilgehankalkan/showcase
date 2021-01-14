@@ -6,7 +6,7 @@ import androidx.annotation.DrawableRes
 import com.trendyol.showcase.R
 import com.trendyol.showcase.util.Constants
 
-data class TooltipViewState(
+internal data class TooltipViewState(
     val titleText: String,
     val descriptionText: String,
     @ColorInt val titleTextColor: Int,
@@ -15,7 +15,7 @@ data class TooltipViewState(
     @ColorInt val closeButtonColor: Int,
     val showCloseButton: Boolean = true,
     @DrawableRes val arrowResource: Int,
-    val arrowPosition: ArrowPosition,
+    val arrowPosition: AbsoluteArrowPosition,
     val arrowPercentage: Int?,
     val arrowMargin: Int,
     val titleTextSize: Float,
@@ -41,11 +41,11 @@ data class TooltipViewState(
 
     fun getTopArrowResource() = if (arrowResource == Constants.DEFAULT_ARROW_RESOURCE) R.drawable.ic_showcase_arrow_up else arrowResource
 
-    fun getTopArrowVisibility() = if (arrowPosition == ArrowPosition.UP) View.VISIBLE else View.GONE
+    fun getTopArrowVisibility() = if (arrowPosition == AbsoluteArrowPosition.UP) View.VISIBLE else View.GONE
 
     fun getBottomArrowResource() = if (arrowResource == Constants.DEFAULT_ARROW_RESOURCE) R.drawable.ic_showcase_arrow_down else arrowResource
 
-    fun getBottomArrowVisibility() = if (arrowPosition == ArrowPosition.DOWN) View.VISIBLE else View.GONE
+    fun getBottomArrowVisibility() = if (arrowPosition == AbsoluteArrowPosition.DOWN) View.VISIBLE else View.GONE
 
     fun getCloseButtonVisibility() = if (showCloseButton) View.VISIBLE else View.GONE
 

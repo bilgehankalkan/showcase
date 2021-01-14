@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.trendyol.showcase.ui.tooltip.AbsoluteArrowPosition
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
 import com.trendyol.showcase.ui.tooltip.TooltipView
 import com.trendyol.showcase.ui.tooltip.TooltipViewState
@@ -22,14 +23,14 @@ object BindingSetter {
 
     @JvmStatic
     @BindingAdapter(value = ["applyMargin", "arrowPosition"], requireAll = true)
-    internal fun TooltipView.placeTooltip(margin: Int, arrowPosition: ArrowPosition) {
-        if (arrowPosition == ArrowPosition.UP) {
+    internal fun TooltipView.placeTooltip(margin: Int, arrowPosition: AbsoluteArrowPosition) {
+        if (arrowPosition == AbsoluteArrowPosition.UP) {
             (layoutParams as? ConstraintLayout.LayoutParams)?.apply {
                 topToTop = 0 // parent
                 bottomToBottom = -1
                 topMargin = margin
             }
-        } else if (arrowPosition == ArrowPosition.DOWN) {
+        } else if (arrowPosition == AbsoluteArrowPosition.DOWN) {
             (layoutParams as? ConstraintLayout.LayoutParams)?.apply {
                 topToTop = -1
                 bottomToBottom = 0 // parent

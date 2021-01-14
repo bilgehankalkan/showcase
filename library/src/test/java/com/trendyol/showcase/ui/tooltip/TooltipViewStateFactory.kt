@@ -3,7 +3,7 @@ package com.trendyol.showcase.ui.tooltip
 import android.graphics.Color
 import com.trendyol.showcase.R
 
-object TooltipViewStateFactory {
+internal object TooltipViewStateFactory {
 
     fun getInstance() = TooltipViewState(
         titleText = "",
@@ -14,7 +14,7 @@ object TooltipViewStateFactory {
         closeButtonColor = Color.BLACK,
         showCloseButton = true,
         arrowResource = R.drawable.ic_showcase_arrow_down,
-        arrowPosition = ArrowPosition.DOWN,
+        arrowPosition = AbsoluteArrowPosition.DOWN,
         arrowPercentage = 50,
         arrowMargin = 0,
         titleTextSize = 16F,

@@ -11,23 +11,23 @@
             type="com.trendyol.showcase.ui.tooltip.TooltipViewState" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <merge
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:paddingTop="@dimen/showcase_padding_8dp"
-        android:paddingBottom="@dimen/showcase_padding_8dp">
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewTopArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/showcase_padding_8dp"
             android:visibility="@{tooltipViewState.getTopArrowVisibility()}"
             app:layout_constraintBottom_toTopOf="@id/layoutContents"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:tint="@{tooltipViewState.backgroundColor}"
+            app:setImageTintList="@{tooltipViewState.backgroundColor}"
             bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
             bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"
             bind:drawableRes="@{tooltipViewState.topArrowResource}"
@@ -36,7 +36,11 @@
         <FrameLayout
             android:id="@+id/layoutContents"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/imageViewBottomArrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewTopArrow">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_content"
@@ -44,13 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/showcase_margin_20dp"
                 android:layout_marginEnd="@dimen/showcase_margin_20dp"
-                app:cardCornerRadius="@dimen/showcase_card_radius"
-                app:cardElevation="0dp"
                 android:visibility="@{tooltipViewState.contentVisible}"
-                app:layout_constraintBottom_toTopOf="@id/imageViewBottomArrow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageViewTopArrow">
+                app:cardCornerRadius="@dimen/showcase_card_radius"
+                app:cardElevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_showcase_close"
-                        app:tint="@{tooltipViewState.closeButtonColor}" />
+                        app:setImageTintList="@{tooltipViewState.closeButtonColor}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewTooltipTitle"
@@ -130,14 +130,15 @@
             android:id="@+id/imageViewBottomArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/showcase_padding_8dp"
             android:visibility="@{tooltipViewState.getBottomArrowVisibility()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layoutContents"
-            app:tint="@{tooltipViewState.backgroundColor}"
+            app:setImageTintList="@{tooltipViewState.backgroundColor}"
             bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
             bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"
             bind:drawableRes="@{tooltipViewState.bottomArrowResource}"
             tools:srcCompat="@drawable/ic_showcase_arrow_down" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </merge>
 </layout>

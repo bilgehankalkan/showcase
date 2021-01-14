@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.trendyol.showcase.showcase.ShowcaseManager
 import com.trendyol.showcase.showcase.ShowcaseModel
 
 class ShowcaseActivity : AppCompatActivity() {
@@ -23,7 +22,7 @@ class ShowcaseActivity : AppCompatActivity() {
     }
 
     fun onBackPress(isHighlightClicked: Boolean = false) {
-        setResult(Activity.RESULT_OK, Intent().putExtra(ShowcaseManager.HIGHLIGHT_CLICKED, isHighlightClicked))
+        setResult(Activity.RESULT_OK, Intent().putExtra(HIGHLIGHT_CLICKED, isHighlightClicked))
         finish()
         overridePendingTransition(0, android.R.anim.fade_out)
     }
@@ -35,5 +34,6 @@ class ShowcaseActivity : AppCompatActivity() {
     companion object {
 
         const val BUNDLE_KEY = "bundle_key"
+        const val HIGHLIGHT_CLICKED = "highlight_clicked"
     }
 }

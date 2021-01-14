@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                     .showCloseButton(true)
                     .arrowPosition(ArrowPosition.DOWN)
                     .highlightType(HighlightType.CIRCLE)
-                    .arrowPercentage(100)
                     .textPosition(TextPosition.CENTER)
                     .build()
                     .show(MainActivity.this, 0);

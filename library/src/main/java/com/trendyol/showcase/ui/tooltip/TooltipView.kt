@@ -12,8 +12,7 @@ import com.trendyol.showcase.R
 import com.trendyol.showcase.databinding.LayoutTooltipBinding
 import com.trendyol.showcase.util.getShowcaseActivity
 
-class TooltipView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : ConstraintLayout(context, attrs, defStyleAttr) {
+class TooltipView : ConstraintLayout {
 
     private val binding: LayoutTooltipBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
@@ -28,7 +27,17 @@ class TooltipView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
     }
 
-    fun bind(tooltipViewState: TooltipViewState) {
+    constructor(context: Context) : super(context)
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
+
+    internal fun bind(tooltipViewState: TooltipViewState) {
         binding.tooltipViewState = tooltipViewState
         binding.executePendingBindings()
     }

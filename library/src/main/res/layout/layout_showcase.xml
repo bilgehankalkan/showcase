@@ -19,6 +19,7 @@
         android:layout_height="match_parent">
 
         <com.trendyol.showcase.ui.tooltip.TooltipView
+            android:id="@+id/tooltipView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

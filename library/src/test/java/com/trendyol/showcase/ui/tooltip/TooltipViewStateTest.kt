@@ -143,7 +143,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowPosition is UP then getTopArrowVisibility() returns VISIBLE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = ArrowPosition.UP)
+        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = AbsoluteArrowPosition.UP)
 
         //then
         val expectedResult = View.VISIBLE
@@ -155,7 +155,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowPosition is not UP then getBottomArrowVisibility() returns GONE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = ArrowPosition.DOWN)
+        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = AbsoluteArrowPosition.DOWN)
 
         //then
         val expectedResult = View.GONE
@@ -191,7 +191,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowPosition is DOWN then getBottomArrowVisibility() returns VISIBLE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = ArrowPosition.DOWN)
+        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = AbsoluteArrowPosition.DOWN)
 
         //then
         val expectedResult = View.VISIBLE
@@ -203,7 +203,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowPosition is not DOWN then getBottomArrowVisibility() returns GONE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = ArrowPosition.UP)
+        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = AbsoluteArrowPosition.UP)
 
         //then
         val expectedResult = View.GONE
@@ -232,6 +232,30 @@ class TooltipViewStateTest {
         //then
         val expectedResult = View.GONE
         val actualResult = tooltipViewState.getCloseButtonVisibility()
+
+        actualResult `should be` expectedResult
+    }
+
+    @Test
+    fun `when showCustomContent is true then isContentVisible() returns GONE`() {
+        //when
+        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(showCustomContent = true)
+
+        //then
+        val expectedResult = View.GONE
+        val actualResult = tooltipViewState.isContentVisible()
+
+        actualResult `should be` expectedResult
+    }
+
+    @Test
+    fun `when showCustomContent is false then isContentVisible() returns VISIBLE`() {
+        //when
+        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(showCustomContent = false)
+
+        //then
+        val expectedResult = View.VISIBLE
+        val actualResult = tooltipViewState.isContentVisible()
 
         actualResult `should be` expectedResult
     }

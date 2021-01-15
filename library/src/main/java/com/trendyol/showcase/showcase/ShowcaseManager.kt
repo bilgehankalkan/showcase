@@ -20,7 +20,7 @@ import com.trendyol.showcase.util.Constants
 import com.trendyol.showcase.util.TooltipFieldUtil
 import com.trendyol.showcase.util.toRectF
 
-data class ShowcaseManager private constructor(
+class ShowcaseManager private constructor(
     private val showcaseModel: ShowcaseModel,
     @StyleRes val resId: Int?
 ) {
@@ -109,6 +109,7 @@ data class ShowcaseManager private constructor(
         private var isDebugMode: Boolean = false
         private var textPosition: TextPosition = Constants.DEFAULT_TEXT_POSITION
         private var imageUrl: String = Constants.DEFAULT_TEXT
+
         @LayoutRes
         private var customContent: Int? = null
 
@@ -228,9 +229,5 @@ data class ShowcaseManager private constructor(
 
             return ShowcaseManager(showcaseModel = showcaseModel, resId = resId)
         }
-    }
-
-    companion object {
-        const val HIGHLIGHT_CLICKED = "highlight_clicked"
     }
 }

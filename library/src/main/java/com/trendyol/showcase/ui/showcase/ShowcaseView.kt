@@ -4,18 +4,17 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.trendyol.showcase.R
 import com.trendyol.showcase.databinding.LayoutShowcaseBinding
 import com.trendyol.showcase.showcase.ShowcaseModel
-import com.trendyol.showcase.ui.tooltip.ArrowPosition
 import com.trendyol.showcase.ui.tooltip.TooltipViewState
 import com.trendyol.showcase.util.OnTouchClickListener
 import com.trendyol.showcase.util.TooltipFieldUtil
 import com.trendyol.showcase.util.getShowcaseActivity
+import com.trendyol.showcase.util.isNavigationBarVisible
 import com.trendyol.showcase.util.shape.CircleShape
 import com.trendyol.showcase.util.shape.RectangleShape
 import com.trendyol.showcase.util.statusBarHeight
@@ -37,40 +36,46 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
 
     override fun dispatchDraw(canvas: Canvas) {
-        showcaseModel?.also {
-            when (it.highlightType) {
-                HighlightType.CIRCLE -> CircleShape(
-                    statusBarHeight(),
-                    width,
-                    height,
-                    it.horizontalCenter(),
-                    it.verticalCenter(),
-                    it.radius + it.highlightPadding)
-                HighlightType.RECTANGLE -> RectangleShape(
-                    statusBarHeight(),
-                    width,
-                    height,
-                    it.rectF.left - (it.highlightPadding / 2),
-                    it.rectF.top - (it.highlightPadding / 2),
-                    it.rectF.right + (it.highlightPadding / 2),
-                    it.rectF.bottom + (it.highlightPadding / 2))
-            }.draw(it.windowBackgroundColor, it.windowBackgroundAlpha, canvas)
+        if (showcaseModel == null) return super.dispatchDraw(canvas)
+        showcaseModel?.also { model ->
+            val shape = when (model.highlightType) {
+                HighlightType.CIRCLE -> {
+                    CircleShape(
+                        statusBarDiff = statusBarHeight(),
+                        screenWidth = width,
+                        screenHeight = height,
+                        x = model.horizontalCenter(),
+                        y = model.verticalCenter(),
+                        radius = model.radius + model.highlightPadding
+                    )
+                }
+                HighlightType.RECTANGLE -> {
+                    RectangleShape(
+                        statusBarDiff = statusBarHeight(),
+                        screenWidth = width,
+                        screenHeight = height,
+                        left = model.rectF.left - (model.highlightPadding / 2),
+                        top = model.rectF.top - (model.highlightPadding / 2),
+                        right = model.rectF.right + (model.highlightPadding / 2),
+                        bottom = model.rectF.bottom + (model.highlightPadding / 2)
+                    )
+                }
+            }
+            shape.draw(model.windowBackgroundColor, model.windowBackgroundAlpha, canvas)
         }
         super.dispatchDraw(canvas)
     }
 
     private fun listenClickEvents() {
-        val onTouchClickListener = OnTouchClickListener()
-
-        onTouchClickListener.clickListener = { _, x, y ->
-            if (showcaseModel?.cancellableFromOutsideTouch == true) {
-                getShowcaseActivity()?.onBackPress(isHighlightClick(x, y))
-            } else if (isHighlightClick(x, y)) {
-                getShowcaseActivity()?.onBackPress(true)
+        OnTouchClickListener().apply {
+            clickListener = { _, x, y ->
+                if (showcaseModel?.cancellableFromOutsideTouch == true) {
+                    getShowcaseActivity()?.onBackPress(isHighlightClick(x, y))
+                } else if (isHighlightClick(x, y)) {
+                    getShowcaseActivity()?.onBackPress(true)
+                }
             }
-        }
-
-        setOnTouchListener(onTouchClickListener)
+        }.also { setOnTouchListener(it) }
     }
 
     private fun isHighlightClick(x: Float, y: Float) = showcaseModel?.let {
@@ -94,43 +99,57 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
     } ?: false
 
     private fun bind(showcaseModel: ShowcaseModel?) {
-        showcaseModel?.let {
-            listenClickEvents()
+        if (showcaseModel == null) return
+        listenClickEvents()
 
-            val arrowPosition = if (it.arrowPosition == ArrowPosition.AUTO) {
-                TooltipFieldUtil.calculateArrowPosition(resources, it.verticalCenter())
-            } else {
-                it.arrowPosition
-            }
-
-            binding.showcaseViewState = ShowcaseViewState(when (it.highlightType) {
-                HighlightType.CIRCLE -> TooltipFieldUtil.calculateMarginForCircle(resources, it.topOfCircle(), it.bottomOfCircle(), arrowPosition, statusBarHeight())
-                HighlightType.RECTANGLE -> TooltipFieldUtil.calculateMarginForRectangle(resources, it.rectF.top, it.rectF.bottom, arrowPosition, statusBarHeight())
-            })
-
-            binding.tooltipViewState = TooltipViewState(
-                titleText = it.titleText,
-                descriptionText = it.descriptionText,
-                titleTextColor = it.titleTextColor,
-                descriptionTextColor = it.descriptionTextColor,
-                backgroundColor = it.popupBackgroundColor,
-                closeButtonColor = it.closeButtonColor,
-                showCloseButton = it.showCloseButton,
-                arrowResource = it.arrowResource,
+        val arrowPosition = TooltipFieldUtil.decideArrowPosition(
+            showcaseModel = showcaseModel,
+            screenHeight = resources.displayMetrics.heightPixels
+        )
+        val arrowMargin = TooltipFieldUtil.calculateArrowMargin(
+            horizontalCenter = showcaseModel.horizontalCenter(),
+            density = resources.displayMetrics.density
+        )
+        val marginFromBottom = when (showcaseModel.highlightType) {
+            HighlightType.CIRCLE -> TooltipFieldUtil.calculateMarginForCircle(
+                top = showcaseModel.topOfCircle(),
+                bottom = showcaseModel.bottomOfCircle(),
                 arrowPosition = arrowPosition,
-                arrowPercentage = it.arrowPercentage,
-                arrowMargin = TooltipFieldUtil.calculateArrowMargin(resources, it.horizontalCenter()),
-                titleTextSize = it.titleTextSize,
-                descriptionTextSize = it.descriptionTextSize,
-                textPosition = it.textPosition,
-                imageUrl = it.imageUrl,
-                showCustomContent = it.customContent != null
+                statusBarHeight = statusBarHeight(),
+                isNavigationBarVisible = isNavigationBarVisible(),
+                screenHeight = resources.displayMetrics.heightPixels
             )
-            binding.executePendingBindings()
+            HighlightType.RECTANGLE -> TooltipFieldUtil.calculateMarginForRectangle(
+                top = showcaseModel.rectF.top,
+                bottom = showcaseModel.rectF.bottom,
+                arrowPosition = arrowPosition,
+                statusBarHeight = statusBarHeight()
+            )
+        }
 
-            if (showcaseModel.customContent != null) {
-                setCustomContent(showcaseModel.customContent)
-            }
+        binding.showcaseViewState = ShowcaseViewState(margin = marginFromBottom)
+        binding.tooltipViewState = TooltipViewState(
+            titleText = showcaseModel.titleText,
+            descriptionText = showcaseModel.descriptionText,
+            titleTextColor = showcaseModel.titleTextColor,
+            descriptionTextColor = showcaseModel.descriptionTextColor,
+            backgroundColor = showcaseModel.popupBackgroundColor,
+            closeButtonColor = showcaseModel.closeButtonColor,
+            showCloseButton = showcaseModel.showCloseButton,
+            arrowResource = showcaseModel.arrowResource,
+            arrowPosition = arrowPosition,
+            arrowPercentage = showcaseModel.arrowPercentage,
+            arrowMargin = arrowMargin,
+            titleTextSize = showcaseModel.titleTextSize,
+            descriptionTextSize = showcaseModel.descriptionTextSize,
+            textPosition = showcaseModel.textPosition,
+            imageUrl = showcaseModel.imageUrl,
+            showCustomContent = showcaseModel.customContent != null
+        )
+        binding.executePendingBindings()
+
+        if (showcaseModel.customContent != null) {
+            setCustomContent(showcaseModel.customContent)
         }
     }
 

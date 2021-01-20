@@ -49,10 +49,15 @@ internal object TooltipFieldUtil {
         top: Float,
         bottom: Float,
         arrowPosition: AbsoluteArrowPosition,
-        statusBarHeight: Int
+        statusBarHeight: Int,
+        isNavigationBarVisible: Boolean,
+        screenHeight: Int
     ): Int = when (arrowPosition) {
         AbsoluteArrowPosition.UP -> bottom.toInt() + statusBarHeight
-        AbsoluteArrowPosition.DOWN -> bottom.toInt() - top.toInt()
+        AbsoluteArrowPosition.DOWN -> {
+            val diff = if (isNavigationBarVisible) -statusBarHeight else 0
+            (screenHeight - top + diff).toInt()
+        }
     }
 
     fun calculateArrowMargin(horizontalCenter: Float, density: Float): Int {

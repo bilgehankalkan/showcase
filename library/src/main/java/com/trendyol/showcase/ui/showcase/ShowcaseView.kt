@@ -123,7 +123,9 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
                 top = showcaseModel.rectF.top,
                 bottom = showcaseModel.rectF.bottom,
                 arrowPosition = arrowPosition,
-                statusBarHeight = statusBarHeight()
+                statusBarHeight = statusBarHeight(),
+                isNavigationBarVisible = isNavigationBarVisible(),
+                screenHeight = resources.displayMetrics.heightPixels
             )
         }
 

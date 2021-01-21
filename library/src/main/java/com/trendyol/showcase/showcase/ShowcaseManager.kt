@@ -113,6 +113,8 @@ class ShowcaseManager private constructor(
         @LayoutRes
         private var customContent: Int? = null
 
+        private var isStatusBarVisible: Boolean = true
+
         fun focus(view: View) = apply { focusViews = arrayOf(view) }
 
         fun focus(vararg view: View) = apply { focusViews = view }
@@ -188,6 +190,8 @@ class ShowcaseManager private constructor(
 
         fun customContent(@LayoutRes content: Int) = apply { customContent = content }
 
+        fun statusBarVisible(isStatusBarVisible: Boolean) = apply { this.isStatusBarVisible = isStatusBarVisible }
+
         fun build(): ShowcaseManager {
             if (focusViews.isNullOrEmpty()) {
                 throw Exception("view should not be null!")
@@ -224,7 +228,8 @@ class ShowcaseManager private constructor(
                 isDebugMode = isDebugMode,
                 textPosition = textPosition,
                 imageUrl = imageUrl,
-                customContent = customContent
+                customContent = customContent,
+                isStatusBarVisible = isStatusBarVisible
             )
 
             return ShowcaseManager(showcaseModel = showcaseModel, resId = resId)

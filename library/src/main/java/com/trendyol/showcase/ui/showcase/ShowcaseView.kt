@@ -14,7 +14,6 @@ import com.trendyol.showcase.ui.tooltip.TooltipViewState
 import com.trendyol.showcase.util.OnTouchClickListener
 import com.trendyol.showcase.util.TooltipFieldUtil
 import com.trendyol.showcase.util.getShowcaseActivity
-import com.trendyol.showcase.util.isNavigationBarVisible
 import com.trendyol.showcase.util.shape.CircleShape
 import com.trendyol.showcase.util.shape.RectangleShape
 import com.trendyol.showcase.util.statusBarHeight
@@ -41,7 +40,7 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
             val shape = when (model.highlightType) {
                 HighlightType.CIRCLE -> {
                     CircleShape(
-                        statusBarDiff = statusBarHeight(),
+                        statusBarDiff = getStatusBarHeight(model.isStatusBarVisible),
                         screenWidth = width,
                         screenHeight = height,
                         x = model.horizontalCenter(),
@@ -51,7 +50,7 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
                 }
                 HighlightType.RECTANGLE -> {
                     RectangleShape(
-                        statusBarDiff = statusBarHeight(),
+                        statusBarDiff = getStatusBarHeight(model.isStatusBarVisible),
                         screenWidth = width,
                         screenHeight = height,
                         left = model.rectF.left - (model.highlightPadding / 2),
@@ -64,6 +63,12 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
             shape.draw(model.windowBackgroundColor, model.windowBackgroundAlpha, canvas)
         }
         super.dispatchDraw(canvas)
+    }
+
+    private fun getStatusBarHeight(isStatusBarVisible: Boolean): Int = if (isStatusBarVisible) {
+        statusBarHeight()
+    } else {
+        0
     }
 
     private fun listenClickEvents() {
@@ -116,7 +121,7 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
                 bottom = showcaseModel.bottomOfCircle(),
                 arrowPosition = arrowPosition,
                 statusBarHeight = statusBarHeight(),
-                isNavigationBarVisible = isNavigationBarVisible(),
+                isStatusBarVisible = showcaseModel.isStatusBarVisible,
                 screenHeight = resources.displayMetrics.heightPixels
             )
             HighlightType.RECTANGLE -> TooltipFieldUtil.calculateMarginForRectangle(
@@ -124,7 +129,7 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
                 bottom = showcaseModel.rectF.bottom,
                 arrowPosition = arrowPosition,
                 statusBarHeight = statusBarHeight(),
-                isNavigationBarVisible = isNavigationBarVisible(),
+                isStatusBarVisible = showcaseModel.isStatusBarVisible,
                 screenHeight = resources.displayMetrics.heightPixels
             )
         }
@@ -146,7 +151,8 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
             descriptionTextSize = showcaseModel.descriptionTextSize,
             textPosition = showcaseModel.textPosition,
             imageUrl = showcaseModel.imageUrl,
-            showCustomContent = showcaseModel.customContent != null
+            showCustomContent = showcaseModel.customContent != null,
+            isStatusBarVisible = showcaseModel.isStatusBarVisible
         )
         binding.executePendingBindings()
 

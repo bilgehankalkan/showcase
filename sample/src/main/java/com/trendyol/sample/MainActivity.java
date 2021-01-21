@@ -2,9 +2,12 @@ package com.trendyol.sample;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
 import com.trendyol.showcase.showcase.ShowcaseManager;
 import com.trendyol.showcase.ui.showcase.HighlightType;
 import com.trendyol.showcase.ui.tooltip.ArrowPosition;
@@ -16,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        final boolean showStatusBar = false;
+        if (showStatusBar) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
 
         final Button buttonTop = findViewById(R.id.button_top);
         final Button buttonCenter = findViewById(R.id.button_center);
@@ -42,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     .textPosition(TextPosition.START)
                     .windowBackgroundAlpha(255)
                     .titleTextSize(30F)
+                    .statusBarVisible(showStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }
@@ -61,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     .arrowPosition(ArrowPosition.DOWN)
                     .highlightType(HighlightType.CIRCLE)
                     .textPosition(TextPosition.CENTER)
+                    .statusBarVisible(showStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }
@@ -79,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     .highlightType(HighlightType.RECTANGLE)
                     .highlightPadding(8F)
                     .textPosition(TextPosition.START)
+                    .statusBarVisible(showStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }
@@ -92,10 +104,11 @@ public class MainActivity extends AppCompatActivity {
                     .titleText("Multiple View Focus")
                     .titleTextSize(16)
                     .showCloseButton(true)
-                    .arrowPosition(ArrowPosition.UP)
+                    .arrowPosition(ArrowPosition.DOWN)
                     .highlightType(HighlightType.RECTANGLE)
                     .highlightPadding(8F)
                     .textPosition(TextPosition.START)
+                    .statusBarVisible(showStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }
@@ -108,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     .focus(imageTop)
                     .customContent(R.layout.view_custom_content)
                     .cancellableFromOutsideTouch(true)
+                    .statusBarVisible(showStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }

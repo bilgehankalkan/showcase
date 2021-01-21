@@ -35,12 +35,12 @@ internal object TooltipFieldUtil {
         bottom: Float,
         arrowPosition: AbsoluteArrowPosition,
         statusBarHeight: Int,
-        isNavigationBarVisible: Boolean,
+        isStatusBarVisible: Boolean,
         screenHeight: Int
     ): Int = when (arrowPosition) {
-        AbsoluteArrowPosition.UP -> bottom.toInt() + statusBarHeight
+        AbsoluteArrowPosition.UP -> bottom.toInt() + if (isStatusBarVisible) statusBarHeight else 0
         AbsoluteArrowPosition.DOWN -> {
-            val diff = if (isNavigationBarVisible) -statusBarHeight else 0
+            val diff = if (isStatusBarVisible) -statusBarHeight else 0
             (screenHeight - top + diff).toInt()
         }
     }
@@ -50,12 +50,12 @@ internal object TooltipFieldUtil {
         bottom: Float,
         arrowPosition: AbsoluteArrowPosition,
         statusBarHeight: Int,
-        isNavigationBarVisible: Boolean,
+        isStatusBarVisible: Boolean,
         screenHeight: Int
     ): Int = when (arrowPosition) {
-        AbsoluteArrowPosition.UP -> bottom.toInt() + statusBarHeight
+        AbsoluteArrowPosition.UP -> bottom.toInt() + if (isStatusBarVisible) statusBarHeight else 0
         AbsoluteArrowPosition.DOWN -> {
-            val diff = if (isNavigationBarVisible) -statusBarHeight else 0
+            val diff = if (isStatusBarVisible) -statusBarHeight else 0
             (screenHeight - top + diff).toInt()
         }
     }

@@ -34,7 +34,8 @@ data class ShowcaseModel(
     val isDebugMode: Boolean,
     val textPosition: TextPosition,
     val imageUrl: String,
-    @LayoutRes val customContent: Int?
+    @LayoutRes val customContent: Int?,
+    val isStatusBarVisible: Boolean
 ) : Parcelable {
 
     fun horizontalCenter() = rectF.left + ((rectF.right - rectF.left) / 2)

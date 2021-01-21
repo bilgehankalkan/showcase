@@ -22,7 +22,8 @@ internal data class TooltipViewState(
     val descriptionTextSize: Float,
     val textPosition: TextPosition,
     val imageUrl: String,
-    val showCustomContent: Boolean
+    val showCustomContent: Boolean,
+    val isStatusBarVisible: Boolean
 ) {
 
     fun getImageViewVisibility(): Int = if (imageUrl.isEmpty()) View.GONE else View.VISIBLE

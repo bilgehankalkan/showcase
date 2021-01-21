@@ -79,6 +79,7 @@ showcaseManager.show(context)
 | `builder.textPosition(TextPosition)`           | text can be positioning center, end and start            | yes      | TextPosition.START           | no       |
 | `builder.imageUrl(String)`                     | show image on tooltip                                    | yes      | null                         | no       |
 | `builder.customContent(Int)`                   | show given layout                                        | yes      | null                         | no       |
+| `builder.statusBarVisible(Boolean)`            | statusBar visibility of window                           | yes      | true                         | no       |
 | `builder.build()`                              | will return ShowcaseManager instance                     | no       |                              |          |
 | `showcaseManager.show(Context)`                | show the tooltip with set attributes on                  | no       |                              |          |
 

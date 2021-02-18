@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        final boolean showStatusBar = false;
-        if (showStatusBar) {
+        final boolean hideStatusBar = true;
+        if (hideStatusBar) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     .textPosition(TextPosition.START)
                     .windowBackgroundAlpha(255)
                     .titleTextSize(30F)
-                    .statusBarVisible(showStatusBar)
+                    .statusBarVisible(hideStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     .arrowPosition(ArrowPosition.DOWN)
                     .highlightType(HighlightType.CIRCLE)
                     .textPosition(TextPosition.CENTER)
-                    .statusBarVisible(showStatusBar)
+                    .statusBarVisible(hideStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     .highlightType(HighlightType.RECTANGLE)
                     .highlightPadding(8F)
                     .textPosition(TextPosition.START)
-                    .statusBarVisible(showStatusBar)
+                    .statusBarVisible(hideStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     .highlightType(HighlightType.RECTANGLE)
                     .highlightPadding(8F)
                     .textPosition(TextPosition.START)
-                    .statusBarVisible(showStatusBar)
+                    .statusBarVisible(hideStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     .focus(imageTop)
                     .customContent(R.layout.view_custom_content)
                     .cancellableFromOutsideTouch(true)
-                    .statusBarVisible(showStatusBar)
+                    .statusBarVisible(hideStatusBar)
                     .build()
                     .show(MainActivity.this, 0);
             }

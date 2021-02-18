@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Version2ShowcaseActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rootConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/showcase_margin_16dp">
+
+            <TextView
+                android:id="@+id/targetRect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Hello world"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/buttonRectShowcase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rectangle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetRect" />
+
+
+            <TextView
+                android:id="@+id/targetRound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+                android:text="Hello world"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonRectShowcase" />
+
+
+            <Button
+                android:id="@+id/buttonRoundedShowcase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rounded"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetRound" />
+
+
+            <LinearLayout
+                android:id="@+id/targetMultiple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="end"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonRoundedShowcase">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello world" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/abc_vector_test"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello world" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/buttonMultipleShowcase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Multiple"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetMultiple" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/targetSizeChange"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+
+                android:background="@drawable/ic_launcher_background"
+                android:src="@drawable/ic_launcher_foreground"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonMultipleShowcase" />
+
+            <Button
+                android:id="@+id/buttonSizeChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Size change"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetSizeChange" />
+
+            <TextView
+                android:id="@+id/targetScroll"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Nevzat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSizeChange" />
+
+            <Button
+                android:id="@+id/buttonScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scroll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetScroll" />
+
+            <TextView
+                android:id="@+id/targetPosition"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="to the left!"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonScroll" />
+
+            <Button
+                android:id="@+id/buttonPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="position"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetPosition" />
+            ¬
+
+            <TextView
+                android:id="@+id/targetLifecycle"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="This fragment will be dead in 3 seconds after button click"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonPosition" />
+
+            <Button
+                android:id="@+id/buttonLifecycle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lifecycle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetLifecycle" />
+
+            <TextView
+                android:id="@+id/textViewScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="1000dp"
+                android:background="#F00"
+                android:text="This content enables scrolling"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonLifecycle" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

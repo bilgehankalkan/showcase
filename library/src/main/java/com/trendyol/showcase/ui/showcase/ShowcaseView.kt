@@ -18,8 +18,8 @@ import com.trendyol.showcase.util.shape.CircleShape
 import com.trendyol.showcase.util.shape.RectangleShape
 import com.trendyol.showcase.util.statusBarHeight
 
-class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : ConstraintLayout(context, attrs, defStyleAttr) {
+class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val binding: LayoutShowcaseBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
@@ -102,6 +102,11 @@ class ShowcaseView @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
         newRectF.contains(x, y)
     } ?: false
+
+    override fun onAttachedToWindow() {
+        bind(showcaseModel)
+        super.onAttachedToWindow()
+    }
 
     private fun bind(showcaseModel: ShowcaseModel?) {
         if (showcaseModel == null) return

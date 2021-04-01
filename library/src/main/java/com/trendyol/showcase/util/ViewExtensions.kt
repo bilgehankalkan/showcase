@@ -1,12 +1,19 @@
 package com.trendyol.showcase.util
 
 import android.content.ContextWrapper
-import android.content.res.Resources
 import android.view.View
 import com.trendyol.showcase.ui.showcase.ShowcaseActivity
 
-internal fun View.statusBarHeight(): Int =
+internal fun View.statusBarHeight(): Int = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+    val displayCutout = rootWindowInsets?.displayCutout
+    if (displayCutout == null) {
+        -resources.getDimensionPixelSize(resources.getIdentifier("status_bar_height", "dimen", "android"))
+    } else {
+        -displayCutout.safeInsetTop
+    }
+} else {
     -resources.getDimensionPixelSize(resources.getIdentifier("status_bar_height", "dimen", "android"))
+}
 
 /**
  *

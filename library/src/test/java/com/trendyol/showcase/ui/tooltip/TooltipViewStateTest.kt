@@ -11,7 +11,7 @@ class TooltipViewStateTest {
     @Test
     fun `when imageUrl is empty then getImageViewVisibility() returns GONE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(imageUrl = "")
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(imageUrl = "")
 
         //then
         val expectedResult = View.GONE
@@ -23,7 +23,8 @@ class TooltipViewStateTest {
     @Test
     fun `when imageUrl is not empty then getImageViewVisibility() returns VISIBLE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(imageUrl = "https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png")
+        val tooltipViewState =
+            TooltipViewStateFactory.provideTooltipViewState(imageUrl = "https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png")
 
         //then
         val expectedResult = View.VISIBLE
@@ -35,7 +36,7 @@ class TooltipViewStateTest {
     @Test
     fun `when textPosition is CENTER then getTextPosition() returns 4`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(textPosition = TextPosition.CENTER)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(textPosition = TextPosition.CENTER)
 
         //then
         val expectedResult = 4
@@ -47,7 +48,7 @@ class TooltipViewStateTest {
     @Test
     fun `when textPosition is END then getTextPosition() returns 3`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(textPosition = TextPosition.END)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(textPosition = TextPosition.END)
 
         //then
         val expectedResult = 3
@@ -59,7 +60,7 @@ class TooltipViewStateTest {
     @Test
     fun `when textPosition is not CENTER or END then getTextPosition() returns 2`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(textPosition = TextPosition.START)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(textPosition = TextPosition.START)
 
         //then
         val expectedResult = 2
@@ -71,7 +72,7 @@ class TooltipViewStateTest {
     @Test
     fun `when titleText is empty then getTitleVisibility() returns false`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(titleText = "")
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(titleText = "")
 
         //then
         val expectedResult = false
@@ -83,7 +84,7 @@ class TooltipViewStateTest {
     @Test
     fun `when titleText is not empty then getTitleVisibility() returns true`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(titleText = "Title")
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(titleText = "Title")
 
         //then
         val expectedResult = true
@@ -95,7 +96,7 @@ class TooltipViewStateTest {
     @Test
     fun `when descriptionText is empty then getDescriptionVisibility() returns false`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(descriptionText = "")
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(descriptionText = "")
 
         //then
         val expectedResult = false
@@ -107,7 +108,7 @@ class TooltipViewStateTest {
     @Test
     fun `when descriptionText is not empty then getDescriptionVisibility() returns true`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(descriptionText = "Description")
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(descriptionText = "Description")
 
         //then
         val expectedResult = true
@@ -119,7 +120,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowResource is DEFAULT_ARROW_RESOURCE then getTopArrowResource() returns ic_arrow_up`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = DEFAULT_ARROW_RESOURCE)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(arrowResource = DEFAULT_ARROW_RESOURCE)
 
         //then
         val expectedResult = R.drawable.ic_showcase_arrow_up
@@ -132,7 +133,7 @@ class TooltipViewStateTest {
     fun `when arrowResource is not DEFAULT_ARROW_RESOURCE then getTopArrowResource() returns arrowResource`() {
         //when
         val givenArrowResource = android.R.drawable.arrow_down_float
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = givenArrowResource)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(arrowResource = givenArrowResource)
 
         //then
         val actualResult = tooltipViewState.getTopArrowResource()
@@ -143,7 +144,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowPosition is UP then getTopArrowVisibility() returns VISIBLE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = AbsoluteArrowPosition.UP)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(absoluteArrowPosition = AbsoluteArrowPosition.UP)
 
         //then
         val expectedResult = View.VISIBLE
@@ -155,7 +156,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowPosition is not UP then getBottomArrowVisibility() returns GONE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = AbsoluteArrowPosition.DOWN)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(absoluteArrowPosition = AbsoluteArrowPosition.DOWN)
 
         //then
         val expectedResult = View.GONE
@@ -167,7 +168,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowResource is DEFAULT_ARROW_RESOURCE then getBottomArrowResource() returns ic_arrow_down`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = DEFAULT_ARROW_RESOURCE)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(arrowResource = DEFAULT_ARROW_RESOURCE)
 
         //then
         val expectedResult = R.drawable.ic_showcase_arrow_down
@@ -180,7 +181,7 @@ class TooltipViewStateTest {
     fun `when arrowResource is not DEFAULT_ARROW_RESOURCE then getBottomArrowResource() returns arrowResource`() {
         //when
         val givenArrowResource = android.R.drawable.arrow_down_float
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowResource = givenArrowResource)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(arrowResource = givenArrowResource)
 
         //then
         val actualResult = tooltipViewState.getBottomArrowResource()
@@ -191,7 +192,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowPosition is DOWN then getBottomArrowVisibility() returns VISIBLE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = AbsoluteArrowPosition.DOWN)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(absoluteArrowPosition = AbsoluteArrowPosition.DOWN)
 
         //then
         val expectedResult = View.VISIBLE
@@ -203,7 +204,7 @@ class TooltipViewStateTest {
     @Test
     fun `when arrowPosition is not DOWN then getBottomArrowVisibility() returns GONE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(arrowPosition = AbsoluteArrowPosition.UP)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(absoluteArrowPosition = AbsoluteArrowPosition.UP)
 
         //then
         val expectedResult = View.GONE
@@ -215,7 +216,7 @@ class TooltipViewStateTest {
     @Test
     fun `when showCloseButton is true then getCloseButtonVisibility() returns VISIBLE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(showCloseButton = true)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(showCloseButton = true)
 
         //then
         val expectedResult = View.VISIBLE
@@ -227,7 +228,7 @@ class TooltipViewStateTest {
     @Test
     fun `when showCloseButton is false then getCloseButtonVisibility() returns GONE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(showCloseButton = false)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(showCloseButton = false)
 
         //then
         val expectedResult = View.GONE
@@ -237,25 +238,25 @@ class TooltipViewStateTest {
     }
 
     @Test
-    fun `when showCustomContent is true then isContentVisible() returns GONE`() {
+    fun `when customContent is not null then isContentVisible() returns GONE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(showCustomContent = true)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(customContent = 0)
 
         //then
         val expectedResult = View.GONE
-        val actualResult = tooltipViewState.isContentVisible()
+        val actualResult = tooltipViewState.getContentVisibility()
 
         actualResult `should be` expectedResult
     }
 
     @Test
-    fun `when showCustomContent is false then isContentVisible() returns VISIBLE`() {
+    fun `when customContent is null then isContentVisible() returns VISIBLE`() {
         //when
-        val tooltipViewState = TooltipViewStateFactory.getInstance().copy(showCustomContent = false)
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(customContent = null)
 
         //then
         val expectedResult = View.VISIBLE
-        val actualResult = tooltipViewState.isContentVisible()
+        val actualResult = tooltipViewState.getContentVisibility()
 
         actualResult `should be` expectedResult
     }

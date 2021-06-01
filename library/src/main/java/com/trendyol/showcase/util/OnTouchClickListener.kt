@@ -10,8 +10,9 @@ import kotlin.math.abs
  */
 class OnTouchClickListener(private val minMove: Int = 10) : View.OnTouchListener {
 
-    private var startX: Float = 0.toFloat()
-    private var startY: Float = 0.toFloat()
+    private var startX: Float = 0f
+    private var startY: Float = 0f
+
     var clickListener: ((v: View, x: Float, y: Float) -> Unit)? = null
 
     private fun isAClick(startX: Float, endX: Float, startY: Float, endY: Float): Boolean {

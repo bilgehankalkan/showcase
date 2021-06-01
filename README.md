@@ -2,7 +2,7 @@
 # Showcase
 <img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/3.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/4.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/5.png" width="170"/>
 
-With **Showcase**, you can easily show tooltips. **Showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. Also you can have callback when user quits from **Showcase**.
+With **Showcase**, you can easily show tooltips. **Showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. You can also find out how the user closed the showcase and in multi focus situations you can find out which view was clicked.
 
 # Installation
  - To implement **Showcase** to your Android project via Gradle, you need to add Jitpack repository to your root build.gradle.
@@ -17,7 +17,7 @@ allprojects {
  - After adding Jitpack repository, you can add **Showcase** dependency to your app level build.gradle.
 ```
 dependencies {
-    implementation "com.trendyol.showcase:showcase:0.9.4"
+    implementation "com.trendyol.showcase:showcase:0.9.5"
 }
 ```
 
@@ -75,6 +75,7 @@ showcaseManager.show(context)
 | `builder.windowBackgroundTint(Int)`            | alpha value of window's background color                 | yes      | 204                          | no       |
 | `builder.titleTextSize(Int)`                   | titleText's text size in SP                              | yes      | 18                           | no       |
 | `builder.cancellableFromOutsideTouch(Boolean)` | outside touch from tooltip will act as close click       | yes      | false                        | yes      |
+| `builder.showcaseViewClickable(Boolean)`       | makes the showcase view clickable or not                 | yes      | false                        | yes      |
 | `builder.isDebugMode(Boolean)`                 | tooltip won't be presented                               | yes      | false                        | no       |
 | `builder.textPosition(TextPosition)`           | text can be positioning center, end and start            | yes      | TextPosition.START           | no       |
 | `builder.imageUrl(String)`                     | show image on tooltip                                    | yes      | null                         | no       |
@@ -82,6 +83,23 @@ showcaseManager.show(context)
 | `builder.statusBarVisible(Boolean)`            | statusBar visibility of window                           | yes      | true                         | no       |
 | `builder.build()`                              | will return ShowcaseManager instance                     | no       |                              |          |
 | `showcaseManager.show(Context)`                | show the tooltip with set attributes on                  | no       |                              |          |
+
+# Action Result
+
+By overriding `onActivityResult` you can get feedback based on the types in the ActionType class.
+
+If the actionType is `HIGHLIGHT_CLICKED`, the `KEY_SELECTED_VIEW_INDEX` parameter returns the index of the clicked view. If no view is clicked, the index will be -1.
+
+```
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (Activity.RESULT_OK == resultCode && REQUEST_CODE_SHOWCASE_CLICKED == requestCode && data != null) {
+            val actionType = data.getSerializableExtra(ShowcaseView.KEY_ACTION_TYPE) as ActionType
+            val selectedViewIndex = data.getIntExtra(ShowcaseView.KEY_SELECTED_VIEW_INDEX, -1)
+            Log.i("MainActivity", "onActivityResult: actionType=${actionType.name} and selected view index=${selectedViewIndex}")
+        }
+    }
+```
 
 License
 --------

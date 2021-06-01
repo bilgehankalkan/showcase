@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
+import android.graphics.RectF
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
@@ -65,7 +66,8 @@ class ShowcaseManager private constructor(
             popupBackgroundColor = typedArray.getColor(R.styleable.Showcase_Theme_popupBackgroundColor, showcaseModel.popupBackgroundColor),
             windowBackgroundColor = typedArray.getColor(R.styleable.Showcase_Theme_windowBackgroundColor, showcaseModel.windowBackgroundColor),
             showCloseButton = typedArray.getBoolean(R.styleable.Showcase_Theme_showCloseButton, showcaseModel.showCloseButton),
-            cancellableFromOutsideTouch = typedArray.getBoolean(R.styleable.Showcase_Theme_cancellableFromOutsideTouch, showcaseModel.cancellableFromOutsideTouch)
+            cancellableFromOutsideTouch = typedArray.getBoolean(R.styleable.Showcase_Theme_cancellableFromOutsideTouch, showcaseModel.cancellableFromOutsideTouch),
+            isShowcaseViewClickable = typedArray.getBoolean(R.styleable.Showcase_Theme_showcaseViewClickable, showcaseModel.isShowcaseViewClickable)
         ).also {
             typedArray.recycle()
         }
@@ -106,6 +108,7 @@ class ShowcaseManager private constructor(
         @StyleRes
         private var resId: Int? = null
         private var cancellableFromOutsideTouch: Boolean = Constants.DEFAULT_CANCELLABLE_FROM_OUTSIDE_TOUCH
+        private var isShowcaseViewClickable: Boolean = Constants.DEFAULT_SHOWCASE_VIEW_CLICKABLE
         private var isDebugMode: Boolean = false
         private var textPosition: TextPosition = Constants.DEFAULT_TEXT_POSITION
         private var imageUrl: String = Constants.DEFAULT_TEXT
@@ -176,6 +179,15 @@ class ShowcaseManager private constructor(
         fun cancellableFromOutsideTouch(cancellable: Boolean) = apply { cancellableFromOutsideTouch = cancellable }
 
         /**
+         * Makes the showcase view clickable or not.
+         *
+         * Default is not clickable
+         *
+         * @param clickable Set the value to true so that the showcase view is clickable
+         */
+        fun showcaseViewClickable(clickable: Boolean) = apply { isShowcaseViewClickable = clickable }
+
+        /**
          * Running in debug mode or not
          */
         fun isDebugMode(isDebug: Boolean) = apply { isDebugMode = isDebug }
@@ -198,15 +210,17 @@ class ShowcaseManager private constructor(
             }
 
             val rect = Rect()
-
+            val highlightedViewsRectFList = mutableListOf<RectF>()
             focusViews!!.forEach {
                 val viewRect = Rect()
                 it.getGlobalVisibleRect(viewRect)
+                highlightedViewsRectFList.add(viewRect.toRectF())
                 rect.union(viewRect)
             }
 
             val showcaseModel = ShowcaseModel(
                 rectF = rect.toRectF(),
+                highlightedViewsRectFList = highlightedViewsRectFList,
                 radius = TooltipFieldUtil.calculateRadius(rect),
                 titleText = titleText,
                 descriptionText = descriptionText,
@@ -225,6 +239,7 @@ class ShowcaseManager private constructor(
                 descriptionTextSize = descriptionTextSize,
                 highlightPadding = highlightPadding,
                 cancellableFromOutsideTouch = cancellableFromOutsideTouch,
+                isShowcaseViewClickable = isShowcaseViewClickable,
                 isDebugMode = isDebugMode,
                 textPosition = textPosition,
                 imageUrl = imageUrl,

@@ -21,4 +21,5 @@ object Constants {
     val DEFAULT_HIGHLIGHT_TYPE = HighlightType.RECTANGLE
     val DEFAULT_TEXT_POSITION = TextPosition.START
     const val DEFAULT_CANCELLABLE_FROM_OUTSIDE_TOUCH = false
+    const val DEFAULT_SHOWCASE_VIEW_CLICKABLE = false
 }

@@ -13,6 +13,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ShowcaseModel(
     val rectF: RectF,
+    val highlightedViewsRectFList: List<RectF>,
     val radius: Float,
     val titleText: String,
     val descriptionText: String,
@@ -31,6 +32,7 @@ data class ShowcaseModel(
     val descriptionTextSize: Float,
     val highlightPadding: Float,
     val cancellableFromOutsideTouch: Boolean,
+    val isShowcaseViewClickable: Boolean,
     val isDebugMode: Boolean,
     val textPosition: TextPosition,
     val imageUrl: String,

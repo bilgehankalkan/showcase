@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.trendyol.showcase.showcase.ShowcaseModel
+import com.trendyol.showcase.util.ActionType
 
 class ShowcaseActivity : AppCompatActivity() {
 
@@ -14,26 +15,31 @@ class ShowcaseActivity : AppCompatActivity() {
 
         val showcaseModel = intent?.extras?.getParcelable(BUNDLE_KEY) as? ShowcaseModel
         showcaseModel?.let { model ->
-            val layout = ShowcaseView(this).apply {
-                this.showcaseModel = model
+            val view = ShowcaseView(this).apply {
+                setShowcaseModel(model)
+                setClickListener { actionType, index ->
+                    finishShowcase(actionType, index)
+                }
             }
-            setContentView(layout)
+            setContentView(view)
         }
     }
 
-    fun onBackPress(isHighlightClicked: Boolean = false) {
-        setResult(Activity.RESULT_OK, Intent().putExtra(HIGHLIGHT_CLICKED, isHighlightClicked))
+    private fun finishShowcase(actionType: ActionType, index: Int = -1) {
+        val bundle = Bundle().apply {
+            putSerializable(ShowcaseView.KEY_ACTION_TYPE, actionType)
+            putInt(ShowcaseView.KEY_SELECTED_VIEW_INDEX, index)
+        }
+        setResult(Activity.RESULT_OK, Intent().apply { putExtras(bundle) })
         finish()
         overridePendingTransition(0, android.R.anim.fade_out)
     }
 
     override fun onBackPressed() {
-        onBackPress()
+        finishShowcase(ActionType.EXIT)
     }
 
     companion object {
-
         const val BUNDLE_KEY = "bundle_key"
-        const val HIGHLIGHT_CLICKED = "highlight_clicked"
     }
 }

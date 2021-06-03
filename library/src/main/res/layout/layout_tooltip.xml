@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -37,6 +38,7 @@
             android:id="@+id/layoutContents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="@{tooltipViewState.showcaseViewClickable}"
             app:layout_constraintBottom_toTopOf="@id/imageViewBottomArrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/showcase_margin_20dp"
                 android:layout_marginEnd="@dimen/showcase_margin_20dp"
-                android:visibility="@{tooltipViewState.contentVisible}"
+                android:visibility="@{tooltipViewState.contentVisibility}"
                 app:cardCornerRadius="@dimen/showcase_card_radius"
                 app:cardElevation="0dp">
 
@@ -80,8 +82,8 @@
                         android:visibility="@{tooltipViewState.getCloseButtonVisibility()}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_showcase_close"
-                        app:setImageTintList="@{tooltipViewState.closeButtonColor}" />
+                        app:setImageTintList="@{tooltipViewState.closeButtonColor}"
+                        app:srcCompat="@drawable/ic_showcase_close" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewTooltipTitle"
@@ -91,8 +93,8 @@
                         android:layout_marginStart="@dimen/showcase_margin_16dp"
                         android:layout_marginTop="@dimen/showcase_margin_16dp"
                         android:layout_marginEnd="@dimen/showcase_margin_16dp"
-                        android:text="@{tooltipViewState.titleText}"
-                        android:textAlignment="@{tooltipViewState.textPosition}"
+                        android:text="@{tooltipViewState.title}"
+                        android:textAlignment="@{tooltipViewState.getTextPosition}"
                         android:textColor="@{tooltipViewState.titleTextColor}"
                         app:layout_constraintBottom_toTopOf="@id/textViewTooltipDescription"
                         app:layout_constraintEnd_toStartOf="@id/imageViewTooltipClose"
@@ -111,8 +113,8 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="@dimen/showcase_margin_16dp"
                         android:layout_marginBottom="@dimen/showcase_margin_16dp"
-                        android:text="@{tooltipViewState.descriptionText}"
-                        android:textAlignment="@{tooltipViewState.textPosition}"
+                        android:text="@{tooltipViewState.description}"
+                        android:textAlignment="@{tooltipViewState.getTextPosition}"
                         android:textColor="@{tooltipViewState.descriptionTextColor}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -122,8 +124,11 @@
                         bind:isVisible="@{tooltipViewState.descriptionVisibility}"
                         bind:textSizeInSP="@{tooltipViewState.descriptionTextSize}"
                         tools:text="lorem ipsum lorem ipsum lorem ipsum" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
+
         </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -140,5 +145,7 @@
             bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"
             bind:drawableRes="@{tooltipViewState.bottomArrowResource}"
             tools:srcCompat="@drawable/ic_showcase_arrow_down" />
+
     </merge>
+
 </layout>

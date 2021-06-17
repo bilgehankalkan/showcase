@@ -2,6 +2,7 @@ package com.trendyol.sample
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,9 +13,9 @@ import androidx.core.content.ContextCompat
 import com.trendyol.showcase.showcase.ShowcaseManager
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.showcase.ShowcaseView
-import com.trendyol.showcase.util.ActionType
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
 import com.trendyol.showcase.ui.tooltip.TextPosition
+import com.trendyol.showcase.util.ActionType
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 .titleText("Title For Top!")
                 .descriptionText("Simple, short description for top tooltip.")
                 .titleTextColor(ContextCompat.getColor(baseContext, R.color.colorAccent))
+                .titleTextFontFamily("sans-serif")
                 .descriptionTextColor(ContextCompat.getColor(baseContext, R.color.colorPrimary))
                 .backgroundColor(ContextCompat.getColor(baseContext, R.color.colorPrimaryDark))
                 .imageUrl("https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png")
@@ -60,6 +62,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 .titleText("Title For Center!")
                 .descriptionText("Center is here.")
                 .titleTextColor(ContextCompat.getColor(baseContext, R.color.white))
+                .titleTextStyle(Typeface.BOLD)
                 .backgroundColor(ContextCompat.getColor(baseContext, R.color.colorPrimaryDark))
                 .closeButtonColor(ContextCompat.getColor(baseContext, R.color.white))
                 .showCloseButton(true)
@@ -76,6 +79,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 .focus(buttonBottom)
                 .titleText("Title without a description")
                 .titleTextSize(16f)
+                .titleTextFontFamily("sans-serif")
+                .titleTextStyle(Typeface.BOLD)
                 .showCloseButton(true)
                 .arrowResource(android.R.drawable.arrow_down_float)
                 .arrowPosition(ArrowPosition.AUTO)

@@ -93,7 +93,6 @@
                         android:layout_marginStart="@dimen/showcase_margin_16dp"
                         android:layout_marginTop="@dimen/showcase_margin_16dp"
                         android:layout_marginEnd="@dimen/showcase_margin_16dp"
-                        android:fontFamily="sans-serif-medium"
                         android:text="@{tooltipViewState.title}"
                         android:textAlignment="@{tooltipViewState.getTextPosition}"
                         android:textColor="@{tooltipViewState.titleTextColor}"

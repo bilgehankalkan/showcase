@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.graphics.RectF
+import android.graphics.Typeface
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
@@ -66,8 +67,19 @@ class ShowcaseManager private constructor(
             popupBackgroundColor = typedArray.getColor(R.styleable.Showcase_Theme_popupBackgroundColor, showcaseModel.popupBackgroundColor),
             windowBackgroundColor = typedArray.getColor(R.styleable.Showcase_Theme_windowBackgroundColor, showcaseModel.windowBackgroundColor),
             showCloseButton = typedArray.getBoolean(R.styleable.Showcase_Theme_showCloseButton, showcaseModel.showCloseButton),
-            cancellableFromOutsideTouch = typedArray.getBoolean(R.styleable.Showcase_Theme_cancellableFromOutsideTouch, showcaseModel.cancellableFromOutsideTouch),
-            isShowcaseViewClickable = typedArray.getBoolean(R.styleable.Showcase_Theme_showcaseViewClickable, showcaseModel.isShowcaseViewClickable)
+            cancellableFromOutsideTouch = typedArray.getBoolean(
+                R.styleable.Showcase_Theme_cancellableFromOutsideTouch,
+                showcaseModel.cancellableFromOutsideTouch
+            ),
+            isShowcaseViewClickable = typedArray.getBoolean(
+                R.styleable.Showcase_Theme_showcaseViewClickable,
+                showcaseModel.isShowcaseViewClickable
+            ),
+            titleTextFontFamily = typedArray.getString(R.styleable.Showcase_Theme_titleTextFontFamily) ?: showcaseModel.titleTextFontFamily,
+            titleTextStyle = typedArray.getInteger(R.styleable.Showcase_Theme_titleStyle, showcaseModel.titleTextStyle),
+            descriptionTextFontFamily = typedArray.getString(R.styleable.Showcase_Theme_descriptionTextFontFamily)
+                ?: showcaseModel.descriptionTextFontFamily,
+            descriptionTextStyle = typedArray.getInteger(R.styleable.Showcase_Theme_descriptionTextStyle, showcaseModel.descriptionTextStyle)
         ).also {
             typedArray.recycle()
         }
@@ -102,7 +114,11 @@ class ShowcaseManager private constructor(
         private var windowBackgroundColor: Int = Constants.DEFAULT_COLOR_BACKGROUND
         private var windowBackgroundAlpha: Int = Constants.DEFAULT_BACKGROUND_ALPHA
         private var titleTextSize: Float = Constants.DEFAULT_TITLE_TEXT_SIZE
+        private var titleTextFontFamily: String = Constants.DEFAULT_TITLE_TEXT_FONT_FAMILY
+        private var titleTextStyle: Int = Constants.DEFAULT_TITLE_TEXT_STYLE
         private var descriptionTextSize: Float = Constants.DEFAULT_DESCRIPTION_TEXT_SIZE
+        private var descriptionTextFontFamily: String = Constants.DEFAULT_DESCRIPTION_TEXT_FONT_FAMILY
+        private var descriptionTextStyle: Int = Constants.DEFAULT_DESCRIPTION_TEXT_STYLE
         private var highlightPadding: Float = Constants.DEFAULT_HIGHLIGHT_PADDING_EXTRA
 
         @StyleRes
@@ -124,11 +140,41 @@ class ShowcaseManager private constructor(
 
         fun titleText(title: String) = apply { titleText = title }
 
-        fun descriptionText(description: String) = apply { descriptionText = description }
-
         fun titleTextColor(@ColorInt color: Int) = apply { titleTextColor = color }
 
+        /**
+         * Assigns fontFamily like sans-serif, sans-serif-medium. By default, sans-serif is used.
+         *
+         * @param fontFamily assigns fontFamily to titleText
+         */
+        fun titleTextFontFamily(fontFamily: String) = apply { titleTextFontFamily = fontFamily }
+
+        /**
+         * Assign textStyle to titleText
+         *
+         * @param textStyle can only be style parameters in Typeface. It should be in the range of NORMAL AND BOLD_ITALIC.
+         */
+        fun titleTextStyle(@IntRange(from = Typeface.NORMAL.toLong(), to = Typeface.BOLD_ITALIC.toLong()) textStyle: Int) =
+            apply { titleTextStyle = textStyle }
+
+        fun descriptionText(description: String) = apply { descriptionText = description }
+
         fun descriptionTextColor(@ColorInt color: Int) = apply { descriptionTextColor = color }
+
+        /**
+         * Assigns fontFamily like sans-serif, sans-serif-medium. By default, sans-serif is used.
+         *
+         * @param fontFamily assigns fontFamily to descriptionText
+         */
+        fun descriptionTextFontFamily(fontFamily: String) = apply { descriptionTextFontFamily = fontFamily }
+
+        /**
+         * Assign textStyle to descriptionText
+         *
+         * @param textStyle can only be style parameters in Typeface. It should be in the range of NORMAL AND BOLD_ITALIC.
+         */
+        fun descriptionTextStyle(@IntRange(from = Typeface.NORMAL.toLong(), to = Typeface.BOLD_ITALIC.toLong()) textStyle: Int) =
+            apply { descriptionTextStyle = textStyle }
 
         fun backgroundColor(@ColorInt color: Int) = apply { popupBackgroundColor = color }
 
@@ -236,7 +282,11 @@ class ShowcaseManager private constructor(
                 windowBackgroundColor = windowBackgroundColor,
                 windowBackgroundAlpha = windowBackgroundAlpha,
                 titleTextSize = titleTextSize,
+                titleTextFontFamily = titleTextFontFamily,
+                titleTextStyle = titleTextStyle,
                 descriptionTextSize = descriptionTextSize,
+                descriptionTextFontFamily = descriptionTextFontFamily,
+                descriptionTextStyle = descriptionTextStyle,
                 highlightPadding = highlightPadding,
                 cancellableFromOutsideTouch = cancellableFromOutsideTouch,
                 isShowcaseViewClickable = isShowcaseViewClickable,

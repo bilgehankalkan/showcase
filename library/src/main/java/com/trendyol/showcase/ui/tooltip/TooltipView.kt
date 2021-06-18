@@ -1,6 +1,7 @@
 package com.trendyol.showcase.ui.tooltip
 
 import android.content.Context
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -37,6 +38,14 @@ class TooltipView @JvmOverloads constructor(
 
     internal fun bind(tooltipViewState: TooltipViewState) {
         binding.tooltipViewState = tooltipViewState
+        binding.textViewTooltipTitle.typeface = Typeface.create(
+            tooltipViewState.getTitleTextFontFamily(),
+            tooltipViewState.getTitleTextStyle()
+        )
+        binding.textViewTooltipDescription.typeface = Typeface.create(
+            tooltipViewState.getDescriptionTextFontFamily(),
+            tooltipViewState.getDescriptionTextStyle()
+        )
         binding.executePendingBindings()
     }
 

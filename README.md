@@ -27,9 +27,11 @@ You can easily use ShowcaseManager.Builder to create **Showcase**.
 val showcaseManager = ShowcaseManager.Builder()  
     .focus(myView)  
     .titleText("Title about myView")  
-    .descriptionText("Little bit info for my lovely myView")  
-    .titleTextSize(22F)  
+    .titleTextSize(22F) 
     .titleTextColor(ContextCompat.getColor(this, R.color.blue)) 
+    .titleTextFontFamily("sans-serif-medium")  
+    .titleTextStyle(Typeface.BOLD)  
+    .descriptionText("Little bit info for my lovely myView")   
     .windowBackgroundAlpha(127)  
     .arrowPosition(ArrowPosition.DOWN)
     .textPosition(TextPosition.START)
@@ -63,6 +65,10 @@ showcaseManager.show(context)
 | `builder.descriptionTextColor(Int)`            | descriptionText's color                                  | yes      | Color.BLACK                  | yes      |
 | `builder.titleTextSize(Int)`                   | titleText's text size in SP                              | yes      | 18 SP                        | no       |
 | `builder.descriptionTextSize(Int)`             | descriptionText's text size in SP                        | yes      | 14 SP                        | no       |
+| `builder.titleTextFontFamily(String)`          | titleText's fontFamily                                   | yes      | sans-serif                   | yes      |
+| `builder.descriptionTextFontFamily(String)`    | descriptionText's fontFamily                             | yes      | sans-serif                   | yes      |
+| `builder.titleTextStyle(Int)`                  | titleText's textStyle                                    | yes      | Typeface.NORMAL              | yes      |
+| `builder.descriptionTextStyle(Int)`            | descriptionText's textStyle                              | yes      | Typeface.NORMAL              | yes      |
 | `builder.backgroundColor(Int)`                 | background color of tooltip                              | yes      | Color.WHITE                  | yes      |
 | `builder.closeButtonColor(Int)`                | closeButton's color                                      | yes      | Color.BLACK                  | yes      |
 | `builder.showCloseButton(Boolean)`             | show close button on tooltip                             | yes      | true                         | yes      |

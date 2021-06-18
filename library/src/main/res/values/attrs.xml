@@ -3,6 +3,10 @@
 
     <declare-styleable name="Showcase.Theme">
         <attr name="titleTextColor" format="color" />
+        <attr name="titleTextFontFamily" format="string" />
+        <attr name="titleStyle" format="integer" />
+        <attr name="descriptionTextFontFamily" format="string" />
+        <attr name="descriptionTextStyle" format="integer" />
         <attr name="descriptionTextColor" format="color" />
         <attr name="closeButtonColor" format="color" />
         <attr name="popupBackgroundColor" format="color" />

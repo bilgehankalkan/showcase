@@ -32,6 +32,10 @@ internal data class TooltipViewState(
 
     fun getTitleTextSize() = showcaseModel.titleTextSize
 
+    fun getTitleTextFontFamily() = showcaseModel.titleTextFontFamily
+
+    fun getTitleTextStyle() = showcaseModel.titleTextStyle
+
     fun getDescription() = showcaseModel.descriptionText
 
     fun getDescriptionVisibility() = showcaseModel.descriptionText.isNotEmpty()
@@ -39,6 +43,10 @@ internal data class TooltipViewState(
     fun getDescriptionTextColor() = showcaseModel.descriptionTextColor
 
     fun getDescriptionTextSize() = showcaseModel.descriptionTextSize
+
+    fun getDescriptionTextFontFamily() = showcaseModel.descriptionTextFontFamily
+
+    fun getDescriptionTextStyle() = showcaseModel.descriptionTextStyle
 
     fun getArrowPercentage() = showcaseModel.arrowPercentage
 

@@ -1,3 +1,2 @@
 include ':sample'
 include ':library-v2'
-include ':library'

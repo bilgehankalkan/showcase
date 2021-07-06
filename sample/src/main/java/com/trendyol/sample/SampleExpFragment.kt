@@ -1,15 +1,18 @@
 package com.trendyol.sample
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.doOnPreDraw
+import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import com.trendyol.sample.databinding.FragmentVersion2ShowcaseBinding
 import com.trendyol.sample.databinding.FragmentWithoutCustomViewExpBinding
+import com.trendyol.sample.databinding.LayoutCustomContentBinding
 import com.trendyol.showcasev2.CircleTargetViewClipper
 import com.trendyol.showcasev2.DefaultShowcaseViewFactory
 import com.trendyol.showcasev2.RectangleTargetViewClipper
@@ -40,7 +43,33 @@ class SampleExpFragment : Fragment() {
             }
 
             buttonMultipleShowcase.setOnClickListener {
-                manager.focus(targetMultiple, CircleTargetViewClipper())
+                manager.focus(
+                    targetMultiple,
+                    CircleTargetViewClipper(),
+                    inflateTooltip = { _, rect ->
+                        val binding = LayoutCustomContentBinding.inflate(LayoutInflater.from(requireContext()))
+
+                        binding.root.doOnPreDraw {
+                            it.y = rect.bottom.toFloat()
+                            it.x = rect.left.toFloat()
+                            it.updateLayoutParams {
+                                width = rect.width()
+                                height = rect.height()
+                            }
+                        }
+                        binding.root.postDelayed({
+                            binding.text = "2 seconds passed"
+                            binding.color = Color.WHITE
+                            binding.executePendingBindings()
+                        }, 2000)
+
+                        binding.text = "tooltip"
+                        binding.color = Color.BLUE
+                        binding.executePendingBindings()
+
+                        binding.root
+                    }
+                )
             }
 
             buttonSizeChange.setOnClickListener {
@@ -51,7 +80,8 @@ class SampleExpFragment : Fragment() {
                             width *= 2
                             height *= 2
                         }
-                    }, 2000)
+                    }, 2000
+                )
             }
 
             buttonScroll.setOnClickListener {
@@ -59,7 +89,8 @@ class SampleExpFragment : Fragment() {
                 targetScroll.postDelayed(
                     {
                         scrollView.smoothScrollBy(0, 500)
-                    }, 2000)
+                    }, 2000
+                )
             }
 
             buttonLifecycle.setOnClickListener {
@@ -73,7 +104,8 @@ class SampleExpFragment : Fragment() {
                             .add(R.id.container, Sample2Fragment(), "SAMPLE-2-FRAGMENT")
                             .addToBackStack(null)
                             .commit()
-                    }, 3000)
+                    }, 3000
+                )
             }
 
             buttonPosition.setOnClickListener {
@@ -84,7 +116,8 @@ class SampleExpFragment : Fragment() {
                         constraintSet.clone(rootConstraintLayout)
                         constraintSet.clear(R.id.targetPosition, ConstraintSet.END)
                         constraintSet.applyTo(rootConstraintLayout)
-                    }, 2000)
+                    }, 2000
+                )
             }
         }
 

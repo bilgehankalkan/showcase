@@ -48,7 +48,12 @@ class ShowcaseManager constructor(
         }
     }
 
-    fun focus(view: View, viewClipper: TargetViewClipper = RectangleTargetViewClipper(), dismissListener: (() -> Boolean)? = null) {
+    fun focus(
+        view: View,
+        viewClipper: TargetViewClipper = RectangleTargetViewClipper(),
+        inflateTooltip: ((ShowcaseView, Rect) -> View)? = null,
+        dismissListener: (() -> Boolean)? = null
+    ) {
         if (targetView != null) {
             log { "realigned to different target ${targetView!!.id}" }
             dismiss()
@@ -57,7 +62,7 @@ class ShowcaseManager constructor(
         observeLifecycleOwner(lifecycleOwner)
         if (lifecycleOwner.isAtLeastStarted()) {
             attachLayoutObservers(view)
-            val showcaseView = buildShowcaseView(view.context, viewClipper, dismissListener)
+            val showcaseView = buildShowcaseView(view.context, viewClipper, dismissListener, inflateTooltip)
             addToDecorView(view, showcaseView)
         }
     }
@@ -100,9 +105,14 @@ class ShowcaseManager constructor(
         decorView.addView(showcaseView)
     }
 
-    private fun buildShowcaseView(context: Context, clipper: TargetViewClipper, dismissListener: (() -> Boolean)?): ShowcaseView {
+    private fun buildShowcaseView(
+        context: Context,
+        clipper: TargetViewClipper,
+        dismissListener: (() -> Boolean)?,
+        inflateTooltip: ((ShowcaseView, Rect) -> View)?
+    ): ShowcaseView {
         return showcaseViewFactory
-            .buildShowcaseView(context, ShowcaseView.Configuration(), clipper)
+            .buildShowcaseView(context, ShowcaseView.Configuration(), clipper, inflateTooltip)
             .apply {
                 tag = ShowcaseTargetView.SHOWCASE_TAG
                 setDismissListener(this, dismissListener)

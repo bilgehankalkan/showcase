@@ -70,7 +70,8 @@ class ShowcaseTargetView : FrameLayout {
             .buildShowcaseView(
                 context,
                 configuration,
-                viewClipper
+                viewClipper,
+                null
             )
             .apply { tag = SHOWCASE_TAG }
         started = true

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="text"
+            type="java.lang.String" />
+
+        <variable
+            name="color"
+            type="int" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black">
+
+        <TextView
+            android:id="@+id/textCustomContent"
+            android:layout_width="wrap_content"
+            android:textColor="@{color}"
+            android:text="@{text}"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+</layout>

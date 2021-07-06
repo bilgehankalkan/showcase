@@ -20,7 +20,7 @@ internal data class TooltipViewState(
     val arrowMargin: Int,
     val titleTextSize: Float,
     val descriptionTextSize: Float,
-    val textPosition: TextPosition,
+    private val textPosition: TextPosition,
     val imageUrl: String,
     val showCustomContent: Boolean,
     val isStatusBarVisible: Boolean

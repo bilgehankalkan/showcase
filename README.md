@@ -38,7 +38,7 @@ val showcaseManager = ShowcaseManager.Builder()
     .resId(R.style.Showcase_Theme)
     .build()  
 
-showcaseManager.show(context)
+showcaseManager.show(context) // or showcaseManager.show(context, REQUEST_CODE_SHOWCASE_CLICKED)
 ```
 
 You can also provide layout resource id for more complex **Showcase** needs with `customContent`.
@@ -50,7 +50,7 @@ val showcaseManager = ShowcaseManager.Builder()
     .arrowPosition(ArrowPosition.UP)
     .build()
 
-showcaseManager.show(context)
+showcaseManager.show(context) // or showcaseManager.show(context, REQUEST_CODE_SHOWCASE_CLICKED)
 ```
 
 # Builder Configuration
@@ -99,7 +99,7 @@ If the actionType is `HIGHLIGHT_CLICKED`, the `KEY_SELECTED_VIEW_INDEX` paramete
 ```
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (Activity.RESULT_OK == resultCode && REQUEST_CODE_SHOWCASE_CLICKED == requestCode && data != null) {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_SHOWCASE_CLICKED && data != null) {
             val actionType = data.getSerializableExtra(ShowcaseView.KEY_ACTION_TYPE) as ActionType
             val selectedViewIndex = data.getIntExtra(ShowcaseView.KEY_SELECTED_VIEW_INDEX, -1)
             Log.i("MainActivity", "onActivityResult: actionType=${actionType.name} and selected view index=${selectedViewIndex}")

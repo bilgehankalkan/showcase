@@ -17,7 +17,7 @@ allprojects {
  - After adding Jitpack repository, you can add **Showcase** dependency to your app level build.gradle.
 ```
 dependencies {
-    implementation "com.trendyol.showcase:showcase:0.9.5"
+    implementation "com.trendyol.showcase:showcase:0.9.7"
 }
 ```
 
@@ -111,7 +111,7 @@ License
 --------
 
 
-    Copyright 2021 Trendyol.com
+    Copyright 2022 Trendyol.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

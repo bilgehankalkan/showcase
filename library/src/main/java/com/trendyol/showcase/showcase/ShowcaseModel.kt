@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
+import com.trendyol.showcase.ui.slidablecontent.SlidableContent
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
 import com.trendyol.showcase.ui.tooltip.TextPosition
@@ -41,7 +42,8 @@ data class ShowcaseModel(
     val textPosition: TextPosition,
     val imageUrl: String,
     @LayoutRes val customContent: Int?,
-    val isStatusBarVisible: Boolean
+    val isStatusBarVisible: Boolean,
+    val slidableContentList: List<SlidableContent>?,
 ) : Parcelable {
 
     fun horizontalCenter() = rectF.left + ((rectF.right - rectF.left) / 2)

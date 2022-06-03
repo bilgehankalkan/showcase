@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import com.trendyol.showcase.showcase.ShowcaseManager
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.showcase.ShowcaseView
+import com.trendyol.showcase.ui.slidablecontent.SlidableContent
+import com.trendyol.showcase.ui.slidablecontent.slidableContent
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
 import com.trendyol.showcase.ui.tooltip.TextPosition
 import com.trendyol.showcase.util.ActionType
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val buttonCenter = findViewById<Button>(R.id.button_center)
         val buttonBottom = findViewById<Button>(R.id.button_bottom)
         val buttonMultipleView = findViewById<Button>(R.id.button_focus_multiple_view)
+        val buttonSlidableContent = findViewById<Button>(R.id.button_slidable_content)
         val textView = findViewById<View>(R.id.textView)
         val imageView = findViewById<View>(R.id.imageView)
         val imageTop = findViewById<View>(R.id.image_top)
@@ -107,6 +110,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 .show(this@MainActivity, REQUEST_CODE_SHOWCASE_CLICKED)
         }
 
+        buttonSlidableContent.setOnClickListener {
+            ShowcaseManager.Builder()
+                .focus(buttonSlidableContent)
+                .setSlidableContentList(buildSlidableContentList())
+                .showCloseButton(false)
+                .cancellableFromOutsideTouch(true)
+                .build()
+                .show(this@MainActivity, REQUEST_CODE_SHOWCASE_CLICKED)
+        }
+
         imageTop.setOnClickListener {
             ShowcaseManager.Builder()
                 .focus(imageTop)
@@ -116,6 +129,29 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 .statusBarVisible(isStatusBarVisible)
                 .build()
                 .show(this@MainActivity, REQUEST_CODE_SHOWCASE_CLICKED)
+        }
+    }
+
+    private fun buildSlidableContentList(): List<SlidableContent> {
+        val baseSlidableContent = slidableContent {
+            imageUrl = "https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png"
+            titleTextColor = ContextCompat.getColor(baseContext, R.color.black)
+            titleTextSize = 16f
+            titleTextFontFamily = "sans-serif"
+            titleTextStyle = Typeface.BOLD
+            descriptionTextColor = ContextCompat.getColor(baseContext, R.color.colorPrimaryDark)
+            descriptionTextSize = 14f
+            descriptionTextFontFamily = "sans-serif"
+            descriptionTextStyle = Typeface.NORMAL
+            textPosition = TextPosition.CENTER
+        }
+
+        return with(baseSlidableContent) {
+            listOf(
+                copy(title = "Title 1", description = "Description 1"),
+                copy(title = "Title 2", description = "Description 2"),
+                copy(title = "Title 3", description = "Description 3"),
+            )
         }
     }
 

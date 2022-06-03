@@ -14,6 +14,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
 import com.trendyol.showcase.R
+import com.trendyol.showcase.ui.slidablecontent.SlidableContent
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.showcase.ShowcaseActivity
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
@@ -134,6 +135,8 @@ class ShowcaseManager private constructor(
 
         private var isStatusBarVisible: Boolean = true
 
+        private var slidableContentList: List<SlidableContent>? = null
+
         fun focus(view: View) = apply { focusViews = arrayOf(view) }
 
         fun focus(vararg view: View) = apply { focusViews = view }
@@ -250,6 +253,9 @@ class ShowcaseManager private constructor(
 
         fun statusBarVisible(isStatusBarVisible: Boolean) = apply { this.isStatusBarVisible = isStatusBarVisible }
 
+        fun setSlidableContentList(slidableContentList: List<SlidableContent>) =
+            apply { this.slidableContentList = slidableContentList }
+
         fun build(): ShowcaseManager {
             if (focusViews.isNullOrEmpty()) {
                 throw Exception("view should not be null!")
@@ -294,7 +300,8 @@ class ShowcaseManager private constructor(
                 textPosition = textPosition,
                 imageUrl = imageUrl,
                 customContent = customContent,
-                isStatusBarVisible = isStatusBarVisible
+                isStatusBarVisible = isStatusBarVisible,
+                slidableContentList = slidableContentList,
             )
 
             return ShowcaseManager(showcaseModel = showcaseModel, resId = resId)

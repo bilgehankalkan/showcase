@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.trendyol.showcase.ui.slidablecontent.SlidableContentViewState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:sc_imageUrl="@{viewState.slidableContent.imageUrl}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/showcase_margin_16dp"
+            android:layout_marginTop="@dimen/showcase_margin_16dp"
+            android:layout_marginEnd="@dimen/showcase_margin_16dp"
+            android:text="@{viewState.slidableContent.title}"
+            android:textAlignment="@{viewState.getTextPosition}"
+            android:textColor="@{viewState.slidableContent.titleTextColor}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_goneMarginBottom="@dimen/showcase_margin_16dp"
+            app:layout_constraintBottom_toTopOf="@id/textViewDescription"
+            bind:isVisible="@{viewState.isTitleVisible()}"
+            bind:textSizeInSP="@{viewState.slidableContent.titleTextSize}"
+            tools:text="lorem ipsum" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/showcase_margin_16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/showcase_margin_16dp"
+            android:layout_marginBottom="32dp"
+            android:text="@{viewState.slidableContent.description}"
+            android:textAlignment="@{viewState.getTextPosition}"
+            android:textColor="@{viewState.slidableContent.descriptionTextColor}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            bind:isVisible="@{viewState.isDescriptionVisible()}"
+            bind:textSizeInSP="@{viewState.slidableContent.descriptionTextSize}"
+            tools:text="lorem ipsum lorem ipsum lorem ipsum"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

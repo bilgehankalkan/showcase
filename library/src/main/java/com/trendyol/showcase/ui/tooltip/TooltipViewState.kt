@@ -67,4 +67,6 @@ internal data class TooltipViewState(
     fun getContentVisibility() = if (showcaseModel.customContent != null) View.GONE else View.VISIBLE
 
     fun isShowcaseViewClickable() = showcaseModel.isShowcaseViewClickable
+
+    fun isSlidableContentVisible() = showcaseModel.slidableContentList.isNullOrEmpty().not()
 }

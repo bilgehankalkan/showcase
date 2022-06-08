@@ -18,10 +18,11 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="140dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
             app:sc_imageUrl="@{viewState.slidableContent.imageUrl}" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -29,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/showcase_margin_16dp"
-            android:layout_marginTop="@dimen/showcase_margin_16dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="@dimen/showcase_margin_16dp"
             android:text="@{viewState.slidableContent.title}"
             android:textAlignment="@{viewState.getTextPosition}"

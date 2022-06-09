@@ -76,7 +76,7 @@
                         android:id="@+id/textViewSlidableContentPosition"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="96dp"
+                        android:layout_marginTop="116dp"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/background_black_radius_4"
                         android:includeFontPadding="false"

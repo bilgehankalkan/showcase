@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.viewpager2.widget.ViewPager2
 import com.trendyol.showcase.R
+import com.trendyol.showcase.ui.slidablecontent.SlidableContent
 import com.trendyol.showcase.databinding.LayoutTooltipBinding
+import com.trendyol.showcase.ui.slidablecontent.SlidableContentAdapter
 import com.trendyol.showcase.util.ActionType
 
 class TooltipView @JvmOverloads constructor(
@@ -37,16 +40,38 @@ class TooltipView @JvmOverloads constructor(
     }
 
     internal fun bind(tooltipViewState: TooltipViewState) {
-        binding.tooltipViewState = tooltipViewState
-        binding.textViewTooltipTitle.typeface = Typeface.create(
-            tooltipViewState.getTitleTextFontFamily(),
-            tooltipViewState.getTitleTextStyle()
-        )
-        binding.textViewTooltipDescription.typeface = Typeface.create(
-            tooltipViewState.getDescriptionTextFontFamily(),
-            tooltipViewState.getDescriptionTextStyle()
-        )
-        binding.executePendingBindings()
+        with(binding) {
+            this.tooltipViewState = tooltipViewState
+            textViewTooltipTitle.typeface = Typeface.create(
+                tooltipViewState.getTitleTextFontFamily(),
+                tooltipViewState.getTitleTextStyle()
+            )
+            textViewTooltipDescription.typeface = Typeface.create(
+                tooltipViewState.getDescriptionTextFontFamily(),
+                tooltipViewState.getDescriptionTextStyle()
+            )
+
+            setupViewPager(tooltipViewState.showcaseModel.slidableContentList.orEmpty())
+
+            executePendingBindings()
+        }
+    }
+
+    private fun setupViewPager(slidableContentList: List<SlidableContent>) {
+        with(binding) {
+            viewPager.adapter = SlidableContentAdapter(slidableContentList)
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    textViewSlidableContentPosition.text =
+                        String.format(
+                            resources.getString(R.string.slidable_content_position_text),
+                            position + 1,
+                            slidableContentList.size
+                        )
+                }
+            })
+        }
     }
 
     fun setCustomContent(@LayoutRes customContent: Int) {

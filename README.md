@@ -1,6 +1,6 @@
 
 # Showcase
-<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/3.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/4.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/5.png" width="170"/>
+<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/1.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/2.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/3.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/4.png" width="170"/>	<img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/5.png" width="170"/>   <img src="https://raw.githubusercontent.com/Trendyol/showcase/master/screenshots/6.png" width="170"/>
 
 With **Showcase**, you can easily show tooltips. **Showcase** will highlight the view and show tooltip on it. You can customize title and description text fields, backgrounds and arrow positions. You can also find out how the user closed the showcase and in multi focus situations you can find out which view was clicked.
 
@@ -17,7 +17,7 @@ allprojects {
  - After adding Jitpack repository, you can add **Showcase** dependency to your app level build.gradle.
 ```
 dependencies {
-    implementation "com.trendyol.showcase:showcase:0.9.5"
+    implementation "com.trendyol.showcase:showcase:1.0.0"
 }
 ```
 
@@ -87,6 +87,7 @@ showcaseManager.show(context) // or showcaseManager.show(context, REQUEST_CODE_S
 | `builder.imageUrl(String)`                     | show image on tooltip                                    | yes      | null                         | no       |
 | `builder.customContent(Int)`                   | show given layout                                        | yes      | null                         | no       |
 | `builder.statusBarVisible(Boolean)`            | statusBar visibility of window                           | yes      | true                         | no       |
+| `builder.setSlidableContentList(List<SlidableContent>)`            | show slidable content                | yes      | null                         | no       |  
 | `builder.build()`                              | will return ShowcaseManager instance                     | no       |                              |          |
 | `showcaseManager.show(Context)`                | show the tooltip with set attributes on                  | no       |                              |          |
 

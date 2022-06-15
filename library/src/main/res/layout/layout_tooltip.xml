@@ -72,6 +72,37 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:sc_imageUrl="@{tooltipViewState.imageUrl}" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewSlidableContentPosition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="96dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/background_black_radius_4"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="4dp"
+                        android:paddingVertical="2dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp"
+                        android:translationZ="4dp"
+                        app:layout_constraintEnd_toEndOf="@id/viewPager"
+                        app:layout_constraintTop_toTopOf="@id/viewPager"
+                        bind:isVisible="@{tooltipViewState.isSlidableContentVisible()}"
+                        tools:ignore="SmallSp"
+                        tools:targetApi="lollipop"
+                        tools:text="1/3" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:translationZ="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        bind:isVisible="@{tooltipViewState.isSlidableContentVisible()}"
+                        tools:targetApi="lollipop" />
+
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageViewTooltipClose"
                         android:layout_width="wrap_content"

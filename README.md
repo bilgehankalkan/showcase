@@ -83,6 +83,7 @@ showcaseManager.show(context) // or showcaseManager.show(context, REQUEST_CODE_S
 | `builder.cancellableFromOutsideTouch(Boolean)` | outside touch from tooltip will act as close click       | yes      | false                        | yes      |
 | `builder.showcaseViewClickable(Boolean)`       | makes the showcase view clickable or not                 | yes      | false                        | yes      |
 | `builder.isDebugMode(Boolean)`                 | tooltip won't be presented                               | yes      | false                        | no       |
+| `builder.attachOnParentLifecycle(Boolean)`     | observe parent lifecycle and dismiss showcase            | yes      | false                        | no       |
 | `builder.textPosition(TextPosition)`           | text can be positioning center, end and start            | yes      | TextPosition.START           | no       |
 | `builder.imageUrl(String)`                     | show image on tooltip                                    | yes      | null                         | no       |
 | `builder.customContent(Int)`                   | show given layout                                        | yes      | null                         | no       |

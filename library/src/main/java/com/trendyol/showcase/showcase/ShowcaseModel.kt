@@ -38,6 +38,7 @@ data class ShowcaseModel(
     val highlightPadding: Float,
     val cancellableFromOutsideTouch: Boolean,
     val isShowcaseViewClickable: Boolean,
+    val attachOnParentLifecycle: Boolean,
     val isDebugMode: Boolean,
     val textPosition: TextPosition,
     val imageUrl: String,

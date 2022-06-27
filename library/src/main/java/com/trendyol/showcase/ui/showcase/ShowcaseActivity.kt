@@ -25,7 +25,7 @@ class ShowcaseActivity : AppCompatActivity() {
         }
     }
 
-    private fun finishShowcase(actionType: ActionType, index: Int = -1) {
+    fun finishShowcase(actionType: ActionType, index: Int = -1) {
         val bundle = Bundle().apply {
             putSerializable(ShowcaseView.KEY_ACTION_TYPE, actionType)
             putInt(ShowcaseView.KEY_SELECTED_VIEW_INDEX, index)

@@ -131,12 +131,18 @@ class ShowcaseManager private constructor(
 
         @StyleRes
         private var resId: Int? = null
-        private var cancellableFromOutsideTouch: Boolean = Constants.DEFAULT_CANCELLABLE_FROM_OUTSIDE_TOUCH
+        private var cancellableFromOutsideTouch: Boolean =
+            Constants.DEFAULT_CANCELLABLE_FROM_OUTSIDE_TOUCH
         private var isShowcaseViewClickable: Boolean = Constants.DEFAULT_SHOWCASE_VIEW_CLICKABLE
         private var isDebugMode: Boolean = false
         private var attachOnParentLifecycle: Boolean = false
         private var textPosition: TextPosition = Constants.DEFAULT_TEXT_POSITION
         private var imageUrl: String = Constants.DEFAULT_TEXT
+        private var radiusTopStart: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS
+        private var radiusTopEnd: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS
+        private var radiusBottomStart: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS
+        private var radiusBottomEnd: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS
+        private var isToolTipVisible: Boolean = true
 
         @LayoutRes
         private var customContent: Int? = null
@@ -177,7 +183,8 @@ class ShowcaseManager private constructor(
          *
          * @param fontFamily assigns fontFamily to descriptionText
          */
-        fun descriptionTextFontFamily(fontFamily: String) = apply { descriptionTextFontFamily = fontFamily }
+        fun descriptionTextFontFamily(fontFamily: String) =
+            apply { descriptionTextFontFamily = fontFamily }
 
         /**
          * Assign textStyle to descriptionText
@@ -242,7 +249,31 @@ class ShowcaseManager private constructor(
          *
          * @param clickable Set the value to true so that the showcase view is clickable
          */
-        fun showcaseViewClickable(clickable: Boolean) = apply { isShowcaseViewClickable = clickable }
+        fun showcaseViewClickable(clickable: Boolean) =
+            apply { isShowcaseViewClickable = clickable }
+
+        /**
+         *
+         * radius for highlight area.
+         */
+        fun highlightRadius(
+            topStartRadius: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS,
+            topEndRadius: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS,
+            bottomStartRadius: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS,
+            bottomEndRadius: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS
+        ) = apply {
+            radiusTopStart = topStartRadius
+            radiusTopEnd = topEndRadius
+            radiusBottomStart = bottomStartRadius
+            radiusBottomEnd = bottomEndRadius
+        }
+
+        /**
+         *
+         * show toolTip or not.
+         */
+        fun toolTipVisible(isToolTipVisible: Boolean) =
+            apply { this.isToolTipVisible = isToolTipVisible }
 
         /**
          * Running in debug mode or not
@@ -314,6 +345,11 @@ class ShowcaseManager private constructor(
                 customContent = customContent,
                 isStatusBarVisible = isStatusBarVisible,
                 slidableContentList = slidableContentList,
+                radiusTopStart = radiusTopStart,
+                radiusTopEnd = radiusTopEnd,
+                radiusBottomEnd = radiusBottomEnd,
+                radiusBottomStart = radiusBottomStart,
+                isToolTipVisible = isToolTipVisible
             )
 
             return ShowcaseManager(showcaseModel = showcaseModel, resId = resId)

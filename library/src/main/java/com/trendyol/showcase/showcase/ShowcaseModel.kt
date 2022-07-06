@@ -45,6 +45,11 @@ data class ShowcaseModel(
     @LayoutRes val customContent: Int?,
     val isStatusBarVisible: Boolean,
     val slidableContentList: List<SlidableContent>?,
+    val radiusTopStart: Float,
+    val radiusTopEnd: Float,
+    val radiusBottomEnd: Float,
+    val radiusBottomStart: Float,
+    val isToolTipVisible: Boolean
 ) : Parcelable {
 
     fun horizontalCenter() = rectF.left + ((rectF.right - rectF.left) / 2)

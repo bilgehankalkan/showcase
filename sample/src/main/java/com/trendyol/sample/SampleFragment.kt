@@ -103,6 +103,14 @@ class SampleFragment : Fragment() {
                     .highlightType(HighlightType.RECTANGLE)
                     .highlightPadding(8f)
                     .textPosition(TextPosition.START)
+                    .highlightRadius(
+                        bottomEndRadius = 16f,
+                        topStartRadius = 16f,
+                        topEndRadius = 16f,
+                        bottomStartRadius = 16f
+                    )
+                    .cancellableFromOutsideTouch(true)
+                    .toolTipVisible(false)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
                     .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)

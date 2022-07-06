@@ -18,21 +18,21 @@ class RectangleShape(
     private val radiusBottomStart: Float,
 ) : Shape(screenWidth, screenHeight) {
 
+    private val path = Path()
+    private val corners = floatArrayOf(
+        radiusTopStart,
+        radiusTopStart,
+        radiusTopEnd,
+        radiusTopEnd,
+        radiusBottomEnd,
+        radiusBottomEnd,
+        radiusBottomStart,
+        radiusBottomStart
+    )
+
     override fun draw(windowBackgroundColor: Int, windowBackgroundAlpha: Int, canvas: Canvas) {
         super.draw(windowBackgroundColor, windowBackgroundAlpha, canvas)
         val rectF = RectF(left, top + statusBarDiff, right, bottom + statusBarDiff)
-
-        val path = Path()
-        val corners = floatArrayOf(
-            radiusTopStart,
-            radiusTopStart,
-            radiusTopEnd,
-            radiusTopEnd,
-            radiusBottomEnd,
-            radiusBottomEnd,
-            radiusBottomStart,
-            radiusBottomStart
-        )
         path.addRoundRect(rectF, corners, Path.Direction.CW)
         canvas.drawPath(path, paint)
     }

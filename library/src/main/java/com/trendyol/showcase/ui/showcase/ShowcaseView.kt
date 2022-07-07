@@ -59,7 +59,11 @@ class ShowcaseView @JvmOverloads constructor(
                         left = model.rectF.left - (model.highlightPadding / 2),
                         top = model.rectF.top - (model.highlightPadding / 2),
                         right = model.rectF.right + (model.highlightPadding / 2),
-                        bottom = model.rectF.bottom + (model.highlightPadding / 2)
+                        bottom = model.rectF.bottom + (model.highlightPadding / 2),
+                        radiusTopStart = model.radiusTopStart,
+                        radiusTopEnd = model.radiusTopEnd,
+                        radiusBottomEnd = model.radiusBottomEnd,
+                        radiusBottomStart = model.radiusBottomStart
                     )
                 }
             }

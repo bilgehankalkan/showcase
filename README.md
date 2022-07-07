@@ -88,6 +88,8 @@ showcaseManager.show(context) // or showcaseManager.show(context, REQUEST_CODE_S
 | `builder.imageUrl(String)`                     | show image on tooltip                                    | yes      | null                         | no       |
 | `builder.customContent(Int)`                   | show given layout                                        | yes      | null                         | no       |
 | `builder.statusBarVisible(Boolean)`            | statusBar visibility of window                           | yes      | true                         | no       |
+| `builder.toolTipVisible(Boolean)`              | tooltip visibility                                       | yes      | true                         | no       |
+| `builder.highlightRadius(Float, Float, Float, Float)`              | tooltip visibility                   | yes      | 0f, 0f, 0f, 0f               | no       |
 | `builder.setSlidableContentList(List<SlidableContent>)`            | show slidable content                | yes      | null                         | no       |  
 | `builder.build()`                              | will return ShowcaseManager instance                     | no       |                              |          |
 | `showcaseManager.show(Context)`                | show the tooltip with set attributes on                  | no       |                              |          |

@@ -3,6 +3,8 @@ package com.trendyol.showcase.ui.showcase
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.trendyol.showcase.showcase.ShowcaseModel
 import com.trendyol.showcase.util.ActionType
@@ -22,6 +24,11 @@ class ShowcaseActivity : AppCompatActivity() {
                 }
             }
             setContentView(view)
+            if (model.isShowcaseViewVisibleIndefinitely.not()) {
+               Handler(Looper.getMainLooper()).postDelayed({
+                   finishShowcase(ActionType.EXIT)
+               }, model.showDuration)
+            }
         }
     }
 

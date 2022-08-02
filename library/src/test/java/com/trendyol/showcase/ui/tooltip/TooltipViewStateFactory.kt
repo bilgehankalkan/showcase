@@ -66,7 +66,9 @@ internal object TooltipViewStateFactory {
             slidableContentList = listOf(),
             titleTextStyle = Typeface.BOLD,
             descriptionTextStyle = Typeface.NORMAL,
-            titleTextFontFamily = "sans-serif"
+            titleTextFontFamily = "sans-serif",
+            showDuration = 2000L,
+            isShowcaseViewVisibleIndefinitely = true
         )
         return provideTooltipViewState(showcaseModel, absoluteArrowPosition, arrowMargin)
     }

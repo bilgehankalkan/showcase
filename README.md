@@ -93,7 +93,8 @@ showcaseManager.show(context) // or showcaseManager.show(context, REQUEST_CODE_S
 | `builder.setSlidableContentList(List<SlidableContent>)`            | show slidable content                | yes      | null                         | no       |  
 | `builder.build()`                              | will return ShowcaseManager instance                     | no       |                              |          |
 | `showcaseManager.show(Context)`                | show the tooltip with set attributes on                  | no       |                              |          |
-
+| `builder.showDurationMillis(Long)`             | duration of the tooltip visibility                       | yes       | 2000L                       | no       |
+| `builder.showcaseViewVisibleIndefinitely(Boolean)` | controls tooltip visibility condition                | yes       | true                         | no       |
 # Action Result
 
 By overriding `onActivityResult` you can get feedback based on the types in the ActionType class.

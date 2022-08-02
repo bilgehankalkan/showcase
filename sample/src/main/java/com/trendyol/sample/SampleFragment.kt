@@ -151,6 +151,18 @@ class SampleFragment : Fragment() {
                     .build()
                     .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
             }
+
+            buttonVanishingShowcase.setOnClickListener {
+                ShowcaseManager.Builder()
+                    .focus(buttonVanishingShowcase)
+                    .showcaseViewClickable(true)
+                    .statusBarVisible(isStatusBarVisible)
+                    .showDurationMillis(4000L)
+                    .titleText("This showcase will vanish in 4 seconds")
+                    .showcaseViewVisibleIndefinitely(false)
+                    .build()
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+            }
         }
     }
 

@@ -11,9 +11,13 @@ import com.trendyol.showcase.util.ActionType
 
 class ShowcaseActivity : AppCompatActivity() {
 
+    private lateinit var handler: Handler
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(android.R.anim.fade_in, 0)
+
+        handler = Handler(Looper.getMainLooper())
 
         val showcaseModel = intent?.extras?.getParcelable(BUNDLE_KEY) as? ShowcaseModel
         showcaseModel?.let { model ->
@@ -25,9 +29,10 @@ class ShowcaseActivity : AppCompatActivity() {
             }
             setContentView(view)
             if (model.isShowcaseViewVisibleIndefinitely.not()) {
-               Handler(Looper.getMainLooper()).postDelayed({
-                   finishShowcase(ActionType.EXIT)
-               }, model.showDuration)
+               handler.postDelayed(
+                   { finishShowcase(ActionType.EXIT) },
+                   model.showDuration
+               )
             }
         }
     }
@@ -37,6 +42,7 @@ class ShowcaseActivity : AppCompatActivity() {
             putSerializable(ShowcaseView.KEY_ACTION_TYPE, actionType)
             putInt(ShowcaseView.KEY_SELECTED_VIEW_INDEX, index)
         }
+        handler.removeCallbacksAndMessages(null)
         setResult(Activity.RESULT_OK, Intent().apply { putExtras(bundle) })
         finish()
         overridePendingTransition(0, android.R.anim.fade_out)

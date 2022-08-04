@@ -2,6 +2,7 @@ package com.trendyol.showcase.ui.tooltip
 
 import android.graphics.Color
 import android.graphics.RectF
+import android.graphics.Typeface
 import com.trendyol.showcase.R
 import com.trendyol.showcase.showcase.ShowcaseModel
 import com.trendyol.showcase.ui.showcase.HighlightType
@@ -54,7 +55,20 @@ internal object TooltipViewStateFactory {
             textPosition = textPosition,
             imageUrl = imageUrl,
             customContent = customContent,
-            isStatusBarVisible = isStatusBarVisible
+            isStatusBarVisible = isStatusBarVisible,
+            radiusTopStart = 0F,
+            radiusBottomEnd = 0F,
+            radiusBottomStart = 0F,
+            radiusTopEnd = 0F,
+            attachOnParentLifecycle = true,
+            descriptionTextFontFamily = "sans-serif",
+            isToolTipVisible = true,
+            slidableContentList = listOf(),
+            titleTextStyle = Typeface.BOLD,
+            descriptionTextStyle = Typeface.NORMAL,
+            titleTextFontFamily = "sans-serif",
+            showDuration = 2000L,
+            isShowcaseViewVisibleIndefinitely = true
         )
         return provideTooltipViewState(showcaseModel, absoluteArrowPosition, arrowMargin)
     }

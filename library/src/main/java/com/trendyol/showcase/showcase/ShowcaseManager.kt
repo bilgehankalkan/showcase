@@ -98,7 +98,8 @@ class ShowcaseManager private constructor(
         private var focusViews: Array<out View>? = null
         private var titleText: String = Constants.DEFAULT_TEXT
         private var descriptionText: String = Constants.DEFAULT_TEXT
-
+        private var isShowcaseViewVisibleIndefinitely: Boolean = Constants.DEFAULT_SHOW_FOREVER
+        private var showDuration: Long = Constants.DEFAULT_SHOW_DURATION
         @ColorInt
         private var titleTextColor: Int = Constants.DEFAULT_TEXT_COLOR
 
@@ -165,6 +166,23 @@ class ShowcaseManager private constructor(
          * @param fontFamily assigns fontFamily to titleText
          */
         fun titleTextFontFamily(fontFamily: String) = apply { titleTextFontFamily = fontFamily }
+
+        /**
+         * Controls whether showcase should be shown indefinitely or not. By default it is true.
+         *
+         * @param isVisibleIndefinitely assigns boolean value to showForever.
+         */
+        fun showcaseViewVisibleIndefinitely(isVisibleIndefinitely: Boolean) =
+            apply { isShowcaseViewVisibleIndefinitely = isVisibleIndefinitely }
+
+        /**
+         * Assign duration value to showDuration. By default it is 2000L.
+         * To see the effect, set [showcaseViewVisibleIndefinitely] to false.
+         *
+         * @param duration assigns duration value to showDuration
+         */
+        fun showDurationMillis(@IntRange(from = 0) duration: Long) =
+            apply { showDuration = duration }
 
         /**
          * Assign textStyle to titleText
@@ -349,7 +367,9 @@ class ShowcaseManager private constructor(
                 radiusTopEnd = radiusTopEnd,
                 radiusBottomEnd = radiusBottomEnd,
                 radiusBottomStart = radiusBottomStart,
-                isToolTipVisible = isToolTipVisible
+                isToolTipVisible = isToolTipVisible,
+                showDuration = showDuration,
+                isShowcaseViewVisibleIndefinitely = isShowcaseViewVisibleIndefinitely
             )
 
             return ShowcaseManager(showcaseModel = showcaseModel, resId = resId)

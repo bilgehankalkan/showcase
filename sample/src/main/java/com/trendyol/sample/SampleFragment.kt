@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.trendyol.medusalib.navigator.Navigator
 import com.trendyol.sample.databinding.FragmentSampleBinding
 import com.trendyol.showcase.showcase.ShowcaseManager
 import com.trendyol.showcase.ui.showcase.HighlightType
@@ -24,6 +25,9 @@ import com.trendyol.showcase.util.ActionType
 class SampleFragment : Fragment() {
 
     private var binding: FragmentSampleBinding? = null
+
+    protected val fragmentNavigator: Navigator?
+        get() = (activity as? MainActivity)?.getNavigator()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +59,7 @@ class SampleFragment : Fragment() {
                     .imageUrl("https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png")
                     .showCloseButton(true)
                     .cancellableFromOutsideTouch(true)
+                    //.attachOnParentLifecycle(true)
                     .arrowPosition(ArrowPosition.AUTO)
                     .highlightType(HighlightType.RECTANGLE)
                     .textPosition(TextPosition.START)
@@ -64,7 +69,9 @@ class SampleFragment : Fragment() {
                     .build()
                     .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
                 if (isFragmentTransactionTest) {
-                    view.postDelayed({ requireActivity().show(TextFragment()) }, 3000)
+                    view.postDelayed({
+                        fragmentNavigator?.start(OneFragment())
+                                     }, 3000)
                 }
             }
 
@@ -76,6 +83,7 @@ class SampleFragment : Fragment() {
                     .descriptionText("Center is here.")
                     .titleTextColor(ContextCompat.getColor(context, R.color.white))
                     .titleTextStyle(Typeface.BOLD)
+                    //.attachOnParentLifecycle(true)
                     .backgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
                     .closeButtonColor(ContextCompat.getColor(context, R.color.white))
                     .showCloseButton(true)
@@ -86,7 +94,7 @@ class SampleFragment : Fragment() {
                     .build()
                     .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
                 if (isFragmentTransactionTest) {
-                    requireActivity().show(TextFragment())
+                    fragmentNavigator?.start(OneFragment())
                 }
             }
 
@@ -207,5 +215,8 @@ class SampleFragment : Fragment() {
         private const val REQUEST_CODE_SHOWCASE_CLICKED = 101
         private const val isStatusBarVisible = true
         private const val isFragmentTransactionTest = false
+
+        @JvmStatic
+        fun newInstance() = SampleFragment()
     }
 }

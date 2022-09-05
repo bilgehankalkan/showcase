@@ -1,10 +1,8 @@
-package com.trendyol.sample
+package com.trendyol.showcase.showcase
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.trendyol.showcase.showcase.ShowcaseStateController
-import com.trendyol.showcase.showcase.ShowcaseState
 
 class ShowcaseLifecycleOwner(
     private val lifecycle: Lifecycle,

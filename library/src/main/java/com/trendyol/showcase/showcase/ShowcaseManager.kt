@@ -10,7 +10,6 @@ import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.trendyol.showcase.R
 import com.trendyol.showcase.ui.showcase.HighlightType
@@ -27,8 +26,21 @@ class ShowcaseManager private constructor(
     @StyleRes val resId: Int?
 ) {
 
-    fun show(activity: FragmentActivity, requestCode: Int? = null) {
-        if (showcaseModel.isDebugMode) return
+    fun show(
+        fragment: FragmentActivity,
+        requestCode: Int? = null,
+        lifecycleOwner: LifecycleOwner
+    ) {
+        val stateController = show(fragment, requestCode)
+        ShowcaseLifecycleOwner(lifecycleOwner.lifecycle, stateController)
+    }
+
+    private fun show(
+        activity: FragmentActivity,
+        requestCode: Int? = null,
+    ): ShowcaseStateController {
+        val stateController = ShowcaseStateController(context = activity)
+        if (showcaseModel.isDebugMode) return stateController
 
         val intent = Intent(activity, ShowcaseActivity::class.java)
         val model = if (resId != null) readFromStyle(activity, resId) else showcaseModel
@@ -39,11 +51,24 @@ class ShowcaseManager private constructor(
         } else {
             activity.startActivityForResult(intent, requestCode)
         }
+        return stateController
     }
 
-    fun show(fragment: Fragment, requestCode: Int? = null) {
-        if (showcaseModel.isDebugMode) return
+    fun show(
+        fragment: Fragment,
+        requestCode: Int? = null,
+        lifecycleOwner: LifecycleOwner
+    ) {
+        val stateController = show(fragment, requestCode)
+        ShowcaseLifecycleOwner(lifecycleOwner.lifecycle, stateController)
+    }
 
+    private fun show(
+        fragment: Fragment,
+        requestCode: Int? = null,
+    ): ShowcaseStateController {
+        val stateController = ShowcaseStateController(context = fragment.requireActivity())
+        if (showcaseModel.isDebugMode) return stateController
         fragment.activity?.let { activity ->
             val intent = Intent(activity, ShowcaseActivity::class.java)
             val model = if (resId != null) readFromStyle(activity, resId) else showcaseModel
@@ -55,11 +80,7 @@ class ShowcaseManager private constructor(
                 fragment.startActivityForResult(intent, requestCode)
             }
         }
-    }
-
-    fun attachController(context: Context, attacher: (ShowcaseStateController) -> Unit): ShowcaseManager {
-        attacher.invoke(ShowcaseStateController(context = context))
-        return this
+        return stateController
     }
 
     private fun readFromStyle(context: Context, resId: Int): ShowcaseModel {

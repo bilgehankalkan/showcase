@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -137,12 +136,15 @@ class SampleFragment : Fragment() {
                     .titleTextSize(30f)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .attachController(requireContext()) {
-                        ShowcaseLifecycleOwner(medusaLifecycleOwner!!.lifecycle, it)
-                    }
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(
+                        this@SampleFragment,
+                        REQUEST_CODE_SHOWCASE_CLICKED,
+                        medusaLifecycleOwner!!
+                    )
                 if (isFragmentTransactionTest) {
-                    fragmentNavigator?.start(OneFragment())
+                    view.postDelayed({
+                        fragmentNavigator?.start(OneFragment())
+                    }, 3000)
                 }
             }
 
@@ -162,9 +164,7 @@ class SampleFragment : Fragment() {
                     .textPosition(TextPosition.CENTER)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .attachController(requireContext()) {
-                        ShowcaseLifecycleOwner(viewLifecycleOwner.lifecycle, it)
-                    } .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, viewLifecycleOwner)
                 if (isFragmentTransactionTest) {
                     view.postDelayed({
                         requireActivity().supportFragmentManager
@@ -198,7 +198,7 @@ class SampleFragment : Fragment() {
                     .toolTipVisible(false)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
 
             buttonFocusMultipleView.setOnClickListener {
@@ -213,7 +213,7 @@ class SampleFragment : Fragment() {
                     .textPosition(TextPosition.START)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
 
             buttonSlidableContent.setOnClickListener {
@@ -223,7 +223,7 @@ class SampleFragment : Fragment() {
                     .showCloseButton(false)
                     .cancellableFromOutsideTouch(true)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
 
             imageTop.setOnClickListener {
@@ -234,7 +234,7 @@ class SampleFragment : Fragment() {
                     .showcaseViewClickable(true)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
 
             buttonVanishingShowcase.setOnClickListener {
@@ -246,7 +246,7 @@ class SampleFragment : Fragment() {
                     .titleText("This showcase will vanish in 4 seconds")
                     .showcaseViewVisibleIndefinitely(false)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
         }
     }
@@ -291,7 +291,7 @@ class SampleFragment : Fragment() {
     companion object {
         private const val REQUEST_CODE_SHOWCASE_CLICKED = 101
         private const val isStatusBarVisible = true
-        private const val isFragmentTransactionTest = true
+        private const val isFragmentTransactionTest = false
 
         @JvmStatic
         fun newInstance() = SampleFragment()

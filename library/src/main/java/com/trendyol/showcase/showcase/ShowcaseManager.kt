@@ -10,6 +10,8 @@ import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import com.trendyol.showcase.R
 import com.trendyol.showcase.ui.showcase.HighlightType
 import com.trendyol.showcase.ui.showcase.ShowcaseActivity
@@ -28,11 +30,6 @@ class ShowcaseManager private constructor(
     fun show(activity: FragmentActivity, requestCode: Int? = null) {
         if (showcaseModel.isDebugMode) return
 
-        if (showcaseModel.attachOnParentLifecycle) {
-            val observer = DefaultLifecycleObserver(activity, activity)
-            if (observer.isLifecycleReady().not()) return
-        }
-
         val intent = Intent(activity, ShowcaseActivity::class.java)
         val model = if (resId != null) readFromStyle(activity, resId) else showcaseModel
         intent.putExtra(ShowcaseActivity.BUNDLE_KEY, model)
@@ -48,11 +45,6 @@ class ShowcaseManager private constructor(
         if (showcaseModel.isDebugMode) return
 
         fragment.activity?.let { activity ->
-            if (showcaseModel.attachOnParentLifecycle) {
-                val observer = DefaultLifecycleObserver(fragment.viewLifecycleOwner, activity)
-                if (observer.isLifecycleReady().not()) return@let
-            }
-
             val intent = Intent(activity, ShowcaseActivity::class.java)
             val model = if (resId != null) readFromStyle(activity, resId) else showcaseModel
             intent.putExtra(ShowcaseActivity.BUNDLE_KEY, model)
@@ -63,6 +55,11 @@ class ShowcaseManager private constructor(
                 fragment.startActivityForResult(intent, requestCode)
             }
         }
+    }
+
+    fun attachController(context: Context, attacher: (ShowcaseStateController) -> Unit): ShowcaseManager {
+        attacher.invoke(ShowcaseStateController(context = context))
+        return this
     }
 
     private fun readFromStyle(context: Context, resId: Int): ShowcaseModel {
@@ -136,7 +133,6 @@ class ShowcaseManager private constructor(
             Constants.DEFAULT_CANCELLABLE_FROM_OUTSIDE_TOUCH
         private var isShowcaseViewClickable: Boolean = Constants.DEFAULT_SHOWCASE_VIEW_CLICKABLE
         private var isDebugMode: Boolean = false
-        private var attachOnParentLifecycle: Boolean = false
         private var textPosition: TextPosition = Constants.DEFAULT_TEXT_POSITION
         private var imageUrl: String = Constants.DEFAULT_TEXT
         private var radiusTopStart: Float = Constants.DEFAULT_HIGHLIGHT_RADIUS
@@ -313,9 +309,6 @@ class ShowcaseManager private constructor(
         fun setSlidableContentList(slidableContentList: List<SlidableContent>) =
             apply { this.slidableContentList = slidableContentList }
 
-        fun attachOnParentLifecycle(attachOnParentLifecycle: Boolean) =
-            apply { this.attachOnParentLifecycle = attachOnParentLifecycle }
-
         fun build(): ShowcaseManager {
             if (focusViews.isNullOrEmpty()) {
                 throw Exception("view should not be null!")
@@ -357,7 +350,6 @@ class ShowcaseManager private constructor(
                 cancellableFromOutsideTouch = cancellableFromOutsideTouch,
                 isShowcaseViewClickable = isShowcaseViewClickable,
                 isDebugMode = isDebugMode,
-                attachOnParentLifecycle = attachOnParentLifecycle,
                 textPosition = textPosition,
                 imageUrl = imageUrl,
                 customContent = customContent,

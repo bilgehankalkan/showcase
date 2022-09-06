@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import com.trendyol.medusalib.navigator.Navigator
 import com.trendyol.sample.databinding.FragmentSampleBinding
 import com.trendyol.showcase.showcase.ShowcaseManager
 import com.trendyol.showcase.ui.showcase.HighlightType
@@ -25,6 +27,76 @@ class SampleFragment : Fragment() {
 
     private var binding: FragmentSampleBinding? = null
 
+    protected val fragmentNavigator: Navigator?
+        get() = (activity as? MainActivity)?.getNavigator()
+
+    private var medusaLifecycleOwner: MedusaLifecycleOwner? = null
+
+    override fun onResume() {
+        super.onResume()
+        if (medusaLifecycleOwner != null) {
+            if (!isHidden && userVisibleHint) {
+                medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (medusaLifecycleOwner != null) {
+            if (!isHidden && userVisibleHint) {
+                medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        if (medusaLifecycleOwner != null) {
+            medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+            medusaLifecycleOwner = null
+        }
+        super.onDestroyView()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (medusaLifecycleOwner == null) {
+            return
+        }
+        if (!isHidden && userVisibleHint) {
+            medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        }
+    }
+
+    override fun onStop() {
+        if (medusaLifecycleOwner != null) {
+            medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+        }
+        super.onStop()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (medusaLifecycleOwner != null) {
+            if (hidden) {
+                medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+            } else {
+                medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+            }
+        }
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (medusaLifecycleOwner != null) {
+            if (isVisibleToUser && isResumed) {
+                medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+            } else {
+                medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +109,8 @@ class SampleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        medusaLifecycleOwner = MedusaLifecycleOwner()
+        medusaLifecycleOwner!!.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
         if (isStatusBarVisible) {
             requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
@@ -62,9 +136,15 @@ class SampleFragment : Fragment() {
                     .titleTextSize(30f)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(
+                        this@SampleFragment,
+                        REQUEST_CODE_SHOWCASE_CLICKED,
+                        medusaLifecycleOwner!!
+                    )
                 if (isFragmentTransactionTest) {
-                    view.postDelayed({ requireActivity().show(TextFragment()) }, 3000)
+                    view.postDelayed({
+                        fragmentNavigator?.start(OneFragment())
+                    }, 3000)
                 }
             }
 
@@ -84,9 +164,14 @@ class SampleFragment : Fragment() {
                     .textPosition(TextPosition.CENTER)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, viewLifecycleOwner)
                 if (isFragmentTransactionTest) {
-                    requireActivity().show(TextFragment())
+                    view.postDelayed({
+                        requireActivity().supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.containerMain, OneFragment())
+                            .commitAllowingStateLoss()
+                    }, 3000)
                 }
             }
 
@@ -113,7 +198,7 @@ class SampleFragment : Fragment() {
                     .toolTipVisible(false)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
 
             buttonFocusMultipleView.setOnClickListener {
@@ -128,7 +213,7 @@ class SampleFragment : Fragment() {
                     .textPosition(TextPosition.START)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
 
             buttonSlidableContent.setOnClickListener {
@@ -138,7 +223,7 @@ class SampleFragment : Fragment() {
                     .showCloseButton(false)
                     .cancellableFromOutsideTouch(true)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
 
             imageTop.setOnClickListener {
@@ -149,7 +234,7 @@ class SampleFragment : Fragment() {
                     .showcaseViewClickable(true)
                     .statusBarVisible(isStatusBarVisible)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
 
             buttonVanishingShowcase.setOnClickListener {
@@ -161,7 +246,7 @@ class SampleFragment : Fragment() {
                     .titleText("This showcase will vanish in 4 seconds")
                     .showcaseViewVisibleIndefinitely(false)
                     .build()
-                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED)
+                    .show(this@SampleFragment, REQUEST_CODE_SHOWCASE_CLICKED, medusaLifecycleOwner!!)
             }
         }
     }
@@ -207,5 +292,8 @@ class SampleFragment : Fragment() {
         private const val REQUEST_CODE_SHOWCASE_CLICKED = 101
         private const val isStatusBarVisible = true
         private const val isFragmentTransactionTest = false
+
+        @JvmStatic
+        fun newInstance() = SampleFragment()
     }
 }

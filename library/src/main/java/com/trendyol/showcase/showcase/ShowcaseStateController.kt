@@ -4,46 +4,20 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
 import com.trendyol.showcase.ui.showcase.ShowcaseActivity
 import com.trendyol.showcase.util.ActionType
 
-internal class DefaultLifecycleObserver(
-    private val lifecycleOwner: LifecycleOwner,
-    context: Context
-) : LifecycleObserver, Application.ActivityLifecycleCallbacks {
-
-    private var activity: ShowcaseActivity? = null
+class ShowcaseStateController(context: Context) : Application.ActivityLifecycleCallbacks {
 
     init {
-        lifecycleOwner.lifecycle.addObserver(this)
         (context.applicationContext as Application).registerActivityLifecycleCallbacks(this)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestroy() {
-        if (shouldFinishShowcase()) {
-            finishShowcase()
-        }
-    }
-
-    fun isLifecycleReady(): Boolean = isDestroyed().not()
-
-    private fun isDestroyed(): Boolean =
-        lifecycleOwner.lifecycle.currentState == Lifecycle.State.DESTROYED
-
-    private fun shouldFinishShowcase() = activity != null && isDestroyed()
-
-    private fun finishShowcase(): Unit? {
-        lifecycleOwner.lifecycle.removeObserver(this)
-        return this.activity?.finishShowcase(ActionType.EXIT, -1)
-    }
+    //region activity
+    private var activity: ShowcaseActivity? = null
 
     override fun onActivityStarted(activity: Activity) {
-        this.activity = activity as? ShowcaseActivity
+        this.activity = activity as? ShowcaseActivity ?: return
         if (shouldFinishShowcase()) {
             finishShowcase()
         }
@@ -63,4 +37,23 @@ internal class DefaultLifecycleObserver(
         (activity.applicationContext as Application).unregisterActivityLifecycleCallbacks(this)
         this.activity = null
     }
+
+    private fun finishShowcase(): Unit? {
+        return this.activity?.finishShowcase(ActionType.EXIT, -1)
+    }
+    //endregion
+
+    //region state
+    private var prevState: ShowcaseState? = null
+
+    fun onStateChanged(state: ShowcaseState) {
+        if (state == ShowcaseState.DESTROY) {
+            finishShowcase()
+        }
+        prevState = state
+    }
+    //endregion
+
+    private fun shouldFinishShowcase(): Boolean = prevState == ShowcaseState.DESTROY
 }
+

@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.trendyol.showcase.R
 import com.trendyol.showcase.ui.slidablecontent.SlidableContent
 import com.trendyol.showcase.databinding.LayoutTooltipBinding
+import com.trendyol.showcase.ui.binding.BindingSetter.isVisible
 import com.trendyol.showcase.ui.slidablecontent.SlidableContentAdapter
 import com.trendyol.showcase.util.ActionType
 
@@ -69,9 +70,16 @@ class TooltipView @JvmOverloads constructor(
                             position + 1,
                             slidableContentList.size
                         )
+                    textViewSlidableContentPosition.isVisible(
+                        shouldShowSlidableContentPosition(slidableContentList.size)
+                    )
                 }
             })
         }
+    }
+
+    private fun shouldShowSlidableContentPosition(slidableContentListSize: Int): Boolean {
+        return slidableContentListSize > 1
     }
 
     fun setCustomContent(@LayoutRes customContent: Int) {

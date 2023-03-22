@@ -1,5 +1,7 @@
 # Showcase
 
+[![](https://jitpack.io/v/trendyol/showcase.svg)](https://jitpack.io/#trendyol/showcase)
+
 <img src="screenshots/1.png" width="240"/>    <img src="screenshots/2.png" width="240"/>    <img src="screenshots/3.png" width="240"/>    <img src="screenshots/4.png" width="240"/>    <img src="screenshots/5.png" width="240"/>   <img src="screenshots/6.png" width="240"/>
 
 With **Showcase**, you can easily show tooltips. **Showcase** will highlight the view and show tooltip on it. You can

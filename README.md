@@ -24,7 +24,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation "com.trendyol.showcase:showcase:2.0.0"
+    implementation "com.github.trendyol::showcase:2.0.0"
 }
 ```
 

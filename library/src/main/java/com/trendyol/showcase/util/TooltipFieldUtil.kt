@@ -1,40 +1,67 @@
 package com.trendyol.showcase.util
 
-import android.content.res.Resources
-import android.view.View
+import android.graphics.Rect
+import com.trendyol.showcase.showcase.ShowcaseModel
+import com.trendyol.showcase.ui.tooltip.AbsoluteArrowPosition
 import com.trendyol.showcase.ui.tooltip.ArrowPosition
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-object TooltipFieldUtil {
+internal object TooltipFieldUtil {
 
-    fun calculateArrowPosition(resources: Resources, verticalCenter: Float): ArrowPosition {
-        val screenHeight = resources.displayMetrics.heightPixels
+    fun decideArrowPosition(showcaseModel: ShowcaseModel, screenHeight: Int): AbsoluteArrowPosition =
+        when (showcaseModel.arrowPosition) {
+            ArrowPosition.UP -> AbsoluteArrowPosition.UP
+            ArrowPosition.DOWN -> AbsoluteArrowPosition.DOWN
+            ArrowPosition.AUTO -> calculateArrowPosition(showcaseModel.verticalCenter(), screenHeight)
+        }
 
-        return if (screenHeight / 2 > verticalCenter) ArrowPosition.UP else ArrowPosition.DOWN
-    }
+    private fun calculateArrowPosition(verticalCenter: Float, screenHeight: Int): AbsoluteArrowPosition =
+        if (screenHeight / 2 > verticalCenter) {
+            AbsoluteArrowPosition.UP
+        } else {
+            AbsoluteArrowPosition.DOWN
+        }
 
-    fun calculateRadius(view: View): Float {
-        val x = view.width.toDouble() / 2
-        val y = view.height.toDouble() / 2
+    fun calculateRadius(rect: Rect): Float {
+        val x = rect.width().toDouble() / 2
+        val y = rect.height().toDouble() / 2
 
         return sqrt(x.pow(2) + y.pow(2)).toFloat()
     }
 
-    fun calculateMarginForCircle(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {
-        ArrowPosition.UP -> bottom.toInt() + statusBarDiff
-        ArrowPosition.DOWN -> resources.displayMetrics.heightPixels - top.toInt()// + statusBarDiff
-        else -> 0//throw IllegalArgumentException("arrowPosition should be ArrowPosition.UP or ArrowPosition.DOWN")
+    fun calculateMarginForCircle(
+        top: Float,
+        bottom: Float,
+        arrowPosition: AbsoluteArrowPosition,
+        statusBarHeight: Int,
+        isStatusBarVisible: Boolean,
+        screenHeight: Int
+    ): Int = when (arrowPosition) {
+        AbsoluteArrowPosition.UP -> bottom.toInt() + if (isStatusBarVisible) statusBarHeight else 0
+        AbsoluteArrowPosition.DOWN -> {
+            val diff = if (isStatusBarVisible) -statusBarHeight else 0
+            (screenHeight - top + diff).toInt()
+        }
     }
 
-    fun calculateMarginForRectangle(resources: Resources, top: Float, bottom: Float, arrowPosition: ArrowPosition, statusBarDiff: Int) = when (arrowPosition) {
-        ArrowPosition.UP -> bottom.toInt() + statusBarDiff
-        ArrowPosition.DOWN -> resources.displayMetrics.heightPixels - top.toInt()// + statusBarDiff
-        else -> 0//throw IllegalArgumentException("arrowPosition should be ArrowPosition.UP or ArrowPosition.DOWN")
+    fun calculateMarginForRectangle(
+        top: Float,
+        bottom: Float,
+        arrowPosition: AbsoluteArrowPosition,
+        statusBarHeight: Int,
+        isStatusBarVisible: Boolean,
+        screenHeight: Int
+    ): Int = when (arrowPosition) {
+        AbsoluteArrowPosition.UP -> bottom.toInt() + if (isStatusBarVisible) statusBarHeight else 0
+        AbsoluteArrowPosition.DOWN -> {
+            val diff = if (isStatusBarVisible) -statusBarHeight else 0
+            (screenHeight - top + diff).toInt()
+        }
     }
 
-    fun calculateArrowMargin(resources: Resources, horizontalCenter: Float): Int {
-        val arrowHalfWidth = (15 * resources.displayMetrics.density)
+    fun calculateArrowMargin(horizontalCenter: Float, density: Float): Int {
+        val arrowHalfWidth = (15 * density)
 
         return (horizontalCenter - arrowHalfWidth).toInt()
     }

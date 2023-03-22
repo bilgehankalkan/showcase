@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_home"
+        android:orderInCategory="0"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/tab_one"
+        android:orderInCategory="1"
+        android:title="Fragment 1" />
+
+    <item
+        android:id="@+id/tab_two"
+        android:orderInCategory="2"
+        android:title="Fragment 2" />
+
+    <item
+        android:id="@+id/tab_three"
+        android:orderInCategory="3"
+        android:title="Fragment 3"/>
+</menu>

@@ -9,6 +9,7 @@ import android.graphics.Rect
 open class Shape(screenWidth: Int, screenHeight: Int) {
 
     private val rect = Rect(0, 0, screenWidth, screenHeight)
+
     protected lateinit var paint: Paint
 
     open fun draw(windowBackgroundColor: Int, windowBackgroundAlpha: Int, canvas: Canvas) {

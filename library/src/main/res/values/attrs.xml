@@ -2,12 +2,17 @@
 <resources>
 
     <declare-styleable name="Showcase.Theme">
-        <attr name="titleTextColor" format="color"/>
-        <attr name="descriptionTextColor" format="color"/>
-        <attr name="closeButtonColor" format="color"/>
-        <attr name="popupBackgroundColor" format="color"/>
-        <attr name="windowBackgroundColor" format="color"/>
-        <attr name="cancellableFromOutsideTouch" format="boolean"/>
-        <attr name="showCloseButton" format="boolean"/>
+        <attr name="titleTextColor" format="color" />
+        <attr name="titleTextFontFamily" format="string" />
+        <attr name="titleStyle" format="integer" />
+        <attr name="descriptionTextFontFamily" format="string" />
+        <attr name="descriptionTextStyle" format="integer" />
+        <attr name="descriptionTextColor" format="color" />
+        <attr name="closeButtonColor" format="color" />
+        <attr name="popupBackgroundColor" format="color" />
+        <attr name="windowBackgroundColor" format="color" />
+        <attr name="cancellableFromOutsideTouch" format="boolean" />
+        <attr name="showcaseViewClickable" format="boolean" />
+        <attr name="showCloseButton" format="boolean" />
     </declare-styleable>
 </resources>

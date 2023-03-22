@@ -1,28 +1,74 @@
 package com.trendyol.showcase.ui.tooltip
 
 import android.view.View
-import androidx.annotation.ColorInt
+import com.trendyol.showcase.R
+import com.trendyol.showcase.showcase.ShowcaseModel
+import com.trendyol.showcase.util.Constants
 
-data class TooltipViewState(
-    val titleText: String,
-    val descriptionText: String,
-    @ColorInt val titleTextColor: Int,
-    @ColorInt val descriptionTextColor: Int,
-    @ColorInt val backgroundColor: Int,
-    @ColorInt val closeButtonColor: Int,
-    val showCloseButton: Boolean = true,
-    val arrowPosition: ArrowPosition,
-    val arrowPercentage: Int?,
-    val titleTextSize: Float,
-    val descriptionTextSize: Float,
+internal data class TooltipViewState(
+    val showcaseModel: ShowcaseModel,
+    val arrowPosition: AbsoluteArrowPosition,
     val arrowMargin: Int
 ) {
+    fun getBackgroundColor(): Int = showcaseModel.popupBackgroundColor
 
-    fun getTopArrowVisibility() =
-        if (arrowPosition == ArrowPosition.UP) View.VISIBLE else View.GONE
+    fun getImageUrl(): String = showcaseModel.imageUrl
 
-    fun getBottomArrowVisibility() =
-        if (arrowPosition == ArrowPosition.DOWN) View.VISIBLE else View.GONE
+    fun getImageViewVisibility(): Int = if (showcaseModel.imageUrl.isBlank()) View.GONE else View.VISIBLE
 
-    fun getCloseButtonVisibility() = if (showCloseButton) View.VISIBLE else View.GONE
+    fun getTextPosition(): Int {
+        return when (showcaseModel.textPosition) {
+            TextPosition.CENTER -> 4
+            TextPosition.END -> 3
+            else -> 2
+        }
+    }
+
+    fun getTitle() = showcaseModel.titleText
+
+    fun getTitleVisibility() = showcaseModel.titleText.isNotEmpty()
+
+    fun getTitleTextColor() = showcaseModel.titleTextColor
+
+    fun getTitleTextSize() = showcaseModel.titleTextSize
+
+    fun getTitleTextFontFamily() = showcaseModel.titleTextFontFamily
+
+    fun getTitleTextStyle() = showcaseModel.titleTextStyle
+
+    fun getDescription() = showcaseModel.descriptionText
+
+    fun getDescriptionVisibility() = showcaseModel.descriptionText.isNotEmpty()
+
+    fun getDescriptionTextColor() = showcaseModel.descriptionTextColor
+
+    fun getDescriptionTextSize() = showcaseModel.descriptionTextSize
+
+    fun getDescriptionTextFontFamily() = showcaseModel.descriptionTextFontFamily
+
+    fun getDescriptionTextStyle() = showcaseModel.descriptionTextStyle
+
+    fun getArrowPercentage() = showcaseModel.arrowPercentage
+
+    fun getTopArrowResource() =
+        if (showcaseModel.arrowResource == Constants.DEFAULT_ARROW_RESOURCE) R.drawable.ic_showcase_arrow_up else showcaseModel.arrowResource
+
+    fun getTopArrowVisibility() = if (arrowPosition == AbsoluteArrowPosition.UP) View.VISIBLE else View.GONE
+
+    fun getBottomArrowResource() =
+        if (showcaseModel.arrowResource == Constants.DEFAULT_ARROW_RESOURCE) R.drawable.ic_showcase_arrow_down else showcaseModel.arrowResource
+
+    fun getBottomArrowVisibility() = if (arrowPosition == AbsoluteArrowPosition.DOWN) View.VISIBLE else View.GONE
+
+    fun getCloseButtonColor() = showcaseModel.closeButtonColor
+
+    fun getCloseButtonVisibility() = if (showcaseModel.showCloseButton) View.VISIBLE else View.GONE
+
+    fun getContentVisibility() = if (showcaseModel.customContent != null) View.GONE else View.VISIBLE
+
+    fun isShowcaseViewClickable() = showcaseModel.isShowcaseViewClickable
+
+    fun isSlidableContentVisible() = showcaseModel.slidableContentList.isNullOrEmpty().not()
+
+    fun isToolTipVisible() = showcaseModel.isToolTipVisible
 }

@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trendyol.showcase">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- to display showcaseview, this activity and its' style must be added -->
     <application>
         <activity

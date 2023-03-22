@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.trendyol.showcase.showcase.ShowcaseModel
 import com.trendyol.showcase.util.ActionType
 
@@ -18,7 +21,6 @@ class ShowcaseActivity : AppCompatActivity() {
         overridePendingTransition(android.R.anim.fade_in, 0)
 
         handler = Handler(Looper.getMainLooper())
-
         val showcaseModel = intent?.extras?.getParcelable(BUNDLE_KEY) as? ShowcaseModel
         showcaseModel?.let { model ->
             val view = ShowcaseView(this).apply {
@@ -29,11 +31,12 @@ class ShowcaseActivity : AppCompatActivity() {
             }
             setContentView(view)
             if (model.isShowcaseViewVisibleIndefinitely.not()) {
-               handler.postDelayed(
-                   { finishShowcase(ActionType.EXIT) },
-                   model.showDuration
-               )
+                handler.postDelayed(
+                    { finishShowcase(ActionType.EXIT) },
+                    model.showDuration
+                )
             }
+            updateStatusBar(model.isStatusBarVisible)
         }
     }
 
@@ -52,7 +55,21 @@ class ShowcaseActivity : AppCompatActivity() {
         finishShowcase(ActionType.EXIT)
     }
 
+    private fun updateStatusBar(isStatusBarVisible: Boolean) {
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        if (isStatusBarVisible) {
+            windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH
+            windowInsetsController.show(WindowInsetsCompat.Type.statusBars())
+        } else {
+            windowInsetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
+        }
+    }
+
     companion object {
-        const val BUNDLE_KEY = "bundle_key"
+
+        internal const val BUNDLE_KEY = "bundle_key"
     }
 }

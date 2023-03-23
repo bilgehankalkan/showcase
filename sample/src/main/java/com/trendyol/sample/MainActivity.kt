@@ -31,11 +31,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigator.Naviga
     }
 
     private fun initializeBottomBarListener() {
-        bottomNavigation.setOnNavigationItemSelectedListener {
+        bottomNavigation.setOnItemSelectedListener {
             navigator.switchTab(it.order)
             true
         }
-        bottomNavigation.setOnNavigationItemReselectedListener {
+        bottomNavigation.setOnItemReselectedListener {
             val selectedTabIndex = it.order
             if (navigator.hasOnlyRoot(selectedTabIndex).not()) {
                 navigator.reset(selectedTabIndex)
@@ -57,18 +57,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigator.Naviga
         )
 
     private fun getRootFragments(): ArrayList<Fragment> = arrayListOf(
-        SampleFragment.newInstance(),
-        OneFragment.newInstance(),
-        TwoFragment.newInstance(),
-        ThreeFragment.newInstance(),
+        SampleFragment.newInstance(isStatusBarVisible = true),
+        SampleFragment.newInstance(isStatusBarVisible = false),
+        SecondarySampleFragment(1),
+        SecondarySampleFragment(2),
     )
 
     fun getNavigator(): Navigator {
         return navigator
-    }
-
-    fun setNavigator(navigator: Navigator) {
-        this.navigator = navigator
     }
 
     override fun onTabChanged(tabIndex: Int) {

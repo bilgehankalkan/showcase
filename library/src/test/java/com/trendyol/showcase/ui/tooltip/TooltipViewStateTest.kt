@@ -23,8 +23,9 @@ class TooltipViewStateTest {
     @Test
     fun `when imageUrl is not empty then getImageViewVisibility() returns VISIBLE`() {
         //when
-        val tooltipViewState =
-            TooltipViewStateFactory.provideTooltipViewState(imageUrl = "https://cdn.dsmcdn.com/Assets/t/y/creative/mobile/InstantDelivery/instant-ty-onboarding.png")
+        val tooltipViewState = TooltipViewStateFactory.provideTooltipViewState(
+            imageUrl = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Aspect_ratio_16_9_example.jpg"
+        )
 
         //then
         val expectedResult = View.VISIBLE

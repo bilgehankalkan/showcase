@@ -60,7 +60,6 @@ internal object TooltipViewStateFactory {
             radiusBottomEnd = 0F,
             radiusBottomStart = 0F,
             radiusTopEnd = 0F,
-            attachOnParentLifecycle = true,
             descriptionTextFontFamily = "sans-serif",
             isToolTipVisible = true,
             slidableContentList = listOf(),

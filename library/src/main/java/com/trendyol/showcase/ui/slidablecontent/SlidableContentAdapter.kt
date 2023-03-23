@@ -3,19 +3,19 @@ package com.trendyol.showcase.ui.slidablecontent
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.trendyol.showcase.R
 import com.trendyol.showcase.databinding.ItemSlidableContentBinding
+import com.trendyol.showcase.ui.loadImage
+import com.trendyol.showcase.ui.setTextSizeInSp
 
 internal class SlidableContentAdapter(private val slidableContentList: List<SlidableContent>) :
     RecyclerView.Adapter<SlidableContentAdapter.ViewPagerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder =
         ViewPagerViewHolder(
-            DataBindingUtil.inflate(
+            ItemSlidableContentBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_slidable_content,
                 parent,
                 false
             )
@@ -27,20 +27,38 @@ internal class SlidableContentAdapter(private val slidableContentList: List<Slid
 
     override fun getItemCount(): Int = slidableContentList.size
 
-    inner class ViewPagerViewHolder(private val binding: ItemSlidableContentBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewPagerViewHolder(
+        private val binding: ItemSlidableContentBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: SlidableContent) {
-            with (binding) {
-                viewState = SlidableContentViewState(item)
+            with(binding) {
+                val viewState = SlidableContentViewState(item)
 
-                textViewTitle.typeface = Typeface.create(
-                    item.titleTextFontFamily,
-                    item.titleTextStyle,
-                )
-                textViewDescription.typeface = Typeface.create(
-                    item.descriptionTextFontFamily,
-                    item.descriptionTextStyle,
-                )
+                with(textViewTitle) {
+                    typeface = Typeface.create(
+                        viewState.slidableContent.titleTextFontFamily,
+                        viewState.slidableContent.titleTextStyle,
+                    )
+                    text = viewState.slidableContent.title
+                    textAlignment = viewState.getTextPosition()
+                    setTextColor(viewState.slidableContent.titleTextColor)
+                    isVisible = viewState.isTitleVisible()
+                    setTextSizeInSp(viewState.slidableContent.titleTextSize)
+                }
+                with(textViewDescription) {
+                    typeface = Typeface.create(
+                        viewState.slidableContent.descriptionTextFontFamily,
+                        viewState.slidableContent.descriptionTextStyle,
+                    )
+                    text = viewState.slidableContent.description
+                    textAlignment = viewState.getTextPosition()
+                    setTextColor(viewState.slidableContent.descriptionTextColor)
+                    isVisible = viewState.isDescriptionVisible()
+                    setTextSizeInSp(viewState.slidableContent.descriptionTextSize)
+                }
+
+                imageView.loadImage(viewState.slidableContent.imageUrl)
             }
         }
     }

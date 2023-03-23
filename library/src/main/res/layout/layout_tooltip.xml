@@ -1,182 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-    <data>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewTopArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/showcase_padding_8dp"
+        app:layout_constraintBottom_toTopOf="@id/layoutContents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:srcCompat="@drawable/ic_showcase_arrow_up" />
 
-        <variable
-            name="tooltipViewState"
-            type="com.trendyol.showcase.ui.tooltip.TooltipViewState" />
-    </data>
-
-    <merge
+    <FrameLayout
+        android:id="@+id/layoutContents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+        app:layout_constraintBottom_toTopOf="@id/imageViewBottomArrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewTopArrow">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewTopArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/showcase_padding_8dp"
-            android:visibility="@{tooltipViewState.getTopArrowVisibility()}"
-            app:layout_constraintBottom_toTopOf="@id/layoutContents"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:setImageTintList="@{tooltipViewState.backgroundColor}"
-            bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
-            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"
-            bind:drawableRes="@{tooltipViewState.topArrowResource}"
-            tools:srcCompat="@drawable/ic_showcase_arrow_up" />
-
-        <FrameLayout
-            android:id="@+id/layoutContents"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="@{tooltipViewState.showcaseViewClickable}"
-            app:layout_constraintBottom_toTopOf="@id/imageViewBottomArrow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageViewTopArrow">
+            android:layout_marginStart="@dimen/showcase_margin_20dp"
+            android:layout_marginEnd="@dimen/showcase_margin_20dp"
+            app:cardCornerRadius="@dimen/showcase_card_radius"
+            app:cardElevation="0dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_bubble"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/showcase_margin_20dp"
-                android:layout_marginEnd="@dimen/showcase_margin_20dp"
-                android:visibility="@{tooltipViewState.contentVisibility}"
-                app:cardCornerRadius="@dimen/showcase_card_radius"
-                app:cardElevation="0dp">
+                android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@{tooltipViewState.backgroundColor}"
-                    android:orientation="vertical">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:visibility="@{tooltipViewState.imageViewVisibility}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:sc_imageUrl="@{tooltipViewState.imageUrl}" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewSlidableContentPosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="96dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/background_black_radius_4"
+                    android:includeFontPadding="false"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="2dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:translationZ="4dp"
+                    app:layout_constraintEnd_toEndOf="@id/viewPager"
+                    app:layout_constraintTop_toTopOf="@id/viewPager"
+                    tools:ignore="SmallSp"
+                    tools:targetApi="lollipop"
+                    tools:text="1/3" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewSlidableContentPosition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="96dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/background_black_radius_4"
-                        android:includeFontPadding="false"
-                        android:paddingHorizontal="4dp"
-                        android:paddingVertical="2dp"
-                        android:textColor="@android:color/white"
-                        android:textSize="10sp"
-                        android:translationZ="4dp"
-                        app:layout_constraintEnd_toEndOf="@id/viewPager"
-                        app:layout_constraintTop_toTopOf="@id/viewPager"
-                        bind:isVisible="@{tooltipViewState.isSlidableContentVisible()}"
-                        tools:ignore="SmallSp"
-                        tools:targetApi="lollipop"
-                        tools:text="1/3" />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:translationZ="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:targetApi="lollipop" />
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/viewPager"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:translationZ="3dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        bind:isVisible="@{tooltipViewState.isSlidableContentVisible()}"
-                        tools:targetApi="lollipop" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageViewTooltipClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/showcase_margin_12dp"
+                    android:layout_marginEnd="@dimen/showcase_margin_12dp"
+                    android:padding="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_showcase_close" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imageViewTooltipClose"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/showcase_margin_12dp"
-                        android:layout_marginEnd="@dimen/showcase_margin_12dp"
-                        android:padding="4dp"
-                        android:visibility="@{tooltipViewState.getCloseButtonVisibility()}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:setImageTintList="@{tooltipViewState.closeButtonColor}"
-                        app:srcCompat="@drawable/ic_showcase_close" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewTooltipTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/showcase_margin_16dp"
+                    android:layout_marginTop="@dimen/showcase_margin_16dp"
+                    android:layout_marginEnd="@dimen/showcase_margin_16dp"
+                    app:layout_constraintBottom_toTopOf="@id/textViewTooltipDescription"
+                    app:layout_constraintEnd_toStartOf="@id/imageViewTooltipClose"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:layout_goneMarginBottom="@dimen/showcase_margin_16dp"
+                    tools:text="lorem ipsum" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewTooltipTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="@dimen/showcase_margin_16dp"
-                        android:layout_marginTop="@dimen/showcase_margin_16dp"
-                        android:layout_marginEnd="@dimen/showcase_margin_16dp"
-                        android:text="@{tooltipViewState.title}"
-                        android:textAlignment="@{tooltipViewState.getTextPosition}"
-                        android:textColor="@{tooltipViewState.titleTextColor}"
-                        app:layout_constraintBottom_toTopOf="@id/textViewTooltipDescription"
-                        app:layout_constraintEnd_toStartOf="@id/imageViewTooltipClose"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView"
-                        app:layout_goneMarginBottom="@dimen/showcase_margin_16dp"
-                        bind:isVisible="@{tooltipViewState.titleVisibility}"
-                        bind:textSizeInSP="@{tooltipViewState.titleTextSize}"
-                        tools:text="lorem ipsum" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewTooltipDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/showcase_margin_16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/showcase_margin_16dp"
+                    android:layout_marginBottom="@dimen/showcase_margin_16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewTooltipTitle"
+                    app:layout_goneMarginTop="@dimen/showcase_margin_16dp"
+                    tools:text="lorem ipsum lorem ipsum lorem ipsum" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewTooltipDescription"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/showcase_margin_16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="@dimen/showcase_margin_16dp"
-                        android:layout_marginBottom="@dimen/showcase_margin_16dp"
-                        android:text="@{tooltipViewState.description}"
-                        android:textAlignment="@{tooltipViewState.getTextPosition}"
-                        android:textColor="@{tooltipViewState.descriptionTextColor}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textViewTooltipTitle"
-                        app:layout_goneMarginTop="@dimen/showcase_margin_16dp"
-                        bind:isVisible="@{tooltipViewState.descriptionVisibility}"
-                        bind:textSizeInSP="@{tooltipViewState.descriptionTextSize}"
-                        tools:text="lorem ipsum lorem ipsum lorem ipsum" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </FrameLayout>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewBottomArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/showcase_padding_8dp"
-            android:visibility="@{tooltipViewState.getBottomArrowVisibility()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutContents"
-            app:setImageTintList="@{tooltipViewState.backgroundColor}"
-            bind:arrowHorizontalPosition="@{tooltipViewState.arrowMargin}"
-            bind:arrowPercentage="@{tooltipViewState.arrowPercentage}"
-            bind:drawableRes="@{tooltipViewState.bottomArrowResource}"
-            tools:srcCompat="@drawable/ic_showcase_arrow_down" />
-
-    </merge>
-
-</layout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewBottomArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/showcase_padding_8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutContents"
+        tools:srcCompat="@drawable/ic_showcase_arrow_down" />
+</merge>

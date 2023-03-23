@@ -4,20 +4,20 @@
     <item
         android:id="@+id/tab_home"
         android:orderInCategory="0"
-        android:title="Home"/>
+        android:title="Status Bar"/>
 
     <item
         android:id="@+id/tab_one"
         android:orderInCategory="1"
-        android:title="Fragment 1" />
+        android:title="No Status Bar" />
 
     <item
         android:id="@+id/tab_two"
         android:orderInCategory="2"
-        android:title="Fragment 2" />
+        android:title="Fragment 1" />
 
     <item
         android:id="@+id/tab_three"
         android:orderInCategory="3"
-        android:title="Fragment 3"/>
+        android:title="Fragment 2" />
 </menu>

@@ -6,13 +6,14 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.DataBindingUtil
-import com.trendyol.showcase.R
+import androidx.core.view.isVisible
 import com.trendyol.showcase.databinding.LayoutShowcaseBinding
 import com.trendyol.showcase.showcase.ShowcaseModel
+import com.trendyol.showcase.ui.placeTooltip
+import com.trendyol.showcase.ui.setTooltipViewState
 import com.trendyol.showcase.ui.tooltip.AbsoluteArrowPosition
-import com.trendyol.showcase.util.ActionType
 import com.trendyol.showcase.ui.tooltip.TooltipViewState
+import com.trendyol.showcase.util.ActionType
 import com.trendyol.showcase.util.OnTouchClickListener
 import com.trendyol.showcase.util.TooltipFieldUtil
 import com.trendyol.showcase.util.getDensity
@@ -23,18 +24,12 @@ import com.trendyol.showcase.util.statusBarHeight
 
 class ShowcaseView @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet? = null
+    attrs: AttributeSet? = null,
 ) : ConstraintLayout(context, attrs) {
 
-    private val binding: LayoutShowcaseBinding
-
+    private val binding = LayoutShowcaseBinding.inflate(LayoutInflater.from(context), this, true)
     private var showcaseModel: ShowcaseModel? = null
     private var clickListener: ((ActionType, Int) -> (Unit))? = null
-
-    init {
-        val inflater = LayoutInflater.from(context)
-        binding = DataBindingUtil.inflate(inflater, R.layout.layout_showcase, this, true)
-    }
 
     override fun dispatchDraw(canvas: Canvas) {
         val showcaseModel = this.showcaseModel ?: return super.dispatchDraw(canvas)
@@ -92,15 +87,25 @@ class ShowcaseView @JvmOverloads constructor(
         val showcaseModel = this.showcaseModel ?: return
 
         listenClickEvents()
-
         val arrowPosition = TooltipFieldUtil.decideArrowPosition(showcaseModel, resources.getHeightInPixels())
-        val arrowMargin = TooltipFieldUtil.calculateArrowMargin(showcaseModel.horizontalCenter(), resources.getDensity())
+        val arrowMargin = TooltipFieldUtil.calculateArrowMargin(
+            horizontalCenter = showcaseModel.horizontalCenter(),
+            density = resources.getDensity()
+        )
         val marginFromBottom = getMarginFromBottom(showcaseModel, arrowPosition)
-
-        binding.showcaseViewState = ShowcaseViewState(margin = marginFromBottom)
-        binding.tooltipViewState = TooltipViewState(showcaseModel = showcaseModel, arrowPosition = arrowPosition, arrowMargin = arrowMargin)
+        val showcaseViewState = ShowcaseViewState(margin = marginFromBottom)
+        val tooltipViewState = TooltipViewState(
+            showcaseModel = showcaseModel,
+            arrowPosition = arrowPosition,
+            arrowMargin = arrowMargin
+        )
         setCustomContent()
-        binding.executePendingBindings()
+
+        with(binding.tooltipView) {
+            isVisible = tooltipViewState.isToolTipVisible()
+            placeTooltip(showcaseViewState.margin, tooltipViewState.arrowPosition)
+            setTooltipViewState(tooltipViewState)
+        }
     }
 
     private fun getMarginFromBottom(showcaseModel: ShowcaseModel, arrowPosition: AbsoluteArrowPosition): Int {
@@ -181,9 +186,9 @@ class ShowcaseView @JvmOverloads constructor(
     }
 
     companion object {
-        private const val CONST_VIEW_NOT_FOUND = -1
 
         const val KEY_ACTION_TYPE = "action-type"
         const val KEY_SELECTED_VIEW_INDEX = "clicked-view-index"
+        private const val CONST_VIEW_NOT_FOUND = -1
     }
 }
